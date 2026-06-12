@@ -8,7 +8,7 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Learn about Teguh Perintis Sdn. Bhd. — a CIDB G3 registered contractor in Ulu Tiram, Johor, delivering building, civil, and M&E works with certified workmanship.",
+    "Learn about Teguh Perintis Sdn. Bhd., a CIDB G3 registered contractor in Ulu Tiram, Johor, covering building, civil, and M&E works.",
 };
 
 const whyChooseUs = [

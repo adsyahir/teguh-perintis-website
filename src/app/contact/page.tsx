@@ -8,7 +8,7 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Contact Teguh Perintis Sdn. Bhd. in Ulu Tiram, Johor — call, WhatsApp, or visit us to discuss your construction, renovation, or maintenance project.",
+    "Contact Teguh Perintis Sdn. Bhd. in Ulu Tiram, Johor. Call, WhatsApp, or visit us to discuss your construction, renovation, or maintenance project.",
 };
 
 export default function ContactPage() {
@@ -18,7 +18,7 @@ export default function ContactPage() {
     <>
       <PageHero
         title="Contact Us"
-        subtitle="Get in touch for a free consultation — we usually respond within the same working day."
+        subtitle="Get in touch for a free consultation. We usually reply within the same working day."
       />
 
       <Section>

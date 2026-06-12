@@ -18,7 +18,7 @@ export default function ServicesPage() {
     <>
       <PageHero
         title="Our Services"
-        subtitle="End-to-end construction capability — licensed under CIDB categories B04, CE21, and M15."
+        subtitle="End-to-end construction capability, licensed under CIDB categories B04, CE21, and M15."
       />
 
       <div className="py-16 sm:py-24">

@@ -38,7 +38,7 @@ export const siteConfig = {
     name: "Teguh Perintis Sdn. Bhd.",
     shortName: "Teguh Perintis",
     tagline:
-      "CIDB G3 Registered Contractor — Roads, Civil Engineering & Building Construction",
+      "CIDB G3 Registered Contractor for Roads, Civil Engineering & Building Construction",
     description:
       "Teguh Perintis Sdn. Bhd. is a CIDB G3 registered construction company based in Ulu Tiram, Johor, specialising in roads and infrastructure works, civil engineering projects, and building construction.",
     establishedYear: 2022,
@@ -86,7 +86,7 @@ export const siteConfig = {
       shortDescription:
         "Construction of roads, drainage, and infrastructure works for public and private development.",
       fullDescription:
-        "Our core registered business is the construction of roads, railways-related works, and civil infrastructure. Registered under CIDB category CE21, we undertake roadworks, drainage systems, earthworks, and external infrastructure for public and private projects — executed to specification and on schedule.",
+        "Road and infrastructure construction is our core registered business. Under CIDB category CE21, we take on roadworks, drainage systems, earthworks, and external infrastructure for public and private projects, and we deliver to specification and on schedule.",
       bullets: [
         "Roadworks, pavements, and upgrading",
         "Drainage and culvert systems",
@@ -102,7 +102,7 @@ export const siteConfig = {
       shortDescription:
         "General engineering construction works supporting industrial, utility, and development projects.",
       fullDescription:
-        "Beyond roads and buildings, we carry out other engineering construction projects — structural works, utility-related construction, and specialised engineering packages — combining proven site experience with compliance to Malaysian engineering standards.",
+        "Beyond roads and buildings, we take on other engineering construction work such as structural works, utility-related construction, and specialised packages, all carried out to Malaysian engineering standards.",
       bullets: [
         "Structural and engineering works",
         "Utility and supporting infrastructure",
@@ -132,7 +132,7 @@ export const siteConfig = {
       id: "mechanical-electrical",
       title: "Mechanical & Electrical",
       shortDescription:
-        "M&E installation and servicing for buildings — wiring, lighting, ventilation, and more.",
+        "M&E installation and servicing for buildings, including wiring, lighting, and ventilation.",
       fullDescription:
         "Under category M15, we provide mechanical and electrical engineering services for new builds and existing premises. We handle electrical wiring and distribution, lighting, ventilation, and mechanical installations with certified workmanship and safety-first practices.",
       bullets: [
@@ -150,7 +150,7 @@ export const siteConfig = {
       shortDescription:
         "Interior and exterior renovation, upgrades, and quality finishing works.",
       fullDescription:
-        "From single-room upgrades to full premises renovation, we transform existing spaces with quality finishing works — tiling, plastering, painting, ceiling works, and carpentry — delivered with minimal disruption to your home or business.",
+        "From single-room upgrades to full premises renovation, we handle tiling, plastering, painting, ceiling works, and carpentry, with as little disruption as possible to your home or business.",
       bullets: [
         "Interior and exterior renovation",
         "Tiling, plastering, and painting",
@@ -166,7 +166,7 @@ export const siteConfig = {
       shortDescription:
         "Scheduled maintenance and facility management to keep your property in top condition.",
       fullDescription:
-        "We provide scheduled maintenance and facility management services for residential, commercial, and institutional properties — preventive maintenance programmes, repair works, and building upkeep that protect your asset over the long term.",
+        "We provide scheduled maintenance and facility management for residential, commercial, and institutional properties, including preventive maintenance programmes, repair works, and general building upkeep.",
       bullets: [
         "Scheduled preventive maintenance",
         "Repair and rectification works",
@@ -271,7 +271,7 @@ export const siteConfig = {
     {
       title: "Integrity",
       description:
-        "Transparent quotations, honest timelines, and work that matches what we promise — every time.",
+        "Clear quotations, honest timelines, and work that matches what we promised.",
     },
     {
       title: "Quality & Safety",

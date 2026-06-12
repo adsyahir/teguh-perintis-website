@@ -11,9 +11,9 @@ export default function HomePage() {
   return (
     <>
       <Hero
-        eyebrow="CIDB G3 Registered Contractor — Bright, Trusted & Compliant"
+        eyebrow="CIDB G3 Registered Contractor"
         title="Building Johor's Future with Strength and Precision"
-        subtitle="From roads and civil infrastructure to engineering projects and building construction — Teguh Perintis delivers reliable building, civil engineering, and M&E solutions across Johor and nearby, combining proven site experience with quality workmanship and compliance to Malaysian standards."
+        subtitle="We build roads, infrastructure, and buildings across Johor and nearby areas. From site preparation to handover, our work is done properly and complies with Malaysian standards."
         image="/images/hero-home.jpg"
         imageAlt="Construction site managed by Teguh Perintis"
       />
@@ -23,7 +23,7 @@ export default function HomePage() {
       <Section
         eyebrow="What We Do"
         title="Our Services"
-        subtitle="Complete construction capability under one roof — licensed, certified, and built on quality workmanship."
+        subtitle="Licensed and certified, with complete construction capability under one roof."
       >
         <ServicesGrid />
       </Section>

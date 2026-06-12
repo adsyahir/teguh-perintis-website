@@ -5,7 +5,7 @@ import { siteConfig } from "@/lib/site-config";
 
 export default function CtaBanner({
   title = "Have a project in mind?",
-  subtitle = "Get a free consultation and quotation — no obligation.",
+  subtitle = "Get a free consultation and quotation with no obligation.",
 }: {
   title?: string;
   subtitle?: string;

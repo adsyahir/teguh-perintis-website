@@ -8,7 +8,7 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Completed construction, renovation, civil, and aluminium works by Teguh Perintis Sdn. Bhd. across Johor — residential, commercial, and facility projects.",
+    "Completed construction, renovation, and civil works by Teguh Perintis Sdn. Bhd. across Johor, covering residential, commercial, and facility projects.",
 };
 
 export default function ProjectsPage() {
@@ -16,7 +16,7 @@ export default function ProjectsPage() {
     <>
       <PageHero
         title="Our Projects"
-        subtitle="A showcase of completed works across Johor — built with quality, delivered on time."
+        subtitle="A selection of completed works across Johor, built with quality and delivered on time."
       />
 
       <Section>
