@@ -33,25 +33,23 @@ export default function AboutPage() {
           <div className="space-y-4 leading-relaxed text-slate-600">
             <p>
               {company.name} is a construction company based in Ulu Tiram,
-              Johor — incorporated in {company.establishedYear} and registered
-              with CIDB since 2023, holding active Grade{" "}
-              {registration.cidbGrade} certification. We
-              deliver reliable building, civil engineering, and mechanical
-              &amp; electrical solutions — combining proven site experience
-              with quality workmanship and compliance to Malaysian standards.
+              Johor. The company was incorporated in {company.establishedYear}{" "}
+              and has been registered with CIDB since 2023, holding an active
+              Grade {registration.cidbGrade} certification. We carry out
+              building, civil engineering, and mechanical &amp; electrical
+              works, all in compliance with Malaysian standards.
             </p>
             <p>
-              Our registered nature of business covers the construction of
-              roads, other engineering projects, and buildings. From site
-              preparation and structural works to finishing and scheduled
-              maintenance, we provide end-to-end construction services across{" "}
-              {registration.serviceArea}.
+              Our registered scope of work covers construction of roads,
+              buildings, and other engineering projects. We handle the full
+              job, from site preparation and structural works through to
+              finishing and scheduled maintenance, for clients in Johor and
+              nearby areas.
             </p>
             <p>
-              Every project we take on is built on the same foundation: honest
-              advice, certified workmanship, compliant IBS &amp; QA practices,
-              and a commitment to handing over work we are proud to put our
-              name on.
+              We keep it simple: give honest advice, follow proper IBS and QA
+              practices, finish on time, and hand over work we are happy to
+              put our name on.
             </p>
           </div>
           <Image
