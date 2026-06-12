@@ -2,7 +2,9 @@ import type { NextConfig } from "next";
 
 const csp = [
   "default-src 'self'",
-  "script-src 'self'",
+  // 'unsafe-inline' is required: Next.js static export hydrates via inline
+  // scripts whose content changes every build (so hashes are impractical).
+  "script-src 'self' 'unsafe-inline'",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data:",
   "font-src 'self'",
