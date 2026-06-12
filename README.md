@@ -91,7 +91,36 @@ If a replacement uses a different extension, update the matching path in `site-c
 
 ## Deployment
 
-`npm run build` produces a fully static site in `./out` — host it on any static host (Cloudflare Pages, Netlify, S3, Nginx, shared hosting).
+### Cloudflare Pages (Git integration)
+
+Following the [official static Next.js guide](https://developers.cloudflare.com/pages/framework-guides/nextjs/deploy-a-static-nextjs-site/) — the project is already configured for static export (`output: "export"` in `next.config.ts`).
+
+1. Push the repository to GitHub:
+
+   ```bash
+   git remote add origin https://github.com/<GH_USERNAME>/<REPOSITORY_NAME>.git
+   git branch -M main
+   git push -u origin main
+   ```
+
+2. In the Cloudflare dashboard, go to **Workers & Pages → Create application → Pages → Import an existing Git repository** and select the repo.
+
+3. Use these build settings:
+
+   | Setting | Value |
+   |---|---|
+   | Framework preset | **Next.js (Static HTML Export)** |
+   | Build command | `npx next build` |
+   | Build output directory | `out` |
+   | Production branch | `main` |
+
+Every push to `main` triggers a rebuild; pull requests get preview deployments. The site gets a `*.pages.dev` subdomain — add the real domain under **Custom domains**, then update `siteUrl` in `src/lib/site-config.ts` and push.
+
+The security headers in `public/_headers` are applied automatically by Cloudflare Pages.
+
+### Other hosts
+
+`npm run build` produces a fully static site in `./out` — it can also be hosted on any static host (Netlify, S3, Nginx, shared hosting).
 
 ### Security headers (important)
 
