@@ -3,10 +3,12 @@
  * Edit copy, contact details, services, and projects here — components
  * never hardcode content.
  *
- * Image specs (replace files in /public/images, keep paths in sync here):
- *   - Heroes:        1920 × 900
- *   - Service cards:  800 × 600
- *   - Project cards: 1200 × 800
+ * Image specs (replace files in /public/images, keep paths in sync here).
+ * All images are WebP sized for their slot — see README "Replacing the
+ * example images" for the conversion workflow:
+ *   - Hero:          hero-home-{768,1280,1920}.webp (same photo, 3 widths)
+ *   - Service cards: 800px wide
+ *   - Project cards: 1200px wide
  */
 
 // ── FILL IN BEFORE LAUNCH ────────────────────────────────────────────
@@ -93,7 +95,7 @@ export const siteConfig = {
         "Earthworks and site infrastructure",
         "Retaining walls and slope works",
       ],
-      image: "/images/services/service-civil.jpg",
+      image: "/images/services/service-civil.webp",
       altText: "Site crew carrying out civil infrastructure works",
     },
     {
@@ -109,7 +111,7 @@ export const siteConfig = {
         "Specialised construction packages",
         "Site preparation and enabling works",
       ],
-      image: "/images/services/service-building.jpg",
+      image: "/images/services/service-building.webp",
       altText: "Engineering construction site with tower cranes",
     },
     {
@@ -125,7 +127,7 @@ export const siteConfig = {
         "Site preparation and earthworks",
         "Extensions and refurbishment",
       ],
-      image: "/images/services/service-aluminium.jpg",
+      image: "/images/services/service-aluminium.webp",
       altText: "Completed commercial buildings with modern facades",
     },
     {
@@ -141,7 +143,7 @@ export const siteConfig = {
         "Ventilation and mechanical systems",
         "Testing and commissioning",
       ],
-      image: "/images/services/service-me.jpg",
+      image: "/images/services/service-me.webp",
       altText: "Electrician installing electrical distribution equipment",
     },
     {
@@ -157,7 +159,7 @@ export const siteConfig = {
         "Ceiling and partition works",
         "Built-in carpentry and fittings",
       ],
-      image: "/images/services/service-maintenance.jpg",
+      image: "/images/services/service-maintenance.webp",
       altText: "Wall painting in progress during renovation works",
     },
     {
@@ -173,7 +175,7 @@ export const siteConfig = {
         "Building and compound upkeep",
         "Facility management programmes",
       ],
-      image: "/images/services/service-facility.jpg",
+      image: "/images/services/service-facility.webp",
       altText: "Maintenance technician servicing building facilities",
     },
   ],
@@ -212,7 +214,7 @@ export const siteConfig = {
       category: "Residential",
       location: "Ulu Tiram, Johor",
       year: "2025",
-      image: "/images/projects/project-01.jpg",
+      image: "/images/projects/project-01.webp",
       altText: "Renovated double-storey house exterior",
       featured: true,
     },
@@ -222,7 +224,7 @@ export const siteConfig = {
       category: "Commercial",
       location: "Johor Bahru, Johor",
       year: "2025",
-      image: "/images/projects/project-02.jpg",
+      image: "/images/projects/project-02.webp",
       altText: "Commercial building with glass and aluminium curtain wall facade",
       featured: true,
     },
@@ -232,7 +234,7 @@ export const siteConfig = {
       category: "Commercial",
       location: "Pasir Gudang, Johor",
       year: "2024",
-      image: "/images/projects/project-03.jpg",
+      image: "/images/projects/project-03.webp",
       altText: "High-rise commercial block under construction with tower cranes",
       featured: true,
     },
@@ -242,7 +244,7 @@ export const siteConfig = {
       category: "Facility Management",
       location: "Kota Tinggi, Johor",
       year: "2024",
-      image: "/images/projects/project-04.jpg",
+      image: "/images/projects/project-04.webp",
       altText: "Apartment block exterior after repair and repainting works",
       featured: false,
     },
@@ -252,7 +254,7 @@ export const siteConfig = {
       category: "Commercial",
       location: "Johor Bahru, Johor",
       year: "2024",
-      image: "/images/projects/project-05.jpg",
+      image: "/images/projects/project-05.webp",
       altText: "Modern office interior with partitions and finishing",
       featured: false,
     },
@@ -262,7 +264,7 @@ export const siteConfig = {
       category: "Residential",
       location: "Ulu Tiram, Johor",
       year: "2023",
-      image: "/images/projects/project-06.jpg",
+      image: "/images/projects/project-06.webp",
       altText: "Renovated bungalow with pool and landscaped garden",
       featured: false,
     },

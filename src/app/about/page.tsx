@@ -53,7 +53,7 @@ export default function AboutPage() {
             </p>
           </div>
           <Image
-            src="/images/about-company.jpg"
+            src="/images/about-company.webp"
             alt="Reviewing construction drawings at the drafting table"
             width={800}
             height={600}

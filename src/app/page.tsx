@@ -14,7 +14,7 @@ export default function HomePage() {
         eyebrow="CIDB G3 Registered Contractor"
         title="Building Johor's Future with Strength and Precision"
         subtitle="We build roads, infrastructure, and buildings across Johor and nearby areas. From site preparation to handover, our work is done properly and complies with Malaysian standards."
-        image="/images/hero-home.jpg"
+        imageBase="/images/hero-home"
         imageAlt="Construction site managed by Teguh Perintis"
       />
 

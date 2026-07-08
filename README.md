@@ -72,22 +72,24 @@ Search `src/lib/site-config.ts` for `TODO`:
 
 ### Replacing the example images
 
-The images in `public/images/` are **example stock photos** (Unsplash, free for commercial use). They show what kind of photo belongs in each slot — replace each with a real company photo of the same subject, keeping the same filename:
+The images in `public/images/` are **example stock photos** (Unsplash, free for commercial use). They show what kind of photo belongs in each slot — replace each with a real company photo of the same subject, keeping the same filename.
 
-| File | Show a photo of… | Size |
+All images are **WebP, pre-sized for their slot** — this is what keeps the mobile PageSpeed score high. Convert replacement photos to WebP at the listed width before dropping them in (free tool: [squoosh.app](https://squoosh.app), quality ~70):
+
+| File | Show a photo of… | Width |
 |---|---|---|
-| `hero-home.jpg` | Your team / a flagship project site | 1920 × 900 |
-| `about-company.jpg` | The team planning or reviewing drawings | 800 × 600 |
-| `services/service-civil.jpg` | Roadworks / drainage / site crew (Roads & Civil Infrastructure) | 800 × 600 |
-| `services/service-building.jpg` | A project under construction (Engineering Projects) | 800 × 600 |
-| `services/service-aluminium.jpg` | A completed building (Building Construction) | 800 × 600 |
-| `services/service-me.jpg` | Electrical / wiring works | 800 × 600 |
-| `services/service-maintenance.jpg` | Renovation / painting in progress | 800 × 600 |
-| `services/service-facility.jpg` | Maintenance technician at work | 800 × 600 |
-| `projects/project-01.jpg` … `project-06.jpg` | Completed projects (update titles/locations in `site-config.ts` to match) | 1200 × 800 |
+| `hero-home-768.webp`, `-1280.webp`, `-1920.webp` | Your team / a flagship project site (same photo at 3 widths) | 768 / 1280 / 1920 |
+| `about-company.webp` | The team planning or reviewing drawings | 800 |
+| `services/service-civil.webp` | Roadworks / drainage / site crew (Roads & Civil Infrastructure) | 800 |
+| `services/service-building.webp` | A project under construction (Engineering Projects) | 800 |
+| `services/service-aluminium.webp` | A completed building (Building Construction) | 800 |
+| `services/service-me.webp` | Electrical / wiring works | 800 |
+| `services/service-maintenance.webp` | Renovation / painting in progress | 800 |
+| `services/service-facility.webp` | Maintenance technician at work | 800 |
+| `projects/project-01.webp` … `project-06.webp` | Completed projects (update titles/locations in `site-config.ts` to match) | 1200 |
 | `logo.svg` | Company logo | ≈200 × 48 |
 
-If a replacement uses a different extension, update the matching path in `site-config.ts`.
+If a replacement uses a different extension, update the matching path in `site-config.ts` (the hero paths live in `src/app/page.tsx`).
 
 ## Deployment
 
