@@ -65,10 +65,11 @@ Search `src/lib/site-config.ts` for `TODO`:
 | Field | What to put |
 |---|---|
 | `email` | Company email address |
-| `siteUrl` | Final production URL (used for sitemap, OG tags, JSON-LD) |
-| `hours` | Confirm opening time (currently "Daily until 6:00 PM") |
 | `stats` | Confirm projects/clients counts |
 | `projects` | Replace the 6 example projects with real ones |
+
+`siteUrl`, `hours`, `geo` and `googleBusinessUrl` are filled in and confirmed
+against the Google Business Profile listing.
 
 ### Replacing the example images
 

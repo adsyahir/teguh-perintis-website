@@ -12,6 +12,12 @@
  */
 
 // ── FILL IN BEFORE LAUNCH ────────────────────────────────────────────
+
+// Surveyed from the Google Business listing. The lot address ("PTD 5623, ...")
+// does not geocode — it pins Ulu Tiram town centre — so the map embed and the
+// schema geo node are both derived from these coordinates.
+const geo = { latitude: 1.593919, longitude: 103.859758 } as const;
+
 const contact = {
   phoneDisplay: "017-751 9510",
   phoneE164: "+60177519510",
@@ -21,15 +27,28 @@ const contact = {
     "PTD 5623, Mukim, Kampung Sungai Tiram",
     "Ulu Tiram, Johor, Malaysia",
   ],
-  hours: "Daily until 6:00 PM", // TODO: confirm opening time
-  // Targets the company's Google Business listing near Kampung Sungai Tiram.
-  // The lot address ("PTD 5623, ...") does not geocode — it pins the wrong
-  // spot (Ulu Tiram town center) — so query the business name instead.
-  googleMapsEmbedUrl:
-    "https://www.google.com/maps?q=" +
-    encodeURIComponent("Teguh Perintis, Ulu Tiram, Johor, Malaysia") +
-    "&output=embed",
-  siteUrl: "https://teguhperintis.example.com", // TODO: production URL
+  // Confirmed against the Google Business Profile listing. `hours` is the
+  // display string; `openingHours` is the machine-readable form the
+  // GeneralContractor schema emits — keep the two in sync.
+  hours: "Monday – Saturday, 9:00 AM – 6:00 PM (closed Sunday)",
+  openingHours: {
+    days: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ],
+    opens: "09:00",
+    closes: "18:00",
+  },
+  geo,
+  googleMapsEmbedUrl: `https://www.google.com/maps?q=${geo.latitude},${geo.longitude}&z=17&output=embed`,
+  siteUrl: "https://teguhperintis.com",
+  // The Google Business Profile listing, as its stable CID link. Emitted as
+  // schema.org sameAs so Google ties this site to the existing map listing.
+  googleBusinessUrl: "https://maps.google.com/?cid=800152553011140462",
   whatsappMessage:
     "Hello Teguh Perintis, I would like to request a consultation.",
 } as const;
