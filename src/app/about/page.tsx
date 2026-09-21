@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageUrls } from "@/lib/page-metadata";
 import Image from "next/image";
 import PageHero from "@/components/sections/PageHero";
 import Section from "@/components/ui/Section";
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
   title: "About Us",
   description:
     "Learn about Teguh Perintis Sdn. Bhd., a CIDB G3 registered contractor in Ulu Tiram, Johor, covering building, civil, and M&E works.",
+  ...pageUrls("/about"),
 };
 
 const whyChooseUs = [

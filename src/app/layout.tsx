@@ -19,6 +19,25 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.company.name}`,
   },
   description: siteConfig.company.description,
+  applicationName: siteConfig.company.shortName,
+  authors: [{ name: siteConfig.company.name, url: siteConfig.contact.siteUrl }],
+  creator: siteConfig.company.name,
+  publisher: siteConfig.company.name,
+  category: "construction",
+  keywords: [
+    "CIDB G3 contractor",
+    "contractor Ulu Tiram",
+    "contractor Johor",
+    "kontraktor Johor",
+    "road construction Johor",
+    "civil engineering contractor Johor",
+    "building construction Johor",
+    "renovation contractor Johor Bahru",
+    siteConfig.company.name,
+  ],
+  // No `url` here: Next resolves og:url only from an explicit value and does
+  // not fall back to the canonical, so setting it at the root would stamp the
+  // homepage URL onto every page. Each page sets its own alongside its canonical.
   openGraph: {
     siteName: siteConfig.company.name,
     locale: "en_MY",
@@ -30,7 +49,19 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
+  // The phone number is already an explicit tel: link everywhere it appears,
+  // so stop iOS Safari re-detecting and restyling it. Address detection is
+  // left on: the address renders as plain text with no link of its own, and
+  // disabling it would take away the tap-for-directions affordance.
+  formatDetection: { telephone: false },
 };
 
 export default function RootLayout({
@@ -39,7 +70,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} h-full antialiased`}>
+    <html lang="en-MY" className={`${geistSans.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <a
           href="#main"

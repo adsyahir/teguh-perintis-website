@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import { pageUrls } from "@/lib/page-metadata";
 import Hero from "@/components/sections/Hero";
 import StatsBar from "@/components/sections/StatsBar";
 import Section from "@/components/ui/Section";
@@ -6,6 +8,12 @@ import Certifications from "@/components/sections/Certifications";
 import ProcessSteps from "@/components/sections/ProcessSteps";
 import FeaturedProjects from "@/components/sections/FeaturedProjects";
 import CtaBanner from "@/components/sections/CtaBanner";
+
+// Title and description are inherited from the root layout — only the
+// canonical needs pinning so "/" and "/index.html" do not compete.
+export const metadata: Metadata = {
+  ...pageUrls("/"),
+};
 
 export default function HomePage() {
   return (

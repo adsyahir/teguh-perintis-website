@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageUrls } from "@/lib/page-metadata";
 import PageHero from "@/components/sections/PageHero";
 import Section from "@/components/ui/Section";
 import ProjectCard from "@/components/ui/ProjectCard";
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
   title: "Projects",
   description:
     "Completed construction, renovation, and civil works by Teguh Perintis Sdn. Bhd. across Johor, covering residential, commercial, and facility projects.",
+  ...pageUrls("/projects"),
 };
 
 export default function ProjectsPage() {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageUrls } from "@/lib/page-metadata";
 import PageHero from "@/components/sections/PageHero";
 import Section from "@/components/ui/Section";
 import CtaBanner from "@/components/sections/CtaBanner";
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
   title: "Contact Us",
   description:
     "Contact Teguh Perintis Sdn. Bhd. in Ulu Tiram, Johor. Call, WhatsApp, or visit us to discuss your construction, renovation, or maintenance project.",
+  ...pageUrls("/contact"),
 };
 
 export default function ContactPage() {

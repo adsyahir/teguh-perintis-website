@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
+
+// Next already emits noindex for not-found, so only the title is needed here.
+export const metadata: Metadata = {
+  title: "Page Not Found",
+};
 
 export default function NotFound() {
   return (

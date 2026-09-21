@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageUrls } from "@/lib/page-metadata";
 import Image from "next/image";
 import PageHero from "@/components/sections/PageHero";
 import Section from "@/components/ui/Section";
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
   title: "Services",
   description:
     "Roads & civil infrastructure (CE21), engineering projects, building construction (B04), M&E (M15), renovation, and facility management services in Johor by Teguh Perintis Sdn. Bhd.",
+  ...pageUrls("/services"),
 };
 
 export default function ServicesPage() {
