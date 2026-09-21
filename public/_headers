@@ -15,3 +15,9 @@
 # Images keep the same filename when replaced, so cache for a week only.
 /images/*
   Cache-Control: public, max-age=604800
+
+# Next emits the OG card as an extensionless file, so static hosts would
+# otherwise guess its type and social crawlers would reject the preview.
+/opengraph-image
+  Content-Type: image/png
+  Cache-Control: public, max-age=604800
