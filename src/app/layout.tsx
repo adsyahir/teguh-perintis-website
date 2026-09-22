@@ -24,6 +24,15 @@ export const metadata: Metadata = {
   creator: siteConfig.company.name,
   publisher: siteConfig.company.name,
   category: "construction",
+  // Declared explicitly rather than left to the file convention, which appends
+  // a per-build hash to the URL. Google asks that a favicon's URL stay stable,
+  // and a hash that changes every deploy works against it settling on one.
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+  },
   keywords: [
     "CIDB G3 contractor",
     "contractor Ulu Tiram",
