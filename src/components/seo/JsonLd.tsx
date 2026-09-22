@@ -24,7 +24,7 @@ export default function JsonLd() {
     url: contact.siteUrl,
     telephone: contact.phoneE164,
     image: `${contact.siteUrl}/images/hero-home-1280.webp`,
-    logo: `${contact.siteUrl}/images/logo.svg`,
+    logo: `${contact.siteUrl}/images/logo.png`,
     foundingDate: String(company.establishedYear),
     // SSM company number — the identifier the registry and CIDB both use.
     identifier: registration.ssmRegNo,

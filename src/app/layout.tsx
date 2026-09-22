@@ -28,10 +28,8 @@ export const metadata: Metadata = {
   // a per-build hash to the URL. Google asks that a favicon's URL stay stable,
   // and a hash that changes every deploy works against it settling on one.
   icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.svg", type: "image/svg+xml" },
-    ],
+    icon: [{ url: "/favicon.ico", sizes: "any" }],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
   keywords: [
     "CIDB G3 contractor",

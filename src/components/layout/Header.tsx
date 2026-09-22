@@ -10,15 +10,26 @@ export default function Header() {
       <Container className="relative flex h-20 items-center justify-between">
         <Link
           href="/"
-          className="focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500"
+          className="flex items-center gap-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500"
         >
           <Image
-            src="/images/logo.svg"
+            src="/images/logo-mark.webp"
             alt={`${siteConfig.company.name} logo`}
-            width={200}
+            width={48}
             height={48}
+            className="h-12 w-12"
             priority
           />
+          {/* The wordmark is live text, not part of the logo artwork: the
+              artwork's own wordmark is illegible at this size. */}
+          <span className="leading-tight">
+            <span className="block text-base font-bold tracking-wide text-primary-700">
+              TEGUH PERINTIS
+            </span>
+            <span className="block text-xs tracking-wide text-slate-500">
+              SDN. BHD.
+            </span>
+          </span>
         </Link>
 
         <nav aria-label="Main" className="hidden md:block">
