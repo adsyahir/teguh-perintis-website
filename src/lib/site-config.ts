@@ -55,10 +55,36 @@ const contact = {
 } as const;
 // ─────────────────────────────────────────────────────────────────────
 
-export type ProjectStatus = "completed" | "ongoing";
+export type ShotKind =
+  | "far"
+  | "close"
+  | "interior"
+  | "detail"
+  | "progress"
+  | "before"
+  | "after"
+  | "drawing";
+
+export interface GalleryPhoto {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+  caption?: string;
+}
+
+/** One gallery position. A slot with no `photo` renders as a placeholder. */
+export interface GallerySlot {
+  kind: ShotKind;
+  cover?: true;
+  photo?: GalleryPhoto;
+}
 
 export interface Project {
+  /** Internal key and image-file stem (project-NN). */
   id: string;
+  /** URL segment: /projects/<slug>. */
+  slug: string;
   title: string;
   category: string;
   location: string;
@@ -67,19 +93,18 @@ export interface Project {
   client: string;
   /** Omitted when the main contractor is not confirmed ("TBC" in the portfolio). */
   mainContractor?: string;
-  status: ProjectStatus;
-  image: string;
-  altText: string;
+  /** 4-6 slots: the 4 core kinds, exactly one cover (see lib/gallery.ts). */
+  gallery: readonly GallerySlot[];
   featured: boolean;
 }
 
 // All 19 projects from the client's portfolio PDF, in portfolio order.
-// TODO_CONFIRM: status is inferred from the year (2026 = ongoing, earlier =
-// completed) — confirm per project. Photos are extracted from the PDF and
-// several are below 1200px wide (see README "Images and logos").
+// Photos are extracted from the PDF and several are below 1200px wide (see
+// README "Images and logos").
 const projects: readonly Project[] = [
   {
     id: "project-01",
+    slug: "masjid-habib-hassan-al-attas",
     title: "Masjid Habib Hassan Al-Attas",
     category: "Aluminium Dome",
     location: "Jalan Tun Abdul Razak, Johor Bahru, Johor",
@@ -87,14 +112,36 @@ const projects: readonly Project[] = [
     scope: "Supply and install aluminium dome",
     client: "Majlis Agama Islam Negeri Johor, JKR Johor",
     mainContractor: "Nobel Energy Construction Sdn Bhd",
-    status: "completed",
-    image: "/images/projects/project-01.webp",
-    altText:
-      "Close-up of a pale gold aluminium dome clad in overlapping scale-shaped panels, with a highway and buildings behind",
+    gallery: [
+      { kind: "far" },
+      {
+        kind: "close",
+        cover: true,
+        photo: {
+          src: "/images/projects/project-01.webp",
+          width: 1200,
+          height: 806,
+          alt:
+            "Close-up of a pale gold aluminium dome clad in overlapping scale-shaped panels, with a highway and buildings behind",
+        },
+      },
+      { kind: "interior" },
+      {
+        kind: "detail",
+        photo: {
+          src: "/images/projects/project-01-detail.webp",
+          width: 518,
+          height: 1007,
+          alt:
+            "Overlapping scale-shaped aluminium panels on a small dome with a gold finial, with the main dome behind",
+        },
+      },
+    ],
     featured: true,
   },
   {
     id: "project-02",
+    slug: "masjid-tuminah-hamidi",
     title: "Masjid Tuminah Hamidi",
     category: "Aluminium Dome",
     location: "Bagan Datuk, Perak",
@@ -102,14 +149,36 @@ const projects: readonly Project[] = [
     scope: "Supply and install aluminium dome",
     client: "Yayasan Al-Falah",
     mainContractor: "Nobel Energy Construction Sdn Bhd",
-    status: "completed",
-    image: "/images/projects/project-02.webp",
-    altText:
-      "Aerial view of a blue-roofed mosque with a blue dome and twin minarets beside a river",
+    gallery: [
+      {
+        kind: "far",
+        cover: true,
+        photo: {
+          src: "/images/projects/project-02.webp",
+          width: 1200,
+          height: 806,
+          alt:
+            "Aerial view of a blue-roofed mosque with a blue dome and twin minarets beside a river",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/project-02-close.webp",
+          width: 554,
+          height: 1078,
+          alt:
+            "Minaret with calligraphy panels in front of the mosque's blue aluminium dome",
+        },
+      },
+      { kind: "interior" },
+      { kind: "detail" },
+    ],
     featured: false,
   },
   {
     id: "project-03",
+    slug: "masjid-bandar-seremban-selatan",
     title: "Masjid Bandar Seremban Selatan",
     category: "Aluminium Dome",
     location: "Seremban, Negeri Sembilan",
@@ -117,14 +186,36 @@ const projects: readonly Project[] = [
     scope: "Supply and install aluminium dome",
     client: "JHEINS, JKR Negeri Sembilan",
     mainContractor: "Sri Bukti Construction Sdn Bhd",
-    status: "completed",
-    image: "/images/projects/project-03.webp",
-    altText:
-      "Triangulated aluminium dome framework with glazed panels on the roof of a grey mosque building, with hills behind",
+    gallery: [
+      {
+        kind: "far",
+        cover: true,
+        photo: {
+          src: "/images/projects/project-03.webp",
+          width: 1200,
+          height: 806,
+          alt:
+            "Triangulated aluminium dome framework with glazed panels on the roof of a grey mosque building, with hills behind",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/project-03-close.webp",
+          width: 518,
+          height: 1007,
+          alt:
+            "Triangulated dome framework with protective film still on its glazed panels, on a concrete roof",
+        },
+      },
+      { kind: "interior" },
+      { kind: "detail" },
+    ],
     featured: true,
   },
   {
     id: "project-04",
+    slug: "masjid-kampung-tok-machang",
     title: "Masjid Baru di Kampung Tok Machang",
     category: "Aluminium Dome",
     location: "Ulu Gali, Raub, Pahang",
@@ -132,14 +223,37 @@ const projects: readonly Project[] = [
     scope: "Supply and install aluminium dome",
     client: "JKR Raub",
     mainContractor: "Mercu Buana (M) Sdn Bhd",
-    status: "completed",
-    image: "/images/projects/project-04.webp",
-    altText:
-      "Gold aluminium dome with ribbed panel seams on a concrete roof, beside minaret scaffolding and limestone hills",
+    gallery: [
+      { kind: "far" },
+      {
+        kind: "close",
+        cover: true,
+        photo: {
+          src: "/images/projects/project-04.webp",
+          width: 1200,
+          height: 806,
+          alt:
+            "Gold aluminium dome with ribbed panel seams on a concrete roof, beside minaret scaffolding and limestone hills",
+        },
+      },
+      { kind: "interior" },
+      { kind: "detail" },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/project-04-progress.webp",
+          width: 518,
+          height: 1007,
+          alt:
+            "Worker on scaffolding beside a tall gold aluminium pinnacle being fitted onto a concrete minaret base",
+        },
+      },
+    ],
     featured: false,
   },
   {
     id: "project-05",
+    slug: "masjid-taman-saga-mentakab",
     title: "Masjid Baru Taman Saga",
     category: "Aluminium Dome",
     location: "Mentakab, Temerloh, Pahang",
@@ -147,14 +261,45 @@ const projects: readonly Project[] = [
     scope: "Supply and install aluminium dome",
     client: "JKR Pahang",
     // TODO_CONFIRM: main contractor is "TBC" in the portfolio, so omitted.
-    status: "completed",
-    image: "/images/projects/project-05.webp",
-    altText:
-      "Aerial view of a mosque with red tiled roofs and a small gold aluminium dome with a pinnacle",
+    gallery: [
+      {
+        kind: "far",
+        cover: true,
+        photo: {
+          src: "/images/projects/project-05.webp",
+          width: 1200,
+          height: 806,
+          alt:
+            "Aerial view of a mosque with red tiled roofs and a small gold aluminium dome with a pinnacle",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/project-05-close.webp",
+          width: 1417,
+          height: 999,
+          alt:
+            "Gold aluminium dome with a pointed finial on a grey roof platform, with trees behind",
+        },
+      },
+      { kind: "interior" },
+      {
+        kind: "detail",
+        photo: {
+          src: "/images/projects/project-05-detail.webp",
+          width: 398,
+          height: 774,
+          alt:
+            "Ribbed gold aluminium dome rising to a tall pointed finial, with forested hills behind",
+        },
+      },
+    ],
     featured: false,
   },
   {
     id: "project-06",
+    slug: "masjid-kariah-seri-kendong",
     title: "Masjid Kariah Seri Kendong",
     category: "Aluminium Dome",
     location: "Rembau, Negeri Sembilan",
@@ -162,14 +307,37 @@ const projects: readonly Project[] = [
     scope: "Supply and install aluminium dome",
     client: "JKR Negeri Sembilan",
     // TODO_CONFIRM: main contractor is not stated in the portfolio, so omitted.
-    status: "completed",
-    image: "/images/projects/project-06.webp",
-    altText:
-      "Aerial view of a mosque under construction with a green aluminium pinnacle on a white minaret tower",
+    gallery: [
+      {
+        kind: "far",
+        cover: true,
+        photo: {
+          src: "/images/projects/project-06.webp",
+          width: 1022,
+          height: 720,
+          alt:
+            "Aerial view of a mosque under construction with a green aluminium pinnacle on a white minaret tower",
+        },
+      },
+      { kind: "close" },
+      { kind: "interior" },
+      { kind: "detail" },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/project-06-progress.webp",
+          width: 370,
+          height: 720,
+          alt:
+            "Crane lifting a green aluminium dome onto a white minaret while a harnessed worker guides it",
+        },
+      },
+    ],
     featured: false,
   },
   {
     id: "project-07",
+    slug: "masjid-muhammad-al-fateh",
     title: "Masjid Muhammad Al-Fateh",
     category: "Aluminium Dome",
     location: "Taman Forest Height, Senawang, Negeri Sembilan",
@@ -177,14 +345,36 @@ const projects: readonly Project[] = [
     scope: "Design, supply and install aluminium dome",
     client: "JKR Negeri Sembilan",
     // TODO_CONFIRM: main contractor is not stated in the portfolio, so omitted.
-    status: "completed",
-    image: "/images/projects/project-07.webp",
-    altText:
-      "Green aluminium dome with a white lattice trim band and gold finial on a white base, with a minaret beside it",
+    gallery: [
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/project-07-far.webp",
+          width: 314,
+          height: 608,
+          alt:
+            "Aerial view of the mosque with its green aluminium dome and white lattice trim above green tiled roofs, beside a highway",
+        },
+      },
+      {
+        kind: "close",
+        cover: true,
+        photo: {
+          src: "/images/projects/project-07.webp",
+          width: 1200,
+          height: 846,
+          alt:
+            "Green aluminium dome with a white lattice trim band and gold finial on a white base, with a minaret beside it",
+        },
+      },
+      { kind: "interior" },
+      { kind: "detail" },
+    ],
     featured: true,
   },
   {
     id: "project-08",
+    slug: "kompleks-pentadbiran-kerajaan-persekutuan-kota-kinabalu",
     title: "Kompleks Pentadbiran Kerajaan Persekutuan",
     category: "Dome Refurbishment",
     location: "Kota Kinabalu, Sabah",
@@ -192,14 +382,38 @@ const projects: readonly Project[] = [
     scope: "Dome refurbishment",
     client: "Kementerian Kerja Raya Malaysia",
     mainContractor: "Pembinaan Kekal Mewah Sdn Bhd",
-    status: "completed",
-    image: "/images/projects/project-08.webp",
-    altText:
-      "Workers on a scaffold platform refurbishing a large teal-green aluminium dome",
+    gallery: [
+      {
+        kind: "far",
+        cover: true,
+        photo: {
+          src: "/images/projects/project-08.webp",
+          width: 1072,
+          height: 720,
+          alt:
+            "Workers on a scaffold platform refurbishing a large teal-green aluminium dome",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/project-08-close.webp",
+          width: 371,
+          height: 720,
+          alt:
+            "Workers on ropes refurbishing the panels of a large teal aluminium dome",
+        },
+      },
+      { kind: "interior" },
+      { kind: "detail" },
+      { kind: "before" },
+      { kind: "after" },
+    ],
     featured: true,
   },
   {
     id: "project-09",
+    slug: "tmiyc-pasir-gudang",
     title: "Tunku Mahkota Ismail Youth Centre (TMIYC)",
     category: "Aluminium Dome",
     location: "Pasir Gudang, Johor",
@@ -207,14 +421,36 @@ const projects: readonly Project[] = [
     scope: "Design, supply and install aluminium dome",
     client: "Kerajaan Negeri Johor",
     mainContractor: "OKA Marketing Sdn Bhd",
-    status: "completed",
-    image: "/images/projects/project-09.webp",
-    altText:
-      "Three dark grey aluminium domes on the roof of a white building, with scaffolding along its walls",
+    gallery: [
+      {
+        kind: "far",
+        cover: true,
+        photo: {
+          src: "/images/projects/project-09.webp",
+          width: 1200,
+          height: 809,
+          alt:
+            "Three dark grey aluminium domes on the roof of a white building, with scaffolding along its walls",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/project-09-close.webp",
+          width: 740,
+          height: 1440,
+          alt:
+            "Dark grey aluminium dome with ribbed panel seams and a bulb finial, with two more domes beside it",
+        },
+      },
+      { kind: "interior" },
+      { kind: "detail" },
+    ],
     featured: true,
   },
   {
     id: "project-10",
+    slug: "masjid-an-nur-glenmarie-dome-cladding",
     title: "Composite Panel Cladding to Existing Domes",
     category: "Dome Cladding",
     location: "Shah Alam, Selangor",
@@ -222,14 +458,38 @@ const projects: readonly Project[] = [
     scope: "Design, supply and install aluminium dome to existing GFRC dome",
     client: "Pentadbir Masjid An-Nur Temasya Glenmarie",
     mainContractor: "Teguh Perintis Sdn Bhd",
-    status: "completed",
-    image: "/images/projects/project-10.webp",
-    altText:
-      "Clad mosque dome with calligraphy, lit in green at dusk beside a minaret",
+    gallery: [
+      { kind: "far" },
+      {
+        kind: "close",
+        cover: true,
+        photo: {
+          src: "/images/projects/project-10.webp",
+          width: 1080,
+          height: 766,
+          alt:
+            "Clad mosque dome with calligraphy, lit in green at dusk beside a minaret",
+        },
+      },
+      { kind: "interior" },
+      {
+        kind: "detail",
+        photo: {
+          src: "/images/projects/project-10-detail.webp",
+          width: 494,
+          height: 960,
+          alt:
+            "Calligraphy on a clad dome lit green at dusk, beneath a crescent-and-star finial",
+        },
+      },
+      { kind: "before" },
+      { kind: "after" },
+    ],
     featured: true,
   },
   {
     id: "project-11",
+    slug: "masjid-jalan-bayu-damai-klang",
     title: "Masjid Jalan Bayu Damai",
     category: "Aluminium Dome",
     location: "Klang, Selangor",
@@ -237,14 +497,36 @@ const projects: readonly Project[] = [
     scope: "Design, supply and install aluminium dome",
     client: "SP Setia / Kota Bayuemas Sdn Bhd",
     mainContractor: "Canggih Kilat Sdn Bhd",
-    status: "ongoing",
-    image: "/images/projects/project-11.webp",
-    altText:
-      "Aerial view of a large grey aluminium dome with ribbed panels and a pinnacle on a mosque roof",
+    gallery: [
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/project-11-far.webp",
+          width: 314,
+          height: 608,
+          alt:
+            "Aerial view of the mosque with a grey aluminium dome on its roof, beside a road and trees",
+        },
+      },
+      {
+        kind: "close",
+        cover: true,
+        photo: {
+          src: "/images/projects/project-11.webp",
+          width: 906,
+          height: 608,
+          alt:
+            "Aerial view of a large grey aluminium dome with ribbed panels and a pinnacle on a mosque roof",
+        },
+      },
+      { kind: "interior" },
+      { kind: "detail" },
+    ],
     featured: false,
   },
   {
     id: "project-12",
+    slug: "maahad-tahfidz-sains-kuala-langat",
     title: "Maahad Tahfidz Sains",
     category: "Aluminium Dome",
     location: "Kuala Langat, Selangor",
@@ -252,14 +534,36 @@ const projects: readonly Project[] = [
     scope: "Design, supply and install aluminium dome",
     client: "Majlis Agama Islam Negeri Selangor",
     mainContractor: "Jutabina Sempurna Sdn Bhd",
-    status: "ongoing",
-    image: "/images/projects/project-12.webp",
-    altText:
-      "Aerial view of a four-storey school block under construction with red roofs and gold domes at its corners",
+    gallery: [
+      {
+        kind: "far",
+        cover: true,
+        photo: {
+          src: "/images/projects/project-12.webp",
+          width: 906,
+          height: 608,
+          alt:
+            "Aerial view of a four-storey school block under construction with red roofs and gold domes at its corners",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/project-12-close.webp",
+          width: 314,
+          height: 608,
+          alt:
+            "Gold aluminium dome with a spire on a concrete base, against a blue sky",
+        },
+      },
+      { kind: "interior" },
+      { kind: "detail" },
+    ],
     featured: false,
   },
   {
     id: "project-13",
+    slug: "asrama-semai-bakti",
     title: "Asrama Semai Bakti",
     category: "Aluminium Windows",
     location: "Johor Bahru, Johor",
@@ -267,14 +571,37 @@ const projects: readonly Project[] = [
     scope: "Supply and install aluminium window",
     client: "Lembaga Kemajuan Tanah Persekutuan (FELDA)",
     mainContractor: "Mutual Premium Sdn Bhd",
-    status: "ongoing",
-    image: "/images/projects/project-13.webp",
-    altText:
-      "Hostel building facade with dark aluminium window frames and orange cladding trim",
+    gallery: [
+      { kind: "far" },
+      {
+        kind: "close",
+        cover: true,
+        photo: {
+          src: "/images/projects/project-13.webp",
+          width: 1200,
+          height: 851,
+          alt:
+            "Hostel building facade with dark aluminium window frames and orange cladding trim",
+        },
+      },
+      { kind: "interior" },
+      { kind: "detail" },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/project-13-progress.webp",
+          width: 509,
+          height: 988,
+          alt:
+            "Dark aluminium window frames being installed behind scaffolding, below an orange cladding band",
+        },
+      },
+    ],
     featured: false,
   },
   {
     id: "project-14",
+    slug: "masjid-taman-bayu-damai-pengerang",
     title: "Masjid Taman Bayu Damai",
     category: "Aluminium Dome",
     location: "Pengerang, Johor",
@@ -282,14 +609,37 @@ const projects: readonly Project[] = [
     scope: "Supply and install aluminium dome",
     client: "JKR Johor",
     mainContractor: "AHA Gemilang Enterprise / QNE Teguh Sdn Bhd",
-    status: "ongoing",
-    image: "/images/projects/project-14.webp",
-    altText:
-      "Dark grey aluminium dome with a gold finial on a white tower being installed with a crane",
+    gallery: [
+      {
+        kind: "far",
+        cover: true,
+        photo: {
+          src: "/images/projects/project-14.webp",
+          width: 888,
+          height: 600,
+          alt:
+            "Dark grey aluminium dome with a gold finial on a white tower being installed with a crane",
+        },
+      },
+      { kind: "close" },
+      { kind: "interior" },
+      { kind: "detail" },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/project-14-progress.webp",
+          width: 308,
+          height: 600,
+          alt:
+            "Worker fitting a gold crescent finial on a dark grey aluminium dome atop a white tower",
+        },
+      },
+    ],
     featured: false,
   },
   {
     id: "project-15",
+    slug: "kompleks-masjid-duyong",
     title: "Kompleks Masjid",
     category: "Dome & Windows",
     location: "Duyong, Melaka",
@@ -297,14 +647,36 @@ const projects: readonly Project[] = [
     scope: "Supply and install aluminium dome and window",
     client: "ICU JPM",
     mainContractor: "Nobel Energy Construction Sdn Bhd",
-    status: "ongoing",
-    image: "/images/projects/project-15.webp",
-    altText:
-      "Gold aluminium dome with a pinnacle and crescent on a concrete plinth, with houses and trees behind",
+    gallery: [
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/project-15-far.webp",
+          width: 307,
+          height: 600,
+          alt:
+            "Aerial view of a gold aluminium dome on a mosque roof, with the surrounding town behind",
+        },
+      },
+      {
+        kind: "close",
+        cover: true,
+        photo: {
+          src: "/images/projects/project-15.webp",
+          width: 888,
+          height: 600,
+          alt:
+            "Gold aluminium dome with a pinnacle and crescent on a concrete plinth, with houses and trees behind",
+        },
+      },
+      { kind: "interior" },
+      { kind: "detail" },
+    ],
     featured: false,
   },
   {
     id: "project-16",
+    slug: "masjid-kampung-baru-kemaman",
     title: "Masjid Kampung Baru",
     category: "Aluminium Dome",
     location: "Kemaman, Terengganu",
@@ -312,14 +684,38 @@ const projects: readonly Project[] = [
     scope: "Supply and install aluminium dome",
     client: "JKR Terengganu",
     mainContractor: "Zulqarnain Sdn Bhd",
-    status: "ongoing",
-    image: "/images/projects/project-16.webp",
-    altText:
-      "Gold aluminium dome surrounded by scaffolding on a roof, with forested hills behind",
+    gallery: [
+      { kind: "far" },
+      { kind: "close" },
+      { kind: "interior" },
+      { kind: "detail" },
+      {
+        kind: "progress",
+        cover: true,
+        photo: {
+          src: "/images/projects/project-16.webp",
+          width: 888,
+          height: 600,
+          alt:
+            "Gold aluminium dome surrounded by scaffolding on a roof, with forested hills behind",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/project-16-progress.webp",
+          width: 308,
+          height: 600,
+          alt:
+            "Top-down view of scaffolding boards over the crown ring of a gold aluminium dome under construction",
+        },
+      },
+    ],
     featured: false,
   },
   {
     id: "project-17",
+    slug: "senai-cargo-warehouse-fencing",
     title: "Perimeter Fencing for Cargo Warehouse",
     category: "Perimeter Fencing",
     location: "Senai, Johor",
@@ -327,14 +723,36 @@ const projects: readonly Project[] = [
     scope: "Supply and install perimeter fence",
     client: "Senai Airport Terminal Services Sdn Bhd",
     mainContractor: "Anylink Holding Sdn Bhd",
-    status: "ongoing",
-    image: "/images/projects/project-17.webp",
-    altText:
-      "Interior of a cargo warehouse with a perimeter fence of white-framed mesh panels",
+    gallery: [
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/project-17-far.webp",
+          width: 509,
+          height: 988,
+          alt:
+            "Inside the cargo warehouse: the corner of the mesh perimeter fence beside electrical cabinets",
+        },
+      },
+      {
+        kind: "close",
+        cover: true,
+        photo: {
+          src: "/images/projects/project-17.webp",
+          width: 1200,
+          height: 851,
+          alt:
+            "Interior of a cargo warehouse with a perimeter fence of white-framed mesh panels",
+        },
+      },
+      { kind: "interior" },
+      { kind: "detail" },
+    ],
     featured: false,
   },
   {
     id: "project-18",
+    slug: "tanjung-aru-public-facilities",
     title: "Proposed Public Facilities, Landscape and Restoration",
     category: "Aluminium Dome",
     location: "Kota Kinabalu, Sabah",
@@ -342,16 +760,40 @@ const projects: readonly Project[] = [
     scope: "Supply and install aluminium dome",
     client: "Tanjung Aru Eco Development Sdn Bhd",
     mainContractor: "MP Perdana Sdn Bhd",
-    status: "ongoing",
-    image: "/images/projects/project-18.webp",
     // TODO_CONFIRM: the portfolio shows an architectural drawing for this
     // project, not a site photo. Replace with a photo when available.
-    altText:
-      "Architectural elevation drawing of a domed public building with grid references and dimensions",
+    gallery: [
+      { kind: "far" },
+      { kind: "close" },
+      { kind: "interior" },
+      { kind: "detail" },
+      {
+        kind: "drawing",
+        cover: true,
+        photo: {
+          src: "/images/projects/project-18.webp",
+          width: 977,
+          height: 547,
+          alt:
+            "Architectural elevation drawing of a domed public building with grid references and dimensions",
+        },
+      },
+      {
+        kind: "drawing",
+        photo: {
+          src: "/images/projects/project-18-drawing.webp",
+          width: 689,
+          height: 374,
+          alt:
+            "Front elevation drawing of the domed building, with a scalloped parapet and arched windows",
+        },
+      },
+    ],
     featured: false,
   },
   {
     id: "project-19",
+    slug: "majlis-agama-islam-johor",
     title: "Majlis Agama Islam",
     category: "Aluminium Dome",
     location: "Johor Bahru, Johor",
@@ -359,12 +801,35 @@ const projects: readonly Project[] = [
     scope: "Supply and install aluminium dome",
     client: "Majlis Agama Islam Johor",
     mainContractor: "OKA Marketing Sdn Bhd",
-    status: "ongoing",
-    image: "/images/projects/project-19.webp",
     // TODO_CONFIRM: the portfolio shows an architectural drawing for this
     // project, not a site photo. Replace with a photo when available.
-    altText:
-      "Architectural elevation drawing of a multi-storey building with an arched ground floor and a tiled roof",
+    gallery: [
+      { kind: "far" },
+      { kind: "close" },
+      { kind: "interior" },
+      { kind: "detail" },
+      {
+        kind: "drawing",
+        cover: true,
+        photo: {
+          src: "/images/projects/project-19.webp",
+          width: 1097,
+          height: 573,
+          alt:
+            "Architectural elevation drawing of a multi-storey building with an arched ground floor and a tiled roof",
+        },
+      },
+      {
+        kind: "drawing",
+        photo: {
+          src: "/images/projects/project-19-drawing.webp",
+          width: 813,
+          height: 573,
+          alt:
+            "Side elevation drawing of the building's arched ground floor and gabled upper storeys, with construction notes",
+        },
+      },
+    ],
     featured: false,
   },
 ];
@@ -545,6 +1010,28 @@ export const siteConfig = {
     },
   ],
   projects,
+  // Copy for the per-project detail pages (/projects/<slug>).
+  projectPage: {
+    galleryHeading: "Project photos",
+    beforeAfterHeading: "Before & after",
+    detailsHeading: "Project details",
+    comingSoon: "Photo coming soon",
+    backLabel: "All projects",
+    prevLabel: "Previous project",
+    nextLabel: "Next project",
+    viewProject: "View project",
+    ctaTitle: "Planning a similar project?",
+    shotLabels: {
+      far: { en: "Wide view", ms: "Pandangan jauh" },
+      close: { en: "Close-up", ms: "Pandangan dekat" },
+      interior: { en: "Interior view", ms: "Pandangan dalam" },
+      detail: { en: "Pattern detail", ms: "Detail corak" },
+      progress: { en: "During construction", ms: "Semasa pembinaan" },
+      before: { en: "Before", ms: "Sebelum" },
+      after: { en: "After", ms: "Selepas" },
+      drawing: { en: "Drawing", ms: "Lukisan" },
+    } satisfies Record<ShotKind, { en: string; ms: string }>,
+  },
   about: {
     // Paragraphs 1-3 are the portfolio overview, verbatim, split by sentence.
     intro: [

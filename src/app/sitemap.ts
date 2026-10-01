@@ -1,6 +1,7 @@
 import { execFileSync } from "node:child_process";
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
+import { projectsInDisplayOrder } from "@/lib/projects";
 
 export const dynamic = "force-static";
 
@@ -30,10 +31,20 @@ function lastCommitDate(): Date | undefined {
 const lastModified = lastCommitDate();
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return siteConfig.nav.map((item) => ({
-    url: `${siteConfig.contact.siteUrl}${item.href === "/" ? "" : item.href}`,
+  const { siteUrl } = siteConfig.contact;
+  const pages: MetadataRoute.Sitemap = siteConfig.nav.map((item) => ({
+    url: `${siteUrl}${item.href === "/" ? "" : item.href}`,
     lastModified,
     changeFrequency: "monthly",
     priority: item.href === "/" ? 1 : 0.8,
   }));
+  const projects: MetadataRoute.Sitemap = projectsInDisplayOrder().map((p) => ({
+    url: `${siteUrl}/projects/${p.slug}`,
+    lastModified,
+    changeFrequency: "yearly",
+    priority: 0.6,
+    // Real photos only; placeholders have no file.
+    images: p.gallery.flatMap((s) => (s.photo ? [`${siteUrl}${s.photo.src}`] : [])),
+  }));
+  return [...pages, ...projects];
 }

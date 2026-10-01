@@ -9,7 +9,11 @@ export default function FeaturedProjects() {
     <>
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {featured.map((project) => (
-          <ProjectCard key={project.id} project={project} />
+          <ProjectCard
+            key={project.id}
+            project={project}
+            viewLabel={siteConfig.projectPage.viewProject}
+          />
         ))}
       </div>
       <div className="mt-10 text-center">

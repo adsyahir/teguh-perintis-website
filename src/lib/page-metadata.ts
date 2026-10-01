@@ -22,8 +22,13 @@ export const ogImage = {
  * not an option either: og:url has no fallback to the canonical, so every page
  * would advertise the homepage and shares of all five would collapse into one
  * object.
+ *
+ * `image` overrides the shared OG card (project pages use their own cover).
  */
-export function pageUrls(path: `/${string}`): Metadata {
+export function pageUrls(
+  path: `/${string}`,
+  image: { url: string; alt: string } = ogImage,
+): Metadata {
   return {
     alternates: { canonical: path },
     openGraph: {
@@ -31,7 +36,7 @@ export function pageUrls(path: `/${string}`): Metadata {
       locale: "en_MY",
       type: "website",
       url: path,
-      images: [ogImage],
+      images: [image],
     },
   };
 }

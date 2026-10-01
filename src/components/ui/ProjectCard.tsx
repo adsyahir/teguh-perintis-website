@@ -1,30 +1,50 @@
 import Image from "next/image";
+import Link from "next/link";
+import CameraIcon from "@/components/ui/CameraIcon";
+import { coverOf, photoCount } from "@/lib/gallery";
 import type { Project } from "@/lib/site-config";
 
-export default function ProjectCard({ project }: { project: Project }) {
+export default function ProjectCard({
+  project,
+  viewLabel,
+}: {
+  project: Project;
+  /** "View project", read from siteConfig by the server-side parent. */
+  viewLabel: string;
+}) {
+  const cover = coverOf(project);
+  const n = photoCount(project);
+
   return (
-    <article className="group flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white transition-shadow hover:shadow-lg">
+    <article className="group relative flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white transition-shadow hover:shadow-lg has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-accent-500">
       <div className="relative overflow-hidden">
         <Image
-          src={project.image}
-          alt={project.altText}
-          width={1200}
-          height={800}
-          className="aspect-video w-full object-cover sm:aspect-[3/2] transition-transform duration-300 group-hover:scale-105"
+          src={cover.src}
+          alt={cover.alt}
+          width={cover.width}
+          height={cover.height}
+          className="aspect-video w-full object-cover sm:aspect-[3/2] transition-transform duration-300 motion-safe:group-hover:scale-105"
         />
         <p className="absolute top-3 left-3 flex flex-wrap gap-2">
           <span className="rounded bg-accent-500 px-2 py-0.5 text-xs font-semibold text-primary-900">
             {project.category}
           </span>
-          {project.status === "ongoing" && (
-            <span className="rounded bg-secondary-700 px-2 py-0.5 text-xs font-semibold text-white">
-              Ongoing
-            </span>
-          )}
+        </p>
+        <p className="absolute right-3 bottom-3 inline-flex items-center gap-1 rounded bg-primary-950/80 px-2 py-0.5 text-xs font-medium text-white">
+          <CameraIcon className="h-3.5 w-3.5" />
+          {n} {n === 1 ? "photo" : "photos"}
         </p>
       </div>
       <div className="flex flex-1 flex-col p-4 sm:p-5">
-        <h3 className="text-base font-bold text-slate-900 sm:text-lg">{project.title}</h3>
+        <h3 className="text-base font-bold text-slate-900 sm:text-lg">
+          {/* Stretched link: the whole card is the click target. */}
+          <Link
+            href={`/projects/${project.slug}`}
+            className="after:absolute after:inset-0 focus-visible:outline-none"
+          >
+            {project.title}
+          </Link>
+        </h3>
         <p className="mt-0.5 text-sm text-slate-500 sm:mt-1">
           {project.location} &middot; {project.year}
         </p>
@@ -48,6 +68,12 @@ export default function ProjectCard({ project }: { project: Project }) {
             </div>
           )}
         </dl>
+        <p
+          aria-hidden="true"
+          className="mt-auto pt-4 text-sm font-semibold text-primary-700 group-hover:text-primary-900"
+        >
+          {viewLabel} <span>&rarr;</span>
+        </p>
       </div>
     </article>
   );

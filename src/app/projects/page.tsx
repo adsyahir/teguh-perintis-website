@@ -6,6 +6,7 @@ import ClientsList from "@/components/sections/ClientsList";
 import ProjectBrowser from "@/components/sections/ProjectBrowser";
 import CtaBanner from "@/components/sections/CtaBanner";
 import { siteConfig } from "@/lib/site-config";
+import { projectsInDisplayOrder } from "@/lib/projects";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -14,19 +15,7 @@ export const metadata: Metadata = {
   ...pageUrls("/projects"),
 };
 
-// Newest first, so the latest work leads each section.
-const byYearDesc = (a: { year: string }, b: { year: string }) =>
-  Number(b.year) - Number(a.year);
-
 export default function ProjectsPage() {
-  // Ongoing work first, then completed, each newest first.
-  const ongoing = siteConfig.projects
-    .filter((p) => p.status === "ongoing")
-    .sort(byYearDesc);
-  const completed = siteConfig.projects
-    .filter((p) => p.status === "completed")
-    .sort(byYearDesc);
-
   return (
     <>
       <PageHero
@@ -35,10 +24,13 @@ export default function ProjectsPage() {
       />
 
       {/* No visible heading: it would only repeat the hero's "Our Projects",
-          and the status tabs already show the ongoing/completed counts. */}
+          and the type filter already shows the project counts. */}
       <Section className="bg-slate-50">
         <h2 className="sr-only">Project portfolio</h2>
-        <ProjectBrowser projects={[...ongoing, ...completed]} />
+        <ProjectBrowser
+          projects={projectsInDisplayOrder()}
+          viewLabel={siteConfig.projectPage.viewProject}
+        />
       </Section>
 
       <Section

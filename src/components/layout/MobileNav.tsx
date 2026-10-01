@@ -49,22 +49,28 @@ export default function MobileNav() {
           className="absolute inset-x-0 top-full border-t border-slate-200 bg-white shadow-lg"
         >
           <ul className="flex flex-col px-4 py-3">
-            {siteConfig.nav.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  aria-current={pathname === item.href ? "page" : undefined}
-                  className={`block rounded-md px-3 py-3 text-base font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500 ${
-                    pathname === item.href
-                      ? "bg-primary-50 text-primary-700"
-                      : "text-slate-700 hover:bg-slate-50"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            {siteConfig.nav.map((item) => {
+              // Section pages (/projects/<slug>) keep their parent highlighted.
+              const active =
+                pathname === item.href ||
+                (item.href !== "/" && pathname.startsWith(item.href + "/"));
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    aria-current={pathname === item.href ? "page" : undefined}
+                    className={`block rounded-md px-3 py-3 text-base font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500 ${
+                      active
+                        ? "bg-primary-50 text-primary-700"
+                        : "text-slate-700 hover:bg-slate-50"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
       )}
