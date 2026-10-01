@@ -12,14 +12,14 @@ export default function CtaBanner({
 }) {
   return (
     <div className="dark-section bg-primary-700">
-      <Container className="flex flex-col items-center gap-8 py-16 text-center sm:py-20">
+      <Container className="flex flex-col items-center gap-6 py-12 text-center sm:gap-8 sm:py-20">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <h2 className="text-2xl font-bold tracking-tight text-white sm:text-4xl">
             {title}
           </h2>
-          <p className="mt-3 text-lg text-slate-200">{subtitle}</p>
+          <p className="mt-3 text-base text-slate-200 sm:text-lg">{subtitle}</p>
         </div>
-        <div className="flex flex-wrap justify-center gap-4">
+        <div className="flex w-full max-w-xs flex-col gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4">
           <WhatsAppLink>WhatsApp Us</WhatsAppLink>
           <Button
             href={`tel:${siteConfig.contact.phoneE164}`}

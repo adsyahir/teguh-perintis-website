@@ -16,10 +16,10 @@ export default function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className={`py-16 sm:py-24 ${className}`}>
+    <section id={id} className={`py-12 sm:py-24 ${className}`}>
       <Container>
         {(eyebrow || title || subtitle) && (
-          <div className="mb-12 max-w-3xl">
+          <div className="mb-8 max-w-3xl sm:mb-12">
             {eyebrow && (
               <p className="mb-2 text-sm font-semibold tracking-wider text-secondary-700 uppercase">
                 {eyebrow}
@@ -30,7 +30,11 @@ export default function Section({
                 {title}
               </h2>
             )}
-            {subtitle && <p className="mt-4 text-lg text-slate-600">{subtitle}</p>}
+            {subtitle && (
+              <p className="mt-3 text-base text-slate-600 sm:mt-4 sm:text-lg">
+                {subtitle}
+              </p>
+            )}
           </div>
         )}
         {children}

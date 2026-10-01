@@ -9,11 +9,11 @@ export default function PageHero({
 }) {
   return (
     <div className="bg-primary-900">
-      <Container className="py-16 sm:py-20">
-        <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+      <Container className="py-10 sm:py-20">
+        <h1 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">
           {title}
         </h1>
-        <p className="mt-4 max-w-2xl text-lg text-slate-300">{subtitle}</p>
+        <p className="mt-3 max-w-2xl text-base text-slate-300 sm:mt-4 sm:text-lg">{subtitle}</p>
       </Container>
     </div>
   );

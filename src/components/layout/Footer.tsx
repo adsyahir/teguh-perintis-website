@@ -81,7 +81,9 @@ export default function Footer() {
       </Container>
 
       <div className="border-t border-white/10">
-        <Container className="flex flex-col items-center justify-between gap-2 py-5 text-xs text-slate-400 sm:flex-row">
+        {/* Extra bottom room on phones so the floating WhatsApp button
+            never sits over the last line. */}
+        <Container className="flex flex-col items-center justify-between gap-2 pt-5 pb-20 text-xs text-slate-400 sm:flex-row sm:pb-5">
           <p>
             &copy; {new Date().getFullYear()} {company.name}. All rights
             reserved.
