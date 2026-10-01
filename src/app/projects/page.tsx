@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { pageUrls } from "@/lib/page-metadata";
 import PageHero from "@/components/sections/PageHero";
 import Section from "@/components/ui/Section";
-import ProjectCard from "@/components/ui/ProjectCard";
 import ClientsList from "@/components/sections/ClientsList";
+import ProjectBrowser from "@/components/sections/ProjectBrowser";
 import CtaBanner from "@/components/sections/CtaBanner";
 import { siteConfig } from "@/lib/site-config";
 
@@ -19,6 +19,7 @@ const byYearDesc = (a: { year: string }, b: { year: string }) =>
   Number(b.year) - Number(a.year);
 
 export default function ProjectsPage() {
+  // Ongoing work first, then completed, each newest first.
   const ongoing = siteConfig.projects
     .filter((p) => p.status === "ongoing")
     .sort(byYearDesc);
@@ -33,29 +34,11 @@ export default function ProjectsPage() {
         subtitle="Aluminium domes, cladding and metal works for mosques, institutions and commercial clients across Malaysia."
       />
 
-      <Section
-        eyebrow="In Progress"
-        title="Ongoing Projects"
-        subtitle={`${ongoing.length} projects currently under way.`}
-      >
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {ongoing.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
-      </Section>
-
-      <Section
-        eyebrow="Track Record"
-        title="Completed Projects"
-        subtitle={`${completed.length} projects delivered to date.`}
-        className="bg-slate-50"
-      >
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {completed.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
+      {/* No visible heading: it would only repeat the hero's "Our Projects",
+          and the status tabs already show the ongoing/completed counts. */}
+      <Section className="bg-slate-50">
+        <h2 className="sr-only">Project portfolio</h2>
+        <ProjectBrowser projects={[...ongoing, ...completed]} />
       </Section>
 
       <Section
