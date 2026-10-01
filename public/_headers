@@ -16,6 +16,12 @@
 /images/*
   Cache-Control: public, max-age=604800
 
+# Keep the staging site out of search results. Matched by host, so this
+# rule is inert on the production domain and safe to merge into main.
+# (Cloudflare already sends noindex on *.pages.dev preview URLs.)
+https://staging.teguhperintis.com/*
+  X-Robots-Tag: noindex, nofollow
+
 # Next emits the OG card as an extensionless file, so static hosts would
 # otherwise guess its type and social crawlers would reject the preview.
 /opengraph-image
