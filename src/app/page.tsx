@@ -19,11 +19,11 @@ export default function HomePage() {
   return (
     <>
       <Hero
-        eyebrow="CIDB G3 Registered Contractor"
-        title="Building Johor's Future with Strength and Precision"
-        subtitle="We build roads, infrastructure, and buildings across Johor and nearby areas. From site preparation to handover, our work is done properly and complies with Malaysian standards."
+        eyebrow="Aluminium Dome & Architectural Metal Specialist"
+        title="Aluminium Domes Built with Strength and Precision"
+        subtitle="From design coordination and in-house fabrication to installation and refurbishment, we deliver aluminium domes and architectural metal works for mosque, institutional and commercial projects across Malaysia."
         imageBase="/images/hero-home"
-        imageAlt="Construction site managed by Teguh Perintis"
+        imageAlt="Green aluminium dome with a white lattice trim band and gold finial on a mosque roof, with a minaret beside it"
       />
 
       <StatsBar />
@@ -31,7 +31,7 @@ export default function HomePage() {
       <Section
         eyebrow="What We Do"
         title="Our Services"
-        subtitle="Licensed and certified, with complete construction capability under one roof."
+        subtitle="Five specialist capabilities, from aluminium domes to architectural metal works, delivered by one in-house team."
       >
         <ServicesGrid />
       </Section>
@@ -39,7 +39,7 @@ export default function HomePage() {
       <Section
         eyebrow="Credentials"
         title="Licensed & Certified"
-        subtitle="Registered with CIDB Malaysia and certified to undertake government and private projects."
+        subtitle="CIDB G3 registered and certified to undertake government and private projects."
         className="bg-slate-50"
       >
         <Certifications />
@@ -48,7 +48,7 @@ export default function HomePage() {
       <Section
         eyebrow="How We Work"
         title="Our Process"
-        subtitle="A clear, four-step journey from first consultation to final handover."
+        subtitle="A clear, four-step journey from site survey to final handover."
       >
         <ProcessSteps />
       </Section>
@@ -56,7 +56,7 @@ export default function HomePage() {
       <Section
         eyebrow="Our Work"
         title="Featured Projects"
-        subtitle="A selection of recently completed works across Johor."
+        subtitle="A selection of dome and metal works projects across Malaysia."
         className="bg-slate-50"
       >
         <FeaturedProjects />

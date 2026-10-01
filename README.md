@@ -1,6 +1,6 @@
 # Teguh Perintis Sdn. Bhd. — Company Website
 
-Company profile website for **Teguh Perintis Sdn. Bhd.**, a CIDB G3 registered construction company based in Ulu Tiram, Johor, specialising in roads & civil infrastructure, engineering projects, and building construction.
+Company profile website for **Teguh Perintis Sdn. Bhd.**, a Johor-based specialist contractor for **aluminium domes and architectural metal works** (CIDB G3 registered), serving mosque, institutional and commercial projects across Malaysia.
 
 Built as a **fully static site** — no server, no database, no secrets — so it can be hosted anywhere cheaply and securely.
 
@@ -15,11 +15,11 @@ Built as a **fully static site** — no server, no database, no secrets — so i
 
 | Route | Content |
 |---|---|
-| `/` | Hero, stats, services, CIDB credentials, process, featured projects |
-| `/about` | Company overview, values, SSM/CIDB registration details, nature of business |
-| `/services` | Six detailed service sections with scope bullets |
-| `/projects` | Project gallery grid |
-| `/contact` | Address, phone, WhatsApp, business hours, Google Maps embed |
+| `/` | Hero, stats, five capabilities, CIDB credentials, process, featured projects |
+| `/about` | Company overview, history timeline, values, SSM/CIDB registration details, why choose us |
+| `/services` | Five detailed capability sections with scope bullets, process |
+| `/projects` | All 19 portfolio projects (ongoing, completed) and the client list |
+| `/contact` | Address, phone, email, WhatsApp, business hours, Google Maps embed |
 
 There is no contact form by design — enquiries go through click-to-WhatsApp (floating button on every page), phone, or email.
 
@@ -49,48 +49,83 @@ src/
     ├── sections/            # Hero, StatsBar, ServicesGrid, ProcessSteps, …
     ├── ui/                  # Container, Section, Button, cards, WhatsApp buttons
     └── seo/JsonLd.tsx       # GeneralContractor structured data
+assets/fonts/                # Poppins TTFs read by the Open Graph image (not served)
 public/
 ├── _headers                 # security headers for static hosts
-└── images/                  # photos (see replacement guide below)
+├── favicon.ico apple-touch-icon.png
+└── images/                  # photos and logos (see "Images and logos" below)
 ```
 
 ## Editing content
 
 **All content lives in one file: `src/lib/site-config.ts`.** Company info, contact details, navigation, services, projects, and stats are defined there — components never hardcode copy.
 
-### Before launch — fill in the TODOs
+## Brand
 
-Search `src/lib/site-config.ts` for `TODO`:
+| Token | Value | Use |
+|---|---|---|
+| `primary-900` (navy) | `#022662` | Headers, footers, dark sections, OG card. Full scale `primary-50`…`950` in `globals.css` |
+| `secondary-700` (maroon) | `#8b0304` | Eyebrows, labels, "Ongoing" badge, footer top border, OG accent bar |
+| `accent-500` (gold) | `#ffba00` | Buttons and highlights **on navy** |
 
-| Field | What to put |
+- Font: **Poppins** via `next/font/google` (weights 400, 500, 700 — it is not a variable font, so weights are listed explicitly in `layout.tsx`). The same TTFs live in `assets/fonts/` for the Open Graph image.
+- **Maroon rule:** gold fails contrast on white, so text on light backgrounds uses `text-secondary-700`, never `text-accent-600`.
+- The navy and maroon are the logo's sRGB values; the CMYK print values convert to different on-screen colours. Needs designer confirmation (see TODO table).
+
+## Editing content
+
+**All content lives in one file: `src/lib/site-config.ts`.** Company info, contact details, navigation, services, projects, clients, About copy, and stats are defined there — components never hardcode copy.
+
+`docs/` holds the client's source files (logos, fonts, portfolio PDF, business card, letterhead). It is about 760MB and **gitignored**; the images below were generated from it.
+
+### Before launch — confirm the TODOs
+
+Search `src/` for `TODO_CONFIRM`:
+
+| Where | What to confirm |
 |---|---|
-| `email` | Company email address |
-| `stats` | Confirm projects/clients counts |
-| `projects` | Replace the 6 example projects with real ones |
+| `globals.css` | Brand navy `#022662` / maroon `#8b0304` with the designer |
+| `site-config.ts` `company.trackRecordSince` | 2014 as the start of the track record |
+| `site-config.ts` `stats` | Track record year, 19 projects, 8 states |
+| `site-config.ts` `registration.serviceArea` | "Nationwide — Peninsular Malaysia & Sabah" |
+| `site-config.ts` `projects` | `status` is inferred from year (2026 = ongoing); main contractor is omitted for projects 05, 06 and 07; projects 18 and 19 use architectural drawings, not photos |
+| `site-config.ts` `about.history` | Year Teguh Aluminium and Construction Sdn. Bhd. was formed |
+| `site-config.ts` `services` | `decorative-panels` and `minarets-metalworks` photos are stand-ins (a lit dome and a fence) |
 
 `siteUrl`, `hours`, `geo` and `googleBusinessUrl` are filled in and confirmed
 against the Google Business Profile listing.
 
-### Replacing the example images
+### Images and logos
 
-The images in `public/images/` are **example stock photos** (Unsplash, free for commercial use). They show what kind of photo belongs in each slot — replace each with a real company photo of the same subject, keeping the same filename.
+All images are **WebP, pre-sized for their slot** (this keeps the mobile PageSpeed score high). They were extracted from `docs/TP - Portfolio_Digital.pdf` and are never upscaled.
 
-All images are **WebP, pre-sized for their slot** — this is what keeps the mobile PageSpeed score high. Convert replacement photos to WebP at the listed width before dropping them in (free tool: [squoosh.app](https://squoosh.app), quality ~70):
-
-| File | Show a photo of… | Width |
+| File | Source | Width |
 |---|---|---|
-| `hero-home-768.webp`, `-1280.webp`, `-1920.webp` | Your team / a flagship project site (same photo at 3 widths) | 768 / 1280 / 1920 |
-| `about-company.webp` | The team planning or reviewing drawings | 800 |
-| `services/service-civil.webp` | Roadworks / drainage / site crew (Roads & Civil Infrastructure) | 800 |
-| `services/service-building.webp` | A project under construction (Engineering Projects) | 800 |
-| `services/service-aluminium.webp` | A completed building (Building Construction) | 800 |
-| `services/service-me.webp` | Electrical / wiring works | 800 |
-| `services/service-maintenance.webp` | Renovation / painting in progress | 800 |
-| `services/service-facility.webp` | Maintenance technician at work | 800 |
-| `projects/project-01.webp` … `project-06.webp` | Completed projects (update titles/locations in `site-config.ts` to match) | 1200 |
-| `logo.svg` | Company logo | ≈200 × 48 |
+| `hero-home-{768,1280,1920}.webp` | PDF page 10, `img-010-078` | 768 / 1280 / 1920 |
+| `about-company.webp` | PDF page 1, `img-001-002` (cropped 4:3) | 800 |
+| `services/service-domes.webp` | `img-012-086` | 800 |
+| `services/service-windows-cladding.webp` | `img-016-108` | 800 |
+| `services/service-decorative-panels.webp` | `img-013-093` | 800 |
+| `services/service-metalworks.webp` | `img-020-128` | 800 |
+| `services/service-refurbishment.webp` | `img-011-081` | 800 |
+| `projects/project-01.webp` … `project-19.webp` | PDF pages 4–22, one landscape photo per project | ≤ 1200 |
+| `logo-mark.webp` | navy mark, 96px high | 152 |
+| `logo-mark-white.png` | white mark (footer, OG card), 160px high | 254 |
+| `logo.png` | primary lockup, 512 × 512, transparent (JSON-LD logo) | 512 |
+| `favicon.ico`, `apple-touch-icon.png` | mark; ico 16/32/48 transparent, touch icon 180 on white | — |
 
-If a replacement uses a different extension, update the matching path in `site-config.ts` (the hero paths live in `src/app/page.tsx`).
+Regenerate the photos with:
+
+```bash
+pdfimages -all -p "docs/TP - Portfolio_Digital.pdf" /tmp/pdf/img   # extracts img-<page>-<n>.jpg
+cwebp -q 70 -m 6 input.png -o public/images/projects/project-01.webp   # resize to max 1200px wide first
+```
+
+Logos come from `docs/TP - Design Files/Logo/` (transparent, heavily padded PNGs): crop each to its alpha bounding box with Pillow (`im.crop(im.getchannel("A").getbbox())`), then resize.
+
+**Higher-resolution originals needed** (the PDF photos are narrower than the 1200px slot, so they render slightly soft on large screens): projects 06, 08, 10, 11, 12, 14, 15, 16, 18 and 19. Projects 18 and 19 are drawings, so real photos should replace them.
+
+If a replacement uses a different extension, update the matching path in `site-config.ts` (the hero paths live in `src/app/page.tsx`). The Poppins OFL licence file was not in the supplied font zip; add it to `assets/fonts/` if the client has it.
 
 ## Deployment
 

@@ -11,7 +11,7 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Roads & civil infrastructure (CE21), engineering projects, building construction (B04), M&E (M15), renovation, and facility management services in Johor by Teguh Perintis Sdn. Bhd.",
+    "Aluminium domes and pinnacles, aluminium windows and ACP cladding, Celuka lattice and CNC-cut panels, minarets and metal works, and dome refurbishment by Teguh Perintis Sdn. Bhd.",
   ...pageUrls("/services"),
 };
 
@@ -20,16 +20,16 @@ export default function ServicesPage() {
     <>
       <PageHero
         title="Our Services"
-        subtitle="End-to-end construction capability, licensed under CIDB categories B04, CE21, and M15."
+        subtitle="Five specialist capabilities in aluminium domes and architectural metal works, from design coordination to installation."
       />
 
       <div className="py-16 sm:py-24">
         <Container>
           <p className="max-w-3xl text-lg leading-relaxed text-slate-600">
-            Whether you are building new, renovating, or maintaining an
-            existing property, our team delivers every stage with certified
-            workmanship, quality materials, and full compliance to Malaysian
-            standards.
+            Whether you are building a new mosque or institutional building,
+            or restoring an existing dome, we coordinate the design,
+            fabricate in-house, and supply and install every component to
+            Malaysian standards.
           </p>
 
           <div className="mt-16 space-y-20">
@@ -82,8 +82,8 @@ export default function ServicesPage() {
       </Section>
 
       <CtaBanner
-        title="Not sure which service you need?"
-        subtitle="Tell us about your project and we'll recommend the right approach."
+        title="Planning a dome or metal works project?"
+        subtitle="Send us your drawings or site details and we'll recommend the right approach."
       />
     </>
   );

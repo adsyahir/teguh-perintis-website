@@ -9,7 +9,7 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Contact Teguh Perintis Sdn. Bhd. in Ulu Tiram, Johor. Call, WhatsApp, or visit us to discuss your construction, renovation, or maintenance project.",
+    "Contact Teguh Perintis Sdn. Bhd. in Ulu Tiram, Johor. Call, WhatsApp, or email us to discuss your aluminium dome, cladding, or architectural metal works project.",
   ...pageUrls("/contact"),
 };
 
@@ -28,7 +28,7 @@ export default function ContactPage() {
           <div className="space-y-8">
             <address className="space-y-6 not-italic">
               <div>
-                <h2 className="text-sm font-semibold tracking-wider text-accent-600 uppercase">
+                <h2 className="text-sm font-semibold tracking-wider text-secondary-700 uppercase">
                   Address
                 </h2>
                 <p className="mt-2 text-lg text-slate-900">
@@ -41,7 +41,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <h2 className="text-sm font-semibold tracking-wider text-accent-600 uppercase">
+                <h2 className="text-sm font-semibold tracking-wider text-secondary-700 uppercase">
                   Phone
                 </h2>
                 <p className="mt-2">
@@ -55,7 +55,21 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <h2 className="text-sm font-semibold tracking-wider text-accent-600 uppercase">
+                <h2 className="text-sm font-semibold tracking-wider text-secondary-700 uppercase">
+                  Email
+                </h2>
+                <p className="mt-2">
+                  <a
+                    href={`mailto:${contact.email}`}
+                    className="text-lg font-semibold text-primary-700 hover:text-primary-600"
+                  >
+                    {contact.email}
+                  </a>
+                </p>
+              </div>
+
+              <div>
+                <h2 className="text-sm font-semibold tracking-wider text-secondary-700 uppercase">
                   Business Hours
                 </h2>
                 <p className="mt-2 text-lg text-slate-900">{contact.hours}</p>
@@ -63,7 +77,7 @@ export default function ContactPage() {
             </address>
 
             <div>
-              <h2 className="text-sm font-semibold tracking-wider text-accent-600 uppercase">
+              <h2 className="text-sm font-semibold tracking-wider text-secondary-700 uppercase">
                 Prefer instant messaging?
               </h2>
               <div className="mt-3">

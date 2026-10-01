@@ -6,7 +6,7 @@ import { siteConfig } from "@/lib/site-config";
  *   - GeneralContractor — the local-business entity Google uses for the map
  *     pack and the knowledge panel.
  *   - WebSite — ties the domain to the business.
- *   - Service — one node per registered service, linked back to the provider.
+ *   - Service — one node per service, linked back to the provider.
  */
 export default function JsonLd() {
   const { company, contact, registration, services } = siteConfig;
@@ -23,6 +23,7 @@ export default function JsonLd() {
     slogan: company.tagline,
     url: contact.siteUrl,
     telephone: contact.phoneE164,
+    email: contact.email,
     image: `${contact.siteUrl}/images/hero-home-1280.webp`,
     logo: `${contact.siteUrl}/images/logo.png`,
     foundingDate: String(company.establishedYear),
@@ -33,6 +34,7 @@ export default function JsonLd() {
       streetAddress: contact.addressLines[0],
       addressLocality: "Ulu Tiram",
       addressRegion: "Johor",
+      postalCode: contact.postalCode,
       addressCountry: "MY",
     },
     geo: {
@@ -41,10 +43,7 @@ export default function JsonLd() {
       longitude: contact.geo.longitude,
     },
     hasMap: contact.googleBusinessUrl,
-    areaServed: {
-      "@type": "AdministrativeArea",
-      name: "Johor, Malaysia",
-    },
+    areaServed: { "@type": "Country", name: "Malaysia" },
     sameAs: [contact.googleBusinessUrl],
     openingHoursSpecification: [
       {
@@ -56,7 +55,7 @@ export default function JsonLd() {
         closes: contact.openingHours.closes,
       },
     ],
-    knowsAbout: registration.categories.map((c) => c.label),
+    knowsAbout: services.map((service) => service.title),
     hasCredential: registration.categories.map((c) => ({
       "@type": "EducationalOccupationalCredential",
       credentialCategory: "CIDB Registration",
@@ -72,7 +71,7 @@ export default function JsonLd() {
         description: service.shortDescription,
         serviceType: service.title,
         provider: { "@id": businessId },
-        areaServed: "Johor, Malaysia",
+        areaServed: "Malaysia",
       },
     })),
   };
