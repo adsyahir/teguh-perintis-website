@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -7,15 +7,18 @@ import JsonLd from "@/components/seo/JsonLd";
 import { FloatingWhatsApp } from "@/components/ui/WhatsAppButton";
 import { siteConfig } from "@/lib/site-config";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Poppins is not a variable font, so each weight in use must be listed.
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.contact.siteUrl),
   title: {
-    default: `${siteConfig.company.name} | CIDB G3 Contractor in Ulu Tiram, Johor`,
+    default: `${siteConfig.company.name} | Aluminium Dome & Architectural Metal Specialist, Johor`,
     template: `%s | ${siteConfig.company.name}`,
   },
   description: siteConfig.company.description,
@@ -32,16 +35,21 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
   keywords: [
-    "CIDB G3 contractor",
-    "contractor Ulu Tiram",
-    "contractor Johor",
+    "aluminium dome",
+    "aluminium dome contractor Malaysia",
+    "kubah aluminium",
+    "kontraktor kubah masjid",
+    "mosque dome Johor",
+    "dome refurbishment",
+    "Celuka lattice panel",
+    "CNC-cut aluminium panel",
+    "aluminium window and ACP cladding",
+    "architectural metal works",
+    "minaret and pinnacle",
     "kontraktor Johor",
-    "road construction Johor",
-    "civil engineering contractor Johor",
-    "building construction Johor",
-    "renovation contractor Johor Bahru",
     siteConfig.company.name,
   ],
+
   // No `url` here: Next resolves og:url only from an explicit value and does
   // not fall back to the canonical, so setting it at the root would stamp the
   // homepage URL onto every page. Each page sets its own alongside its canonical.
@@ -77,7 +85,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-MY" className={`${geistSans.variable} h-full antialiased`}>
+    <html lang="en-MY" className={`${poppins.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <a
           href="#main"

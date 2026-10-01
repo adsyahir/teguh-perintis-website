@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
 import { siteConfig } from "@/lib/site-config";
@@ -6,10 +7,17 @@ export default function Footer() {
   const { company, registration, contact, nav } = siteConfig;
 
   return (
-    <footer className="bg-primary-900 text-slate-300">
+    <footer className="border-t-4 border-secondary-700 bg-primary-900 text-slate-300">
       <Container className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-3">
         <div>
-          <p className="text-lg font-bold text-white">{company.name}</p>
+          <Image
+            src="/images/logo-mark-white.png"
+            alt=""
+            width={101}
+            height={64}
+            className="h-12 w-auto"
+          />
+          <p className="mt-4 text-lg font-bold text-white">{company.name}</p>
           <p className="mt-3 text-sm leading-relaxed">{company.description}</p>
           <p className="mt-4 text-sm">
             SSM Reg. No: {registration.ssmRegNo}
@@ -59,6 +67,14 @@ export default function Footer() {
                 {contact.phoneDisplay}
               </a>
             </p>
+            <p>
+              <a
+                href={`mailto:${contact.email}`}
+                className="transition-colors hover:text-accent-400"
+              >
+                {contact.email}
+              </a>
+            </p>
             <p>{contact.hours}</p>
           </address>
         </div>
@@ -70,7 +86,10 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} {company.name}. All rights
             reserved.
           </p>
-          <p>CIDB Registered Contractor &middot; {company.location}</p>
+          <p>
+            Aluminium Dome &amp; Architectural Metal Specialist &middot;{" "}
+            {company.location}
+          </p>
         </Container>
       </div>
     </footer>

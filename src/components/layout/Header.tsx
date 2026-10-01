@@ -15,9 +15,9 @@ export default function Header() {
           <Image
             src="/images/logo-mark.webp"
             alt={`${siteConfig.company.name} logo`}
-            width={48}
+            width={76}
             height={48}
-            className="h-12 w-12"
+            className="h-10 w-auto"
             priority
           />
           {/* The wordmark is live text, not part of the logo artwork: the

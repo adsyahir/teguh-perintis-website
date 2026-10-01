@@ -14,11 +14,18 @@ export const contentType = "image/png";
 // Inlined as a data URI: satori cannot fetch a relative URL at build time, and
 // under `output: "export"` there is no server to fetch it from either.
 const logo = `data:image/png;base64,${readFileSync(
-  join(process.cwd(), "public/images/logo.png"),
+  join(process.cwd(), "public/images/logo-mark-white.png"),
 ).toString("base64")}`;
 
+// Satori needs the font files themselves (it cannot use next/font), so the
+// brand's Poppins TTFs are kept in /assets/fonts and read at build time.
+const font = (file: string) =>
+  readFileSync(join(process.cwd(), "assets/fonts", file));
+const poppinsRegular = font("Poppins-Regular.ttf");
+const poppinsBold = font("Poppins-Bold.ttf");
+
 export default function OpengraphImage() {
-  const { company, registration, contact } = siteConfig;
+  const { company, contact } = siteConfig;
 
   return new ImageResponse(
     (
@@ -29,38 +36,23 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#0e2034",
+          backgroundColor: "#022662",
           padding: "72px 80px",
-          fontFamily: "Helvetica, Arial, sans-serif",
+          fontFamily: "Poppins",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          {/* On a white chip: the logo artwork has a white background of its
-              own, so it needs a light surface to sit on over the navy card. */}
+        <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
+          <img src={logo} width={127} height={80} alt="" />
           <div
             style={{
               display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 96,
-              height: 96,
-              borderRadius: 16,
-              backgroundColor: "#ffffff",
-              padding: 8,
-            }}
-          >
-            <img src={logo} width={80} height={80} alt="" />
-          </div>
-          <div
-            style={{
-              display: "flex",
-              color: "#f59e0b",
+              color: "#ffba00",
               fontSize: 26,
               fontWeight: 700,
               letterSpacing: 2,
             }}
           >
-            CIDB GRADE {registration.cidbGrade} REGISTERED CONTRACTOR
+            ALUMINIUM DOME SPECIALIST
           </div>
         </div>
 
@@ -69,7 +61,7 @@ export default function OpengraphImage() {
             style={{
               display: "flex",
               color: "#ffffff",
-              fontSize: 68,
+              fontSize: 64,
               fontWeight: 700,
               lineHeight: 1.1,
             }}
@@ -79,24 +71,30 @@ export default function OpengraphImage() {
           <div
             style={{
               display: "flex",
-              color: "#b8cfe6",
-              fontSize: 32,
+              color: "#adc1e1",
+              fontSize: 30,
               lineHeight: 1.35,
-              maxWidth: 920,
+              maxWidth: 940,
             }}
           >
-            Roads &amp; Civil Infrastructure · Building Construction · M&amp;E
+            Aluminium Domes &amp; Architectural Metal Works
           </div>
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
-          <div style={{ display: "flex", width: 96, height: 8, backgroundColor: "#f59e0b" }} />
-          <div style={{ display: "flex", color: "#dbe7f3", fontSize: 28 }}>
+          <div style={{ display: "flex", width: 96, height: 8, backgroundColor: "#8b0304" }} />
+          <div style={{ display: "flex", color: "#d6e0f0", fontSize: 26 }}>
             {company.location} · {contact.phoneDisplay}
           </div>
         </div>
       </div>
     ),
-    size,
+    {
+      ...size,
+      fonts: [
+        { name: "Poppins", data: poppinsRegular, weight: 400, style: "normal" },
+        { name: "Poppins", data: poppinsBold, weight: 700, style: "normal" },
+      ],
+    },
   );
 }
