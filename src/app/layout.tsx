@@ -85,7 +85,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-MY" className={`${poppins.variable} h-full antialiased`}>
+    <html
+      lang="en-MY"
+      className={`${poppins.variable} h-full antialiased`}
+      // globals.css sets smooth scrolling; this lets Next switch it off during
+      // route changes so a new page doesn't animate from the old scroll spot.
+      data-scroll-behavior="smooth"
+    >
       <body className="flex min-h-full flex-col">
         <a
           href="#main"

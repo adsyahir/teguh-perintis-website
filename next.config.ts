@@ -4,7 +4,9 @@ const csp = [
   "default-src 'self'",
   // 'unsafe-inline' is required: Next.js static export hydrates via inline
   // scripts whose content changes every build (so hashes are impractical).
-  "script-src 'self' 'unsafe-inline'",
+  // 'unsafe-eval' in dev only: React uses eval() there to rebuild server
+  // error stacks. Production builds never use eval, so the export omits it.
+  `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data:",
   "font-src 'self'",

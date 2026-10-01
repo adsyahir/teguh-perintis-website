@@ -37,6 +37,13 @@ body {
 }
 
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: 5rem;
+}
+
+/* Smooth in-page scrolling only for visitors who haven't asked for less
+   motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
