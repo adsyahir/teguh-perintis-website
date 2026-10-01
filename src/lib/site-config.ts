@@ -589,28 +589,101 @@ export const siteConfig = {
       },
     ],
   },
-  // Client and agency names, verbatim from the portfolio summary page.
-  clients: [
-    "Jabatan Agama Islam Selangor",
-    "ICU Jabatan Perdana Menteri",
-    "JKR Johor",
-    "Kerajaan Negeri Johor / MBPG Pasir Gudang",
-    "Tanjung Aru Eco Development Sdn Bhd",
-    "Lembaga Kemajuan Tanah Persekutuan (FELDA)",
-    "Kementerian Kerja Raya Malaysia",
-    "Mindef / UPNM",
-    "Majlis Agama Islam Johor / JKR Johor / KPRJ E&C Sdn Bhd",
-    "Majlis Agama Islam Negeri Selangor / JKR Kuala Langat",
-    "JHEINS, JKR Negeri Sembilan",
-    "JKR Negeri Sembilan",
-    "Majlis Agama Islam Negeri Johor, JKR Johor",
-    "Senai Airport Terminal Services Sdn Bhd",
-    "JKR Pahang",
-    "SP Setia / Kota Bayuemas Sdn Bhd",
-    "Yayasan Al-Falah, Perak",
-    "Pejabat Pembangunan Negeri Pahang, JKR Raub",
-    "Pentadbir Masjid An-Nur Temasya Glenmarie / ICU JPM",
-    "JKR Terengganu",
+  // Names verbatim from the portfolio's project experience summary (PDF p3);
+  // logos are cut from that same page and trimmed to their content, so
+  // width/height are the files' real pixel sizes (used for optical sizing).
+  // Clients that share a logo are listed together under it, so each logo
+  // shows once. `wide` gives a tile two grid columns: JKR for its five
+  // offices, KPRJ and Tanjung Aru for their wide wordmarks. The tile counts
+  // (6, 6, 4 grid cells) fill whole rows at 2, 3 and 6 columns.
+  clientGroups: [
+    {
+      category: "Federal Government",
+      organisations: [
+        {
+          logo: { src: "/images/clients/jkr.webp", width: 214, height: 160 },
+          wide: true,
+          clients: [
+            "JKR Johor",
+            "JKR Negeri Sembilan",
+            "JKR Pahang",
+            "Pejabat Pembangunan Negeri Pahang, JKR Raub",
+            "JKR Terengganu",
+          ],
+        },
+        {
+          logo: { src: "/images/clients/kkr.webp", width: 152, height: 121 },
+          clients: ["Kementerian Kerja Raya Malaysia"],
+        },
+        {
+          logo: { src: "/images/clients/icu-jpm.webp", width: 147, height: 103 },
+          clients: [
+            "ICU Jabatan Perdana Menteri",
+            "Pentadbir Masjid An-Nur Temasya Glenmarie / ICU JPM",
+          ],
+        },
+        {
+          logo: { src: "/images/clients/felda.webp", width: 126, height: 160 },
+          clients: ["Lembaga Kemajuan Tanah Persekutuan (FELDA)"],
+        },
+        {
+          logo: { src: "/images/clients/upnm.webp", width: 153, height: 153 },
+          clients: ["Mindef / UPNM"],
+        },
+      ],
+    },
+    {
+      category: "State Government & Religious Authorities",
+      organisations: [
+        {
+          logo: { src: "/images/clients/jais.webp", width: 138, height: 152 },
+          clients: ["Jabatan Agama Islam Selangor"],
+        },
+        {
+          logo: { src: "/images/clients/mais.webp", width: 102, height: 151 },
+          clients: ["Majlis Agama Islam Negeri Selangor / JKR Kuala Langat"],
+        },
+        {
+          logo: { src: "/images/clients/jain-johor.webp", width: 191, height: 160 },
+          clients: ["Majlis Agama Islam Negeri Johor, JKR Johor"],
+        },
+        {
+          logo: { src: "/images/clients/mbpg.webp", width: 184, height: 160 },
+          clients: ["Kerajaan Negeri Johor / MBPG Pasir Gudang"],
+        },
+        {
+          logo: { src: "/images/clients/jheains.webp", width: 280, height: 160 },
+          clients: ["JHEINS, JKR Negeri Sembilan"],
+        },
+        {
+          logo: { src: "/images/clients/al-falah.webp", width: 124, height: 137 },
+          clients: ["Yayasan Al-Falah, Perak"],
+        },
+      ],
+    },
+    {
+      category: "Private Sector",
+      organisations: [
+        {
+          logo: { src: "/images/clients/kprj.webp", width: 303, height: 72 },
+          wide: true,
+          clients: ["Majlis Agama Islam Johor / JKR Johor / KPRJ E&C Sdn Bhd"],
+        },
+        {
+          logo: { src: "/images/clients/setia-bayuemas.webp", width: 215, height: 92 },
+          clients: ["SP Setia / Kota Bayuemas Sdn Bhd"],
+        },
+        {
+          logo: { src: "/images/clients/tanjung-aru.webp", width: 320, height: 146 },
+          wide: true,
+          clients: ["Tanjung Aru Eco Development Sdn Bhd"],
+        },
+        {
+          logo: { src: "/images/clients/senai-airport.webp", width: 320, height: 80 },
+          clients: ["Senai Airport Terminal Services Sdn Bhd"],
+        },
+      ],
+    },
   ],
   values: [
     {
