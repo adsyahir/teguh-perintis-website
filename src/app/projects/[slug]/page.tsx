@@ -54,16 +54,6 @@ export default async function ProjectPage({ params }: Props) {
   const prev = ordered[at - 1];
   const next = ordered[at + 1];
 
-  const details = [
-    ["Scope", project.scope],
-    ["Client", project.client],
-    ...(project.mainContractor
-      ? [["Main Contractor", project.mainContractor]]
-      : []),
-    ["Location", project.location],
-    ["Year", project.year],
-  ];
-
   const neighbour =
     "rounded-lg border border-slate-200 p-4 hover:border-primary-300 hover:bg-primary-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500";
   const neighbourLabel =
@@ -105,22 +95,6 @@ export default async function ProjectPage({ params }: Props) {
             comingSoon: copy.comingSoon,
           }}
         />
-
-        <h2 className="mt-12 text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
-          {copy.detailsHeading}
-        </h2>
-        <dl className="mt-4 grid gap-x-8 gap-y-5 rounded-lg border border-slate-200 bg-slate-50 p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-3">
-          {details.map(([label, value]) => (
-            <div key={label}>
-              <dt className="text-xs font-semibold tracking-wider text-secondary-700 uppercase">
-                {label}
-              </dt>
-              <dd className="mt-1 text-sm text-slate-800 sm:text-base">
-                {value}
-              </dd>
-            </div>
-          ))}
-        </dl>
 
         <nav
           aria-label="More projects"

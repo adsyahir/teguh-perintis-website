@@ -1014,7 +1014,6 @@ export const siteConfig = {
   projectPage: {
     galleryHeading: "Project photos",
     beforeAfterHeading: "Before & after",
-    detailsHeading: "Project details",
     comingSoon: "Photo coming soon",
     backLabel: "All projects",
     prevLabel: "Previous project",
