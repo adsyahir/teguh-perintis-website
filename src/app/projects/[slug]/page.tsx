@@ -63,7 +63,7 @@ export default async function ProjectPage({ params }: Props) {
     <>
       <div className="bg-primary-900">
         <Container className="py-8 sm:py-14">
-          <BackToProjects label={copy.backLabel} />
+          <BackToProjects label={copy.backLabel} slug={project.slug} />
           <p className="mt-5">
             <span className="rounded bg-accent-500 px-2 py-0.5 text-xs font-semibold text-primary-900">
               {project.category}

@@ -3,7 +3,7 @@
 import { useEffect, useId, useRef, useSyncExternalStore } from "react";
 import ProjectCard from "@/components/ui/ProjectCard";
 import Pagination from "@/components/ui/Pagination";
-import { RETURN_KEY } from "@/lib/return-to-projects";
+import { RETURN_KEY, encodeReturn } from "@/lib/return-to-projects";
 import type { Project } from "@/lib/site-config";
 
 // Two rows at desktop width. Paging keeps the section the same length
@@ -252,9 +252,14 @@ export default function ProjectBrowser({
       <ul
         className="grid gap-5 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3"
         onClickCapture={(e) => {
-          if ((e.target as Element).closest("a"))
+          const link = (e.target as Element).closest("a");
+          if (link)
             try {
-              sessionStorage.setItem(RETURN_KEY, window.location.search);
+              const slug = new URL(link.href).pathname.split("/").pop() ?? "";
+              sessionStorage.setItem(
+                RETURN_KEY,
+                encodeReturn(slug, window.location.search),
+              );
             } catch {}
         }}
       >
