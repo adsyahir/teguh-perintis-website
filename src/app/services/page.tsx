@@ -74,7 +74,6 @@ export default function ServicesPage() {
       </div>
 
       <Section
-        eyebrow="How We Work"
         title="Our Process"
         className="bg-slate-50"
       >

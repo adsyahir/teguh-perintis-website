@@ -19,7 +19,6 @@ export default function HomePage() {
   return (
     <>
       <Hero
-        eyebrow="Aluminium Dome & Architectural Metal Specialist"
         title="Aluminium Domes Built with Strength and Precision"
         subtitle="From design coordination and in-house fabrication to installation and refurbishment, we deliver aluminium domes and architectural metal works for mosque, institutional and commercial projects across Malaysia."
         imageBase="/images/hero-home"
@@ -29,7 +28,6 @@ export default function HomePage() {
       <StatsBar />
 
       <Section
-        eyebrow="What We Do"
         title="Our Services"
         subtitle="Five specialist capabilities, from aluminium domes to architectural metal works, delivered by one in-house team."
       >
@@ -37,7 +35,6 @@ export default function HomePage() {
       </Section>
 
       <Section
-        eyebrow="Credentials"
         title="Licensed & Certified"
         subtitle="CIDB G3 registered and certified to undertake government and private projects."
         className="bg-slate-50"
@@ -46,15 +43,13 @@ export default function HomePage() {
       </Section>
 
       <Section
-        eyebrow="How We Work"
         title="Our Process"
-        subtitle="A clear, four-step journey from site survey to final handover."
+        subtitle="Four steps from site survey to final handover."
       >
         <ProcessSteps />
       </Section>
 
       <Section
-        eyebrow="Our Work"
         title="Featured Projects"
         subtitle="A selection of dome and metal works projects across Malaysia."
         className="bg-slate-50"

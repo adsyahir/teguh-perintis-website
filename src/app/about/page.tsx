@@ -65,7 +65,7 @@ export default function AboutPage() {
         </ol>
       </Section>
 
-      <Section eyebrow="Our Values" title="What We Stand For">
+      <Section title="What We Stand For">
         <div className="grid gap-8 md:grid-cols-3">
           {values.map((value) => (
             <div
@@ -84,7 +84,6 @@ export default function AboutPage() {
       </Section>
 
       <Section
-        eyebrow="Credentials"
         title="Registration & Certifications"
         subtitle="Fully registered with the Construction Industry Development Board (CIDB) Malaysia."
         className="bg-slate-50"

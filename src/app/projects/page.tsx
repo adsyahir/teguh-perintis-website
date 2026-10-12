@@ -34,7 +34,6 @@ export default function ProjectsPage() {
       </Section>
 
       <Section
-        eyebrow="Trusted By"
         title="Clients & Agencies"
         subtitle="Government agencies, religious authorities and private developers we have worked with."
       >

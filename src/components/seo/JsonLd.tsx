@@ -59,7 +59,7 @@ export default function JsonLd() {
     hasCredential: registration.categories.map((c) => ({
       "@type": "EducationalOccupationalCredential",
       credentialCategory: "CIDB Registration",
-      name: `CIDB ${c.code} — ${c.label}`,
+      name: `CIDB ${c.code}: ${c.label}`,
       identifier: registration.cidbRegNo,
     })),
     makesOffer: services.map((service) => ({

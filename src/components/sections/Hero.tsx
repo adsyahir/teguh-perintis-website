@@ -9,7 +9,8 @@ export default function Hero({
   imageBase,
   imageAlt,
 }: {
-  eyebrow: string;
+  /** Optional: skip it when it would only restate the headline. */
+  eyebrow?: string;
   title: string;
   subtitle: string;
   /** Path without extension; expects `${imageBase}-{768,1280,1920}.webp` */
@@ -34,9 +35,11 @@ export default function Hero({
       />
       <Container className="py-24 sm:py-32 lg:py-40">
         <div className="max-w-3xl">
-          <p className="mb-3 text-sm font-semibold tracking-wider text-accent-400 uppercase">
-            {eyebrow}
-          </p>
+          {eyebrow && (
+            <p className="mb-3 text-sm font-semibold tracking-wider text-accent-400 uppercase">
+              {eyebrow}
+            </p>
+          )}
           <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
             {title}
           </h1>

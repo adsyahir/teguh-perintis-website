@@ -9,7 +9,7 @@ export const ogImage = {
   url: "/opengraph-image",
   width: 1200,
   height: 630,
-  alt: `${siteConfig.company.name} — ${siteConfig.company.tagline}`,
+  alt: `${siteConfig.company.name}: ${siteConfig.company.tagline}`,
 } as const;
 
 /**
