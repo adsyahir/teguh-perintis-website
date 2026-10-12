@@ -124,12 +124,6 @@ export default function ProjectGallery({
           className="object-cover transition-transform duration-300 motion-safe:group-hover:scale-105"
           {...(first && { loading: "eager", fetchPriority: "high" })}
         />
-        <span
-          aria-hidden="true"
-          className="pointer-events-none absolute bottom-2 left-2 rounded bg-primary-950/75 px-2 py-0.5 text-xs font-medium text-white"
-        >
-          {label.en}
-        </span>
         <span className="sr-only">, open larger view</span>
       </button>
     );
@@ -217,12 +211,13 @@ export default function ProjectGallery({
                 draggable={false}
                 className="h-auto max-h-[calc(100dvh-9rem)] w-auto max-w-full rounded object-contain motion-safe:animate-fade-in"
               />
-              <figcaption className="mt-3 text-center text-sm text-primary-100">
-                <span className="font-semibold text-white">
-                  {labels.shotLabels[item.kind].en}
-                </span>
-                {item.caption && ` · ${item.caption}`}
-              </figcaption>
+              {/* Shot kinds (wide view, close-up, ...) order the gallery but
+                  aren't shown; only a written caption appears. */}
+              {item.caption && (
+                <figcaption className="mt-3 text-center text-sm text-primary-100">
+                  {item.caption}
+                </figcaption>
+              )}
             </figure>
           )}
           {N > 1 && (
