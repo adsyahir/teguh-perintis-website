@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
 import GalleryPlaceholder from "@/components/ui/GalleryPlaceholder";
-import { lightboxItems, tileClass } from "@/lib/gallery";
+import { lightboxItems, thumbSrc, tileClass } from "@/lib/gallery";
 import type { GallerySlot, ShotKind } from "@/lib/site-config";
 
 type Labels = {
@@ -98,7 +98,9 @@ export default function ProjectGallery({
     if (slot.photo) lightboxIndex.set(slot, lightboxIndex.size);
   }
 
-  function tile(slot: GallerySlot, first: boolean) {
+  // `large` tiles (the lead, and any spanning the full row) get the full file;
+  // the rest get the small copy.
+  function tile(slot: GallerySlot, first: boolean, large: boolean) {
     const label = labels.shotLabels[slot.kind];
     const { photo } = slot;
     if (!photo) {
@@ -116,10 +118,9 @@ export default function ProjectGallery({
         className={`group relative block h-full w-full cursor-zoom-in overflow-hidden rounded-lg bg-slate-100 ${focusRing}`}
       >
         <Image
-          src={photo.src}
+          src={large ? photo.src : thumbSrc(photo.src)}
           fill
           alt={photo.alt}
-          sizes="(min-width:1024px) 50vw, 100vw"
           className="object-cover transition-transform duration-300 motion-safe:group-hover:scale-105"
           {...(first && { loading: "eager", fetchPriority: "high" })}
         />
@@ -139,7 +140,11 @@ export default function ProjectGallery({
       <ul className="mt-6 grid grid-cols-2 gap-2 sm:gap-3 lg:auto-rows-[12rem] lg:grid-cols-4 lg:gap-4">
         {main.map((slot, i) => (
           <li key={i} className={tileClass(i, main.length)}>
-            {tile(slot, i === 0)}
+            {tile(
+              slot,
+              i === 0,
+              i === 0 || tileClass(i, main.length).includes("col-span-4"),
+            )}
           </li>
         ))}
       </ul>
@@ -152,7 +157,7 @@ export default function ProjectGallery({
           <ul className="mt-4 grid grid-cols-2 gap-2 sm:gap-3 lg:gap-4">
             {beforeAfter.map((slot, i) => (
               <li key={i} className="aspect-[4/3]">
-                {tile(slot, false)}
+                {tile(slot, false, false)}
               </li>
             ))}
           </ul>
@@ -180,7 +185,7 @@ export default function ProjectGallery({
             aria-label="Close photo viewer"
             className={`inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 ${focusRing}`}
           >
-            <Icon d="M6 6l12 12M18 6L6 18" />
+            <Icon d="M5 5l10 10M15 5L5 15" />
           </button>
         </div>
         <div

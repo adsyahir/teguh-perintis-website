@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import CameraIcon from "@/components/ui/CameraIcon";
-import { coverOf, photoCount } from "@/lib/gallery";
+import { coverOf, photoCount, thumbSrc } from "@/lib/gallery";
 import type { Project } from "@/lib/site-config";
 
 export default function ProjectCard({
@@ -19,7 +19,7 @@ export default function ProjectCard({
     <article className="group relative flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white transition-shadow hover:shadow-lg has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-accent-500">
       <div className="relative overflow-hidden">
         <Image
-          src={cover.src}
+          src={thumbSrc(cover.src)}
           alt={cover.alt}
           width={cover.width}
           height={cover.height}
@@ -55,10 +55,12 @@ export default function ProjectCard({
             <dt className="font-semibold text-secondary-700 max-sm:text-xs max-sm:leading-5">Scope</dt>
             <dd className="text-slate-700">{project.scope}</dd>
           </div>
-          <div className="contents sm:block">
-            <dt className="font-semibold text-secondary-700 max-sm:text-xs max-sm:leading-5">Client</dt>
-            <dd className="text-slate-700">{project.client}</dd>
-          </div>
+          {project.client && (
+            <div className="contents sm:block">
+              <dt className="font-semibold text-secondary-700 max-sm:text-xs max-sm:leading-5">Client</dt>
+              <dd className="text-slate-700">{project.client}</dd>
+            </div>
+          )}
           {project.mainContractor && (
             <div className="contents sm:block">
               <dt className="font-semibold text-secondary-700 max-sm:text-xs max-sm:leading-5">
@@ -72,7 +74,7 @@ export default function ProjectCard({
           aria-hidden="true"
           className="mt-auto pt-4 text-sm font-semibold text-primary-700 group-hover:text-primary-900"
         >
-          {viewLabel} <span>&rarr;</span>
+          {viewLabel}
         </p>
       </div>
     </article>

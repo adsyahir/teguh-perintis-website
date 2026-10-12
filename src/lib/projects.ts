@@ -18,7 +18,8 @@ export function projectsInDisplayOrder() {
 
 /** Meta description, also used as the WebPage description in JSON-LD. */
 export function projectDescription(p: Project) {
-  return `${p.scope}: ${p.title}, ${p.location}, completed ${p.year}. Client: ${p.client}.`;
+  const client = p.client ? ` Client: ${p.client}.` : "";
+  return `${p.scope}: ${p.title}, ${p.location}, completed ${p.year}.${client}`;
 }
 
 export function getProjectBySlug(slug: string) {

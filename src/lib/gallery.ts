@@ -1,8 +1,14 @@
 import type { GalleryPhoto, GallerySlot, Project, ShotKind } from "@/lib/site-config";
 
 export const CORE_KINDS = ["far", "close", "interior", "detail"] as const;
-export const MIN_SLOTS = 4;
-export const MAX_SLOTS = 6;
+// Every core kind has a slot (a photo, or a placeholder until one arrives);
+// beyond that a project can carry as many photos as the client supplies.
+export const MAX_SLOTS = 16;
+
+// "Photo coming soon" tiles for missing core shots. Hidden while the client
+// gathers more photos; the placeholder slots stay in the data, so setting this
+// back to true brings them back.
+export const SHOW_PLACEHOLDERS = false;
 
 const isBeforeAfter = (s: GallerySlot) =>
   s.kind === "before" || s.kind === "after";
@@ -23,7 +29,10 @@ export function gallerySections(p: Project): {
   main: GallerySlot[];
   beforeAfter: GallerySlot[];
 } {
-  const rest = p.gallery.filter((s) => !isBeforeAfter(s));
+  const shown = SHOW_PLACEHOLDERS
+    ? p.gallery
+    : p.gallery.filter((s) => s.photo);
+  const rest = shown.filter((s) => !isBeforeAfter(s));
   const cover = rest.find((s) => s.cover)!;
   return {
     main: [
@@ -31,11 +40,23 @@ export function gallerySections(p: Project): {
       ...rest.filter((s) => s !== cover && s.photo),
       ...rest.filter((s) => !s.photo),
     ],
-    beforeAfter: p.gallery.filter(isBeforeAfter),
+    beforeAfter: shown.filter(isBeforeAfter),
   };
 }
 
 export type LightboxItem = GalleryPhoto & { kind: ShotKind };
+
+/** Width of the small copies in each project's thumb/ folder. */
+export const THUMB_WIDTH = 800;
+
+/** The small copy of a project photo, for cards and ordinary gallery tiles.
+ * images are `unoptimized` (static export), so next/image can't resize; these
+ * keep phones from downloading 1440px files for ~180px tiles. The full file is
+ * still used by the lightbox and by tiles that span the grid. */
+export function thumbSrc(src: string) {
+  // /images/projects/<slug>/<file> -> /images/projects/<slug>/thumb/<file>
+  return src.replace(/\/([^/]+)$/, "/thumb/$1");
+}
 
 /** Real photos in the order the lightbox steps through them. */
 export function lightboxItems(sections: {
@@ -53,11 +74,10 @@ export function assertGallery(p: Project) {
     throw new Error(`${p.id}: gallery ${why}`);
   };
   const n = p.gallery.length;
-  if (n < MIN_SLOTS || n > MAX_SLOTS)
-    fail(`has ${n} slots, expected ${MIN_SLOTS}-${MAX_SLOTS}`);
+  if (n > MAX_SLOTS) fail(`has ${n} slots, at most ${MAX_SLOTS} allowed`);
   for (const kind of CORE_KINDS) {
-    if (p.gallery.filter((s) => s.kind === kind).length !== 1)
-      fail(`needs exactly one "${kind}" slot`);
+    if (!p.gallery.some((s) => s.kind === kind))
+      fail(`needs a "${kind}" slot (a photo or a placeholder)`);
   }
   const covers = p.gallery.filter((s) => s.cover);
   if (covers.length !== 1) fail(`needs exactly one cover, has ${covers.length}`);
@@ -68,19 +88,28 @@ export function assertGallery(p: Project) {
 const LEAD = "col-span-2 aspect-[4/3] lg:row-span-2 lg:aspect-auto";
 const SMALL = "aspect-square sm:aspect-[4/3] lg:aspect-auto";
 const WIDE_MOBILE = "col-span-2 aspect-[2/1] lg:aspect-auto";
-const LG_SPANS: Record<number, string[]> = {
-  3: ["lg:col-span-2", "", ""],
-  4: ["", "", "", ""],
-  5: ["lg:col-span-2", "", "", "lg:col-span-2", "lg:col-span-2"],
+/** lg spans that soak up the empty cells left after the 4-column grid fills,
+ * keyed by how many cells would be empty. Applied to the last tiles. */
+const LG_FILL: Record<number, string[]> = {
+  0: [],
+  1: ["lg:col-span-2"],
+  2: ["lg:col-span-2", "lg:col-span-2"],
+  3: ["lg:col-span-4 lg:row-span-2"],
 };
 
-/** Grid classes for tile i of n: the lead tile is 2x2 at lg, and an odd last
- * tile spans the row on phones so no cell is left empty. */
+/** Grid classes for tile i of n. The lead tile is 2x2 at lg; the tiles after
+ * it fill 4-column rows, and the last few widen so no cell is left empty. On
+ * phones an odd last tile spans the row for the same reason. */
 export function tileClass(i: number, n: number) {
-  if (i === 0) return LEAD;
   const r = n - 1;
+  // A lone photo takes the full width; a single partner matches the lead.
+  if (i === 0) return r === 0 ? `${LEAD} lg:col-span-4` : LEAD;
+  if (r === 1) return `${WIDE_MOBILE} lg:row-span-2`;
+  const fill = LG_FILL[(4 - (r % 4)) % 4];
+  const fromEnd = r - i; // 0 for the last tile
   const oddLast = r % 2 === 1 && i === r;
-  let lg = LG_SPANS[r]?.[i - 1] ?? "";
-  if (oddLast && lg === "") lg = "lg:col-span-1";
+  // WIDE_MOBILE spans 2 columns; reset that at lg unless a fill span applies.
+  const lg =
+    fill[fill.length - 1 - fromEnd] ?? (oddLast ? "lg:col-span-1" : "");
   return `${oddLast ? WIDE_MOBILE : SMALL} ${lg}`.trim();
 }

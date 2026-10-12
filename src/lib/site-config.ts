@@ -31,7 +31,7 @@ const contact = {
   // Confirmed against the Google Business Profile listing. `hours` is the
   // display string; `openingHours` is the machine-readable form the
   // GeneralContractor schema emits — keep the two in sync.
-  hours: "Monday – Saturday, 9:00 AM – 6:00 PM (closed Sunday)",
+  hours: "Monday to Saturday, 9:00 AM to 6:00 PM (closed Sunday)",
   openingHours: {
     days: [
       "Monday",
@@ -90,60 +90,97 @@ export interface Project {
   location: string;
   year: string;
   scope: string;
-  client: string;
+  /** Omitted when the client is not confirmed. */
+  client?: string;
   /** Omitted when the main contractor is not confirmed ("TBC" in the portfolio). */
   mainContractor?: string;
-  /** 4-6 slots: the 4 core kinds, exactly one cover (see lib/gallery.ts). */
+  /** Real photos plus a placeholder for any core kind still missing, with
+   * exactly one cover (see lib/gallery.ts). */
   gallery: readonly GallerySlot[];
   featured: boolean;
 }
 
-// All 19 projects from the client's portfolio PDF, in portfolio order.
-// Photos are extracted from the PDF and several are below 1200px wide (see
-// README "Images and logos").
+// Projects 01-19 come from the client's portfolio PDF, in portfolio order;
+// 20 arrived later with the photo folders. Names, categories and photos follow
+// the client's docs/Website folders (see README "Images and logos"). 18 and 19
+// have no folder yet, so they still show the portfolio's drawings.
 const projects: readonly Project[] = [
   {
     id: "project-01",
-    slug: "masjid-habib-hassan-al-attas",
-    title: "Masjid Habib Hassan Al-Attas",
-    category: "Aluminium Dome",
-    location: "Jalan Tun Abdul Razak, Johor Bahru, Johor",
+    slug: "masjid-wadi-hassan-johor-bahru",
+    title: "Masjid Wadi Hassan",
+    category: "Supply and Install Aluminium Dome",
+    location: "Johor Bahru, Johor",
     year: "2020",
     scope: "Supply and install aluminium dome",
     client: "Majlis Agama Islam Negeri Johor, JKR Johor",
     mainContractor: "Nobel Energy Construction Sdn Bhd",
     gallery: [
-      { kind: "far" },
       {
         kind: "close",
         cover: true,
         photo: {
-          src: "/images/projects/project-01.webp",
-          width: 1200,
-          height: 806,
-          alt:
-            "Close-up of a pale gold aluminium dome clad in overlapping scale-shaped panels, with a highway and buildings behind",
+          src: "/images/projects/masjid-wadi-hassan-johor-bahru/project-01-02.webp",
+          width: 1440,
+          height: 810,
+          alt: "Gold aluminium dome clad in overlapping scale-shaped panels, seen from above with the highway behind",
         },
       },
-      { kind: "interior" },
       {
         kind: "detail",
         photo: {
-          src: "/images/projects/project-01-detail.webp",
+          src: "/images/projects/masjid-wadi-hassan-johor-bahru/project-01-detail.webp",
           width: 518,
           height: 1007,
           alt:
             "Overlapping scale-shaped aluminium panels on a small dome with a gold finial, with the main dome behind",
         },
       },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/masjid-wadi-hassan-johor-bahru/project-01-01.webp",
+          width: 1440,
+          height: 810,
+          alt: "Aerial view of Masjid Wadi Hassan's white prayer hall with two gold scale-clad domes and a minaret, beside a highway",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/masjid-wadi-hassan-johor-bahru/project-01-04.webp",
+          width: 1440,
+          height: 810,
+          alt: "Aerial view of the mosque and its car park between the highway and the river",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/masjid-wadi-hassan-johor-bahru/project-01-05.webp",
+          width: 1440,
+          height: 810,
+          alt: "The mosque from a distance with the Johor Bahru skyline behind",
+        },
+      },
+      {
+        kind: "detail",
+        photo: {
+          src: "/images/projects/masjid-wadi-hassan-johor-bahru/project-01-03.webp",
+          width: 1440,
+          height: 810,
+          alt: "Smaller scale-clad gold dome in front of the main dome, framed by the building's arched windows",
+        },
+      },
+      { kind: "interior" },
     ],
     featured: true,
   },
   {
     id: "project-02",
-    slug: "masjid-tuminah-hamidi",
+    slug: "masjid-tuminah-hamidi-bagan-datuk",
     title: "Masjid Tuminah Hamidi",
-    category: "Aluminium Dome",
+    category: "Supply and Install Aluminium Dome",
     location: "Bagan Datuk, Perak",
     year: "2020",
     scope: "Supply and install aluminium dome",
@@ -154,21 +191,29 @@ const projects: readonly Project[] = [
         kind: "far",
         cover: true,
         photo: {
-          src: "/images/projects/project-02.webp",
-          width: 1200,
-          height: 806,
-          alt:
-            "Aerial view of a blue-roofed mosque with a blue dome and twin minarets beside a river",
+          src: "/images/projects/masjid-tuminah-hamidi-bagan-datuk/project-02-01.webp",
+          width: 1440,
+          height: 810,
+          alt: "Aerial view of Masjid Tuminah Hamidi, a white mosque with blue domes and two minarets, standing in the river",
         },
       },
       {
         kind: "close",
         photo: {
-          src: "/images/projects/project-02-close.webp",
+          src: "/images/projects/masjid-tuminah-hamidi-bagan-datuk/project-02-close.webp",
           width: 554,
           height: 1078,
           alt:
             "Minaret with calligraphy panels in front of the mosque's blue aluminium dome",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/masjid-tuminah-hamidi-bagan-datuk/project-02-02.webp",
+          width: 1440,
+          height: 810,
+          alt: "The mosque from the landward side, with a roundabout and a paved walkway leading out across the water",
         },
       },
       { kind: "interior" },
@@ -178,9 +223,9 @@ const projects: readonly Project[] = [
   },
   {
     id: "project-03",
-    slug: "masjid-bandar-seremban-selatan",
-    title: "Masjid Bandar Seremban Selatan",
-    category: "Aluminium Dome",
+    slug: "masjid-seremban-selatan",
+    title: "Masjid Seremban Selatan",
+    category: "Supply and Install Aluminium Dome",
     location: "Seremban, Negeri Sembilan",
     year: "2023",
     scope: "Supply and install aluminium dome",
@@ -191,21 +236,38 @@ const projects: readonly Project[] = [
         kind: "far",
         cover: true,
         photo: {
-          src: "/images/projects/project-03.webp",
-          width: 1200,
-          height: 806,
-          alt:
-            "Triangulated aluminium dome framework with glazed panels on the roof of a grey mosque building, with hills behind",
+          src: "/images/projects/masjid-seremban-selatan/project-03-01.webp",
+          width: 1440,
+          height: 810,
+          alt: "Geodesic aluminium dome with triangular glazed panels on the roof of Masjid Seremban Selatan",
         },
       },
       {
         kind: "close",
         photo: {
-          src: "/images/projects/project-03-close.webp",
+          src: "/images/projects/masjid-seremban-selatan/project-03-close.webp",
           width: 518,
           height: 1007,
           alt:
             "Triangulated dome framework with protective film still on its glazed panels, on a concrete roof",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/masjid-seremban-selatan/project-03-03.webp",
+          width: 1440,
+          height: 810,
+          alt: "Top-down view of the glazed dome on the flat roof beside green metal roofing",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/masjid-seremban-selatan/project-03-02.webp",
+          width: 1440,
+          height: 810,
+          alt: "Triangulated glazed dome on the concrete roof, with earthworks and hills behind",
         },
       },
       { kind: "interior" },
@@ -215,47 +277,100 @@ const projects: readonly Project[] = [
   },
   {
     id: "project-04",
-    slug: "masjid-kampung-tok-machang",
-    title: "Masjid Baru di Kampung Tok Machang",
-    category: "Aluminium Dome",
+    slug: "masjid-kg-tok-machang-raub",
+    title: "Masjid Kg Tok Machang",
+    category: "Supply and Install Aluminium Dome",
     location: "Ulu Gali, Raub, Pahang",
     year: "2023",
     scope: "Supply and install aluminium dome",
     client: "JKR Raub",
     mainContractor: "Mercu Buana (M) Sdn Bhd",
     gallery: [
-      { kind: "far" },
       {
         kind: "close",
         cover: true,
         photo: {
-          src: "/images/projects/project-04.webp",
+          src: "/images/projects/masjid-kg-tok-machang-raub/project-04.webp",
           width: 1200,
           height: 806,
           alt:
             "Gold aluminium dome with ribbed panel seams on a concrete roof, beside minaret scaffolding and limestone hills",
         },
       },
-      { kind: "interior" },
-      { kind: "detail" },
       {
         kind: "progress",
         photo: {
-          src: "/images/projects/project-04-progress.webp",
+          src: "/images/projects/masjid-kg-tok-machang-raub/project-04-progress.webp",
           width: 518,
           height: 1007,
           alt:
             "Worker on scaffolding beside a tall gold aluminium pinnacle being fitted onto a concrete minaret base",
         },
       },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/masjid-kg-tok-machang-raub/project-04-02.webp",
+          width: 1440,
+          height: 810,
+          alt: "Gold aluminium dome and finial on the roof, with the scaffolded minaret and limestone hills behind",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/masjid-kg-tok-machang-raub/project-04-01.webp",
+          width: 1440,
+          height: 810,
+          alt: "Aerial view of Masjid Kg Tok Machang under construction, with its gold dome and a minaret in scaffolding",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/masjid-kg-tok-machang-raub/project-04-03.webp",
+          width: 1440,
+          height: 810,
+          alt: "Gold dome on the mosque roof against limestone hills and palm trees",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-kg-tok-machang-raub/project-04-04.webp",
+          width: 1440,
+          height: 810,
+          alt: "Workers fitting the gold aluminium dome, one at the finial on top",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-kg-tok-machang-raub/project-04-05.webp",
+          width: 1440,
+          height: 810,
+          alt: "Crane beside the minaret as the gold pinnacle is lifted into place",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-kg-tok-machang-raub/project-04-06.webp",
+          width: 1280,
+          height: 960,
+          alt: "Dome and pinnacle assembled on the ground before lifting, the dome still in protective film",
+        },
+      },
+      { kind: "interior" },
+      { kind: "detail" },
     ],
     featured: false,
   },
   {
     id: "project-05",
     slug: "masjid-taman-saga-mentakab",
-    title: "Masjid Baru Taman Saga",
-    category: "Aluminium Dome",
+    title: "Masjid Taman Saga",
+    category: "Supply and Install Aluminium Dome",
     location: "Mentakab, Temerloh, Pahang",
     year: "2023",
     scope: "Supply and install aluminium dome",
@@ -266,42 +381,67 @@ const projects: readonly Project[] = [
         kind: "far",
         cover: true,
         photo: {
-          src: "/images/projects/project-05.webp",
-          width: 1200,
-          height: 806,
-          alt:
-            "Aerial view of a mosque with red tiled roofs and a small gold aluminium dome with a pinnacle",
+          src: "/images/projects/masjid-taman-saga-mentakab/project-05-02.webp",
+          width: 1440,
+          height: 810,
+          alt: "Aerial view of the red-roofed mosque and its gold dome, with the town behind",
         },
       },
       {
         kind: "close",
         photo: {
-          src: "/images/projects/project-05-close.webp",
-          width: 1417,
-          height: 999,
-          alt:
-            "Gold aluminium dome with a pointed finial on a grey roof platform, with trees behind",
+          src: "/images/projects/masjid-taman-saga-mentakab/project-05-03.webp",
+          width: 1440,
+          height: 810,
+          alt: "Ribbed gold aluminium dome with finial on the roof, overlooking a pond",
         },
       },
-      { kind: "interior" },
       {
         kind: "detail",
         photo: {
-          src: "/images/projects/project-05-detail.webp",
+          src: "/images/projects/masjid-taman-saga-mentakab/project-05-detail.webp",
           width: 398,
           height: 774,
           alt:
             "Ribbed gold aluminium dome rising to a tall pointed finial, with forested hills behind",
         },
       },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/masjid-taman-saga-mentakab/project-05-01.webp",
+          width: 1440,
+          height: 810,
+          alt: "Masjid Taman Saga, a red-roofed mosque with a gold dome, seen across the construction site",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/masjid-taman-saga-mentakab/project-05-04.webp",
+          width: 1440,
+          height: 810,
+          alt: "Gold dome with a crescent finial on the flat roof, with neighbouring buildings behind",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-taman-saga-mentakab/project-05-05.webp",
+          width: 1280,
+          height: 960,
+          alt: "Workers assembling the aluminium dome frame on the ground",
+        },
+      },
+      { kind: "interior" },
     ],
     featured: false,
   },
   {
     id: "project-06",
-    slug: "masjid-kariah-seri-kendong",
-    title: "Masjid Kariah Seri Kendong",
-    category: "Aluminium Dome",
+    slug: "masjid-kendong",
+    title: "Masjid Kendong",
+    category: "Supply and Install Aluminium Dome",
     location: "Rembau, Negeri Sembilan",
     year: "2023",
     scope: "Supply and install aluminium dome",
@@ -312,26 +452,53 @@ const projects: readonly Project[] = [
         kind: "far",
         cover: true,
         photo: {
-          src: "/images/projects/project-06.webp",
+          src: "/images/projects/masjid-kendong/project-06.webp",
           width: 1022,
           height: 720,
           alt:
             "Aerial view of a mosque under construction with a green aluminium pinnacle on a white minaret tower",
         },
       },
-      { kind: "close" },
-      { kind: "interior" },
-      { kind: "detail" },
       {
         kind: "progress",
         photo: {
-          src: "/images/projects/project-06-progress.webp",
+          src: "/images/projects/masjid-kendong/project-06-progress.webp",
           width: 370,
           height: 720,
           alt:
             "Crane lifting a green aluminium dome onto a white minaret while a harnessed worker guides it",
         },
       },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/masjid-kendong/project-06-03.webp",
+          width: 1280,
+          height: 720,
+          alt: "Aerial view of Masjid Kendong with its green-domed minaret, the grounds still under construction",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-kendong/project-06-01.webp",
+          width: 1280,
+          height: 720,
+          alt: "Crane lifting the green aluminium dome onto the minaret of Masjid Kendong",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-kendong/project-06-02.webp",
+          width: 1280,
+          height: 720,
+          alt: "Crane beside the mosque as the green dome is set on its minaret",
+        },
+      },
+      { kind: "close" },
+      { kind: "interior" },
+      { kind: "detail" },
     ],
     featured: false,
   },
@@ -339,7 +506,7 @@ const projects: readonly Project[] = [
     id: "project-07",
     slug: "masjid-muhammad-al-fateh",
     title: "Masjid Muhammad Al-Fateh",
-    category: "Aluminium Dome",
+    category: "Supply and Install Aluminium Dome",
     location: "Taman Forest Height, Senawang, Negeri Sembilan",
     year: "2024",
     scope: "Design, supply and install aluminium dome",
@@ -349,7 +516,7 @@ const projects: readonly Project[] = [
       {
         kind: "far",
         photo: {
-          src: "/images/projects/project-07-far.webp",
+          src: "/images/projects/masjid-muhammad-al-fateh/project-07-far.webp",
           width: 314,
           height: 608,
           alt:
@@ -360,11 +527,74 @@ const projects: readonly Project[] = [
         kind: "close",
         cover: true,
         photo: {
-          src: "/images/projects/project-07.webp",
+          src: "/images/projects/masjid-muhammad-al-fateh/project-07.webp",
           width: 1200,
           height: 846,
           alt:
             "Green aluminium dome with a white lattice trim band and gold finial on a white base, with a minaret beside it",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/masjid-muhammad-al-fateh/project-07-01.webp",
+          width: 1440,
+          height: 810,
+          alt: "Green aluminium dome with white lattice trim and a gold finial, beside the white minaret",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/masjid-muhammad-al-fateh/project-07-02.webp",
+          width: 1080,
+          height: 608,
+          alt: "Front of Masjid Muhammad Al-Fateh with its green dome and tall white minaret",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/masjid-muhammad-al-fateh/project-07-03.webp",
+          width: 1080,
+          height: 608,
+          alt: "Aerial view of the mosque complex and car park, with the green dome at its centre",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-muhammad-al-fateh/project-07-04.webp",
+          width: 1440,
+          height: 810,
+          alt: "Aluminium dome frame assembled on the ground before cladding",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-muhammad-al-fateh/project-07-05.webp",
+          width: 1440,
+          height: 810,
+          alt: "The mosque under construction, with a silver dome frame on the roof and the minaret in scaffolding",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-muhammad-al-fateh/project-07-06.webp",
+          width: 1440,
+          height: 810,
+          alt: "Green dome being fitted on top of the minaret, wrapped in green safety netting",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-muhammad-al-fateh/project-07-07.webp",
+          width: 1440,
+          height: 810,
+          alt: "Minaret top with its green dome being installed, the main dome frame behind",
         },
       },
       { kind: "interior" },
@@ -374,7 +604,7 @@ const projects: readonly Project[] = [
   },
   {
     id: "project-08",
-    slug: "kompleks-pentadbiran-kerajaan-persekutuan-kota-kinabalu",
+    slug: "kompleks-pentadbiran-kerajaan-persekutuan-sabah",
     title: "Kompleks Pentadbiran Kerajaan Persekutuan",
     category: "Dome Refurbishment",
     location: "Kota Kinabalu, Sabah",
@@ -387,35 +617,113 @@ const projects: readonly Project[] = [
         kind: "far",
         cover: true,
         photo: {
-          src: "/images/projects/project-08.webp",
+          src: "/images/projects/kompleks-pentadbiran-kerajaan-persekutuan-sabah/project-08.webp",
           width: 1072,
           height: 720,
-          alt:
-            "Workers on a scaffold platform refurbishing a large teal-green aluminium dome",
+          alt: "Workers on a scaffold tower refurbishing the dome panels",
         },
       },
       {
         kind: "close",
         photo: {
-          src: "/images/projects/project-08-close.webp",
+          src: "/images/projects/kompleks-pentadbiran-kerajaan-persekutuan-sabah/project-08-close.webp",
           width: 371,
           height: 720,
           alt:
             "Workers on ropes refurbishing the panels of a large teal aluminium dome",
         },
       },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/kompleks-pentadbiran-kerajaan-persekutuan-sabah/project-08-03.webp",
+          width: 1440,
+          height: 810,
+          alt: "Pale green dome from above, with the complex's main dome and car park behind",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/kompleks-pentadbiran-kerajaan-persekutuan-sabah/project-08-04.webp",
+          width: 1440,
+          height: 810,
+          alt: "Aerial view of the curved administration complex and its green domes",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/kompleks-pentadbiran-kerajaan-persekutuan-sabah/project-08-07.webp",
+          width: 1440,
+          height: 810,
+          alt: "Pale green dome in front of the multi-storey administration building",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/kompleks-pentadbiran-kerajaan-persekutuan-sabah/project-08-01.webp",
+          width: 1280,
+          height: 720,
+          alt: "Rope-access workers refurbishing the teal dome of Kompleks Pentadbiran Kerajaan Persekutuan Sabah",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/kompleks-pentadbiran-kerajaan-persekutuan-sabah/project-08-02.webp",
+          width: 686,
+          height: 386,
+          alt: "Refurbished teal aluminium domes with mountains behind",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/kompleks-pentadbiran-kerajaan-persekutuan-sabah/project-08-08.webp",
+          width: 1440,
+          height: 810,
+          alt: "Streaked teal dome with its finial, mountains on the horizon",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/kompleks-pentadbiran-kerajaan-persekutuan-sabah/project-08-10.webp",
+          width: 691,
+          height: 389,
+          alt: "Refurbished teal dome above a smaller half-dome on the roof, beside a clock tower",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/kompleks-pentadbiran-kerajaan-persekutuan-sabah/project-08-05.webp",
+          width: 1440,
+          height: 810,
+          alt: "Dome with weathered, streaked panels above its ring beam, before re-cladding",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/kompleks-pentadbiran-kerajaan-persekutuan-sabah/project-08-06.webp",
+          width: 1440,
+          height: 810,
+          alt: "Weathered teal dome above the ring beam, with the highway and river behind",
+        },
+      },
       { kind: "interior" },
       { kind: "detail" },
-      { kind: "before" },
-      { kind: "after" },
     ],
     featured: true,
   },
   {
     id: "project-09",
-    slug: "tmiyc-pasir-gudang",
-    title: "Tunku Mahkota Ismail Youth Centre (TMIYC)",
-    category: "Aluminium Dome",
+    slug: "tunku-mahkota-ismail-youth-club-pasir-gudang",
+    title: "Tunku Mahkota Ismail Youth Club",
+    category: "Supply and Install Aluminium Dome",
     location: "Pasir Gudang, Johor",
     year: "2024",
     scope: "Design, supply and install aluminium dome",
@@ -426,7 +734,7 @@ const projects: readonly Project[] = [
         kind: "far",
         cover: true,
         photo: {
-          src: "/images/projects/project-09.webp",
+          src: "/images/projects/tunku-mahkota-ismail-youth-club-pasir-gudang/project-09.webp",
           width: 1200,
           height: 809,
           alt:
@@ -436,11 +744,56 @@ const projects: readonly Project[] = [
       {
         kind: "close",
         photo: {
-          src: "/images/projects/project-09-close.webp",
+          src: "/images/projects/tunku-mahkota-ismail-youth-club-pasir-gudang/project-09-close.webp",
           width: 740,
           height: 1440,
           alt:
             "Dark grey aluminium dome with ribbed panel seams and a bulb finial, with two more domes beside it",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/tunku-mahkota-ismail-youth-club-pasir-gudang/project-09-03.webp",
+          width: 1440,
+          height: 810,
+          alt: "Row of three ribbed dark grey domes along the roof edge",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/tunku-mahkota-ismail-youth-club-pasir-gudang/project-09-01.webp",
+          width: 1440,
+          height: 810,
+          alt: "Aerial view of the Tunku Mahkota Ismail Youth Club site, with three dark domes on the roof and a minaret in scaffolding",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/tunku-mahkota-ismail-youth-club-pasir-gudang/project-09-04.webp",
+          width: 1440,
+          height: 810,
+          alt: "Wide view of the building with domes at both ends and the scaffolded minaret in the middle",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/tunku-mahkota-ismail-youth-club-pasir-gudang/project-09-02.webp",
+          width: 1440,
+          height: 810,
+          alt: "Three dark grey aluminium domes on the rooftop, the minaret wrapped in green netting behind",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/tunku-mahkota-ismail-youth-club-pasir-gudang/project-09-05.webp",
+          width: 1440,
+          height: 810,
+          alt: "Dome frame on top of the minaret inside scaffolding and safety netting",
         },
       },
       { kind: "interior" },
@@ -450,48 +803,125 @@ const projects: readonly Project[] = [
   },
   {
     id: "project-10",
-    slug: "masjid-an-nur-glenmarie-dome-cladding",
-    title: "Composite Panel Cladding to Existing Domes",
-    category: "Dome Cladding",
+    slug: "masjid-an-nur-temasya-glenmarie",
+    title: "Masjid An-Nur Temasya Glenmarie",
+    category: "Supply and Install Aluminium Dome",
     location: "Shah Alam, Selangor",
     year: "2025",
     scope: "Design, supply and install aluminium dome to existing GFRC dome",
     client: "Pentadbir Masjid An-Nur Temasya Glenmarie",
     mainContractor: "Teguh Perintis Sdn Bhd",
     gallery: [
-      { kind: "far" },
       {
         kind: "close",
         cover: true,
         photo: {
-          src: "/images/projects/project-10.webp",
+          src: "/images/projects/masjid-an-nur-temasya-glenmarie/project-10.webp",
           width: 1080,
           height: 766,
           alt:
             "Clad mosque dome with calligraphy, lit in green at dusk beside a minaret",
         },
       },
-      { kind: "interior" },
       {
         kind: "detail",
         photo: {
-          src: "/images/projects/project-10-detail.webp",
+          src: "/images/projects/masjid-an-nur-temasya-glenmarie/project-10-detail.webp",
           width: 494,
           height: 960,
           alt:
             "Calligraphy on a clad dome lit green at dusk, beneath a crescent-and-star finial",
         },
       },
-      { kind: "before" },
-      { kind: "after" },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/masjid-an-nur-temasya-glenmarie/project-10-01.webp",
+          width: 1440,
+          height: 1080,
+          alt: "White Masjid An-Nur with its silver-white dome and calligraphy band, beside a minaret",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/masjid-an-nur-temasya-glenmarie/project-10-02.webp",
+          width: 1440,
+          height: 1080,
+          alt: "Masjid An-Nur's courtyard with its two white domes and arched colonnade",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/masjid-an-nur-temasya-glenmarie/project-10-03.webp",
+          width: 1440,
+          height: 1080,
+          alt: "The mosque's domes framed through an arched opening at dusk",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/masjid-an-nur-temasya-glenmarie/project-10-04.webp",
+          width: 1280,
+          height: 960,
+          alt: "White aluminium-clad dome with a calligraphy band, workers on the roof",
+        },
+      },
+      {
+        kind: "detail",
+        photo: {
+          src: "/images/projects/masjid-an-nur-temasya-glenmarie/project-10-09.webp",
+          width: 810,
+          height: 1080,
+          alt: "White pinnacle beside the dome's calligraphy panels",
+        },
+      },
+      {
+        kind: "interior",
+        photo: {
+          src: "/images/projects/masjid-an-nur-temasya-glenmarie/project-10-05.webp",
+          width: 1280,
+          height: 960,
+          alt: "Inside the dome: aluminium frame ribs with a scaffold tower in the middle",
+        },
+      },
+      {
+        kind: "interior",
+        photo: {
+          src: "/images/projects/masjid-an-nur-temasya-glenmarie/project-10-06.webp",
+          width: 1440,
+          height: 1080,
+          alt: "Looking up into the dome frame, with ribs radiating from the crown",
+        },
+      },
+      {
+        kind: "interior",
+        photo: {
+          src: "/images/projects/masjid-an-nur-temasya-glenmarie/project-10-07.webp",
+          width: 1440,
+          height: 1080,
+          alt: "Inside the dome looking up, frame ribs and cladding panels against the sky",
+        },
+      },
+      {
+        kind: "interior",
+        photo: {
+          src: "/images/projects/masjid-an-nur-temasya-glenmarie/project-10-08.webp",
+          width: 1440,
+          height: 1080,
+          alt: "The dome frame from below, ribs meeting at the crown, workers at the top",
+        },
+      },
     ],
     featured: true,
   },
   {
     id: "project-11",
-    slug: "masjid-jalan-bayu-damai-klang",
-    title: "Masjid Jalan Bayu Damai",
-    category: "Aluminium Dome",
+    slug: "masjid-setia-bayuemas-klang",
+    title: "Masjid Setia Bayuemas",
+    category: "Supply and Install Aluminium Dome",
     location: "Klang, Selangor",
     year: "2026",
     scope: "Design, supply and install aluminium dome",
@@ -501,7 +931,7 @@ const projects: readonly Project[] = [
       {
         kind: "far",
         photo: {
-          src: "/images/projects/project-11-far.webp",
+          src: "/images/projects/masjid-setia-bayuemas-klang/project-11-far.webp",
           width: 314,
           height: 608,
           alt:
@@ -512,23 +942,85 @@ const projects: readonly Project[] = [
         kind: "close",
         cover: true,
         photo: {
-          src: "/images/projects/project-11.webp",
+          src: "/images/projects/masjid-setia-bayuemas-klang/project-11.webp",
           width: 906,
           height: 608,
           alt:
             "Aerial view of a large grey aluminium dome with ribbed panels and a pinnacle on a mosque roof",
         },
       },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/masjid-setia-bayuemas-klang/project-11-03.webp",
+          width: 1080,
+          height: 608,
+          alt: "Ribbed grey aluminium dome on the flat roof",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/masjid-setia-bayuemas-klang/project-11-01.webp",
+          width: 1080,
+          height: 810,
+          alt: "Masjid Setia Bayuemas from the roadside, with its grey dome and open-frame minaret",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/masjid-setia-bayuemas-klang/project-11-02.webp",
+          width: 1080,
+          height: 608,
+          alt: "Aerial view of the mosque, its grey dome, car park and landscaped grounds",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/masjid-setia-bayuemas-klang/project-11-05.webp",
+          width: 1080,
+          height: 608,
+          alt: "The mosque and minaret with new housing behind",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/masjid-setia-bayuemas-klang/project-11-06.webp",
+          width: 1080,
+          height: 608,
+          alt: "The mosque with its minaret in the foreground, seen from above the car park",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/masjid-setia-bayuemas-klang/project-11-07.webp",
+          width: 1080,
+          height: 608,
+          alt: "Front of the mosque and its grey dome, from the entrance driveway",
+        },
+      },
+      {
+        kind: "detail",
+        photo: {
+          src: "/images/projects/masjid-setia-bayuemas-klang/project-11-04.webp",
+          width: 810,
+          height: 1080,
+          alt: "Top of the open-frame steel minaret with its crescent finial",
+        },
+      },
       { kind: "interior" },
-      { kind: "detail" },
     ],
     featured: false,
   },
   {
     id: "project-12",
-    slug: "maahad-tahfidz-sains-kuala-langat",
-    title: "Maahad Tahfidz Sains",
-    category: "Aluminium Dome",
+    slug: "maahad-tahfiz-sains-dan-teknologi-kuala-langat",
+    title: "Maahad Tahfiz Sains dan Teknologi Istana Bandar",
+    category: "Supply and Install Aluminium Dome",
     location: "Kuala Langat, Selangor",
     year: "2026",
     scope: "Design, supply and install aluminium dome",
@@ -539,7 +1031,7 @@ const projects: readonly Project[] = [
         kind: "far",
         cover: true,
         photo: {
-          src: "/images/projects/project-12.webp",
+          src: "/images/projects/maahad-tahfiz-sains-dan-teknologi-kuala-langat/project-12.webp",
           width: 906,
           height: 608,
           alt:
@@ -549,11 +1041,56 @@ const projects: readonly Project[] = [
       {
         kind: "close",
         photo: {
-          src: "/images/projects/project-12-close.webp",
+          src: "/images/projects/maahad-tahfiz-sains-dan-teknologi-kuala-langat/project-12-close.webp",
           width: 314,
           height: 608,
           alt:
             "Gold aluminium dome with a spire on a concrete base, against a blue sky",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/maahad-tahfiz-sains-dan-teknologi-kuala-langat/project-12-03.webp",
+          width: 1080,
+          height: 608,
+          alt: "Ribbed gold aluminium dome on the red tiled roof",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/maahad-tahfiz-sains-dan-teknologi-kuala-langat/project-12-01.webp",
+          width: 1080,
+          height: 608,
+          alt: "Front of the Maahad Tahfiz building, with gold domes on the roof",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/maahad-tahfiz-sains-dan-teknologi-kuala-langat/project-12-02.webp",
+          width: 1080,
+          height: 608,
+          alt: "Aerial view of the four-storey building with red roofs and gold domes at the corners",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/maahad-tahfiz-sains-dan-teknologi-kuala-langat/project-12-05.webp",
+          width: 1080,
+          height: 608,
+          alt: "Aerial view of the building's inner courtyard, with gold domes on three corners",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/maahad-tahfiz-sains-dan-teknologi-kuala-langat/project-12-04.webp",
+          width: 1080,
+          height: 608,
+          alt: "Gold dome with a pointed finial on its square roof base",
         },
       },
       { kind: "interior" },
@@ -563,39 +1100,64 @@ const projects: readonly Project[] = [
   },
   {
     id: "project-13",
-    slug: "asrama-semai-bakti",
-    title: "Asrama Semai Bakti",
-    category: "Aluminium Windows",
+    slug: "asrama-semai-bakti-felda",
+    title: "Asrama Semai Bakti (FELDA)",
+    category: "Supply and Install Aluminium Window",
     location: "Johor Bahru, Johor",
     year: "2026",
     scope: "Supply and install aluminium window",
     client: "Lembaga Kemajuan Tanah Persekutuan (FELDA)",
     mainContractor: "Mutual Premium Sdn Bhd",
     gallery: [
-      { kind: "far" },
       {
         kind: "close",
         cover: true,
         photo: {
-          src: "/images/projects/project-13.webp",
-          width: 1200,
-          height: 851,
-          alt:
-            "Hostel building facade with dark aluminium window frames and orange cladding trim",
+          src: "/images/projects/asrama-semai-bakti-felda/project-13-04.webp",
+          width: 1440,
+          height: 1080,
+          alt: "Upper-floor aluminium window frames inside the orange cladding frame",
         },
       },
-      { kind: "interior" },
-      { kind: "detail" },
       {
         kind: "progress",
         photo: {
-          src: "/images/projects/project-13-progress.webp",
+          src: "/images/projects/asrama-semai-bakti-felda/project-13-progress.webp",
           width: 509,
           height: 988,
           alt:
             "Dark aluminium window frames being installed behind scaffolding, below an orange cladding band",
         },
       },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/asrama-semai-bakti-felda/project-13-01.webp",
+          width: 1440,
+          height: 1080,
+          alt: "Front of Asrama Semai Bakti with dark aluminium window frames and orange trim, scaffolding still up",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/asrama-semai-bakti-felda/project-13-02.webp",
+          width: 1440,
+          height: 1080,
+          alt: "Ground-floor aluminium windows and glazed doors below the orange band",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/asrama-semai-bakti-felda/project-13-03.webp",
+          width: 1440,
+          height: 1080,
+          alt: "Corner of the building with dark aluminium window frames on three floors",
+        },
+      },
+      { kind: "interior" },
+      { kind: "detail" },
     ],
     featured: false,
   },
@@ -603,7 +1165,7 @@ const projects: readonly Project[] = [
     id: "project-14",
     slug: "masjid-taman-bayu-damai-pengerang",
     title: "Masjid Taman Bayu Damai",
-    category: "Aluminium Dome",
+    category: "Supply and Install Aluminium Dome",
     location: "Pengerang, Johor",
     year: "2026",
     scope: "Supply and install aluminium dome",
@@ -614,34 +1176,60 @@ const projects: readonly Project[] = [
         kind: "far",
         cover: true,
         photo: {
-          src: "/images/projects/project-14.webp",
-          width: 888,
-          height: 600,
-          alt:
-            "Dark grey aluminium dome with a gold finial on a white tower being installed with a crane",
+          src: "/images/projects/masjid-taman-bayu-damai-pengerang/project-14-02.webp",
+          width: 1080,
+          height: 608,
+          alt: "Crane lifting the dark grey dome onto the minaret beside the two-storey mosque",
         },
       },
-      { kind: "close" },
-      { kind: "interior" },
-      { kind: "detail" },
       {
         kind: "progress",
         photo: {
-          src: "/images/projects/project-14-progress.webp",
+          src: "/images/projects/masjid-taman-bayu-damai-pengerang/project-14-progress.webp",
           width: 308,
           height: 600,
           alt:
             "Worker fitting a gold crescent finial on a dark grey aluminium dome atop a white tower",
         },
       },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-taman-bayu-damai-pengerang/project-14-01.webp",
+          width: 1080,
+          height: 608,
+          alt: "Crane beside the minaret as its dark grey dome is installed, a housing estate behind",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-taman-bayu-damai-pengerang/project-14-03.webp",
+          width: 1080,
+          height: 608,
+          alt: "Mobile crane on site lifting the minaret dome, red-roofed houses behind",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-taman-bayu-damai-pengerang/project-14-04.webp",
+          width: 1080,
+          height: 608,
+          alt: "Worker fixing the dark grey dome and finial on top of the minaret",
+        },
+      },
+      { kind: "close" },
+      { kind: "interior" },
+      { kind: "detail" },
     ],
     featured: false,
   },
   {
     id: "project-15",
-    slug: "kompleks-masjid-duyong",
-    title: "Kompleks Masjid",
-    category: "Dome & Windows",
+    slug: "masjid-laksamana-hang-tuah-melaka",
+    title: "Masjid Laksamana Hang Tuah",
+    category: "Supply and Install Aluminium Dome",
     location: "Duyong, Melaka",
     year: "2026",
     scope: "Supply and install aluminium dome and window",
@@ -651,7 +1239,7 @@ const projects: readonly Project[] = [
       {
         kind: "far",
         photo: {
-          src: "/images/projects/project-15-far.webp",
+          src: "/images/projects/masjid-laksamana-hang-tuah-melaka/project-15-far.webp",
           width: 307,
           height: 600,
           alt:
@@ -662,11 +1250,47 @@ const projects: readonly Project[] = [
         kind: "close",
         cover: true,
         photo: {
-          src: "/images/projects/project-15.webp",
+          src: "/images/projects/masjid-laksamana-hang-tuah-melaka/project-15.webp",
           width: 888,
           height: 600,
           alt:
             "Gold aluminium dome with a pinnacle and crescent on a concrete plinth, with houses and trees behind",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/masjid-laksamana-hang-tuah-melaka/project-15-01.webp",
+          width: 1080,
+          height: 608,
+          alt: "Ribbed gold dome on the roof of Masjid Laksamana Hang Tuah, the town behind",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/masjid-laksamana-hang-tuah-melaka/project-15-03.webp",
+          width: 1080,
+          height: 608,
+          alt: "Aerial view of the mosque with its gold dome and minaret among nearby houses",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/masjid-laksamana-hang-tuah-melaka/project-15-04.webp",
+          width: 1080,
+          height: 608,
+          alt: "The mosque from above: the gold dome, red tiled roof and a white minaret",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/masjid-laksamana-hang-tuah-melaka/project-15-02.webp",
+          width: 1080,
+          height: 608,
+          alt: "Gold aluminium dome with a pointed finial, with trees and a road behind",
         },
       },
       { kind: "interior" },
@@ -676,24 +1300,20 @@ const projects: readonly Project[] = [
   },
   {
     id: "project-16",
-    slug: "masjid-kampung-baru-kemaman",
-    title: "Masjid Kampung Baru",
-    category: "Aluminium Dome",
-    location: "Kemaman, Terengganu",
+    slug: "masjid-kg-baru-kertih",
+    title: "Masjid Kg Baru Kertih",
+    category: "Supply and Install Aluminium Dome",
+    location: "Kertih, Kemaman, Terengganu",
     year: "2026",
     scope: "Supply and install aluminium dome",
     client: "JKR Terengganu",
     mainContractor: "Zulqarnain Sdn Bhd",
     gallery: [
-      { kind: "far" },
-      { kind: "close" },
-      { kind: "interior" },
-      { kind: "detail" },
       {
         kind: "progress",
         cover: true,
         photo: {
-          src: "/images/projects/project-16.webp",
+          src: "/images/projects/masjid-kg-baru-kertih/project-16.webp",
           width: 888,
           height: 600,
           alt:
@@ -703,21 +1323,69 @@ const projects: readonly Project[] = [
       {
         kind: "progress",
         photo: {
-          src: "/images/projects/project-16-progress.webp",
+          src: "/images/projects/masjid-kg-baru-kertih/project-16-progress.webp",
           width: 308,
           height: 600,
           alt:
             "Top-down view of scaffolding boards over the crown ring of a gold aluminium dome under construction",
         },
       },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-kg-baru-kertih/project-16-01.webp",
+          width: 1440,
+          height: 810,
+          alt: "Gold dome of Masjid Kg Baru Kertih inside scaffolding, workers at the finial",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/masjid-kg-baru-kertih/project-16-05.webp",
+          width: 1440,
+          height: 810,
+          alt: "Close view of the gold dome's panels, a worker at the finial and scaffolding around",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-kg-baru-kertih/project-16-03.webp",
+          width: 1440,
+          height: 810,
+          alt: "Workers on scaffolding beside the gold dome, seen from above",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-kg-baru-kertih/project-16-04.webp",
+          width: 1440,
+          height: 810,
+          alt: "Scaffolding around the gold dome on the roof, seen from above",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-kg-baru-kertih/project-16-06.webp",
+          width: 1440,
+          height: 810,
+          alt: "The gold dome in scaffolding, with the cleared site and forest behind",
+        },
+      },
+      { kind: "far" },
+      { kind: "interior" },
+      { kind: "detail" },
     ],
     featured: false,
   },
   {
     id: "project-17",
-    slug: "senai-cargo-warehouse-fencing",
-    title: "Perimeter Fencing for Cargo Warehouse",
-    category: "Perimeter Fencing",
+    slug: "senai-airport-warehouse",
+    title: "Senai Airport Warehouse",
+    category: "Metal Work",
     location: "Senai, Johor",
     year: "2026",
     scope: "Supply and install perimeter fence",
@@ -727,7 +1395,7 @@ const projects: readonly Project[] = [
       {
         kind: "far",
         photo: {
-          src: "/images/projects/project-17-far.webp",
+          src: "/images/projects/senai-airport-warehouse/project-17-far.webp",
           width: 509,
           height: 988,
           alt:
@@ -738,11 +1406,82 @@ const projects: readonly Project[] = [
         kind: "close",
         cover: true,
         photo: {
-          src: "/images/projects/project-17.webp",
-          width: 1200,
-          height: 851,
-          alt:
-            "Interior of a cargo warehouse with a perimeter fence of white-framed mesh panels",
+          src: "/images/projects/senai-airport-warehouse/project-17-08.webp",
+          width: 1440,
+          height: 1080,
+          alt: "Fenced area along the warehouse wall, with a cone at the corner",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/senai-airport-warehouse/project-17-03.webp",
+          width: 1440,
+          height: 1080,
+          alt: "Long run of white-framed mesh fencing across the warehouse floor",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/senai-airport-warehouse/project-17-02.webp",
+          width: 1440,
+          height: 1080,
+          alt: "Mesh fence enclosure along the warehouse floor, the open hangar door behind",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/senai-airport-warehouse/project-17-04.webp",
+          width: 1440,
+          height: 1080,
+          alt: "Fenced enclosure in the warehouse with stacked boxes beside it",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/senai-airport-warehouse/project-17-05.webp",
+          width: 1440,
+          height: 1080,
+          alt: "Mesh fence line leading toward the open warehouse door",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/senai-airport-warehouse/project-17-07.webp",
+          width: 1440,
+          height: 1080,
+          alt: "Completed fenced enclosure with safety cones at its entrance",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/senai-airport-warehouse/project-17-01.webp",
+          width: 1440,
+          height: 1080,
+          alt: "White-framed mesh fence panels being installed inside the cargo warehouse",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/senai-airport-warehouse/project-17-06.webp",
+          width: 1440,
+          height: 1080,
+          alt: "Worker on a mobile scaffold fixing the top of the fence frame",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/senai-airport-warehouse/project-17-09.webp",
+          width: 1440,
+          height: 1080,
+          alt: "Workers fitting a mesh gate panel, one on a ladder",
         },
       },
       { kind: "interior" },
@@ -754,7 +1493,7 @@ const projects: readonly Project[] = [
     id: "project-18",
     slug: "tanjung-aru-public-facilities",
     title: "Proposed Public Facilities, Landscape and Restoration",
-    category: "Aluminium Dome",
+    category: "Supply and Install Aluminium Dome",
     location: "Kota Kinabalu, Sabah",
     year: "2026",
     scope: "Supply and install aluminium dome",
@@ -763,15 +1502,11 @@ const projects: readonly Project[] = [
     // TODO_CONFIRM: the portfolio shows an architectural drawing for this
     // project, not a site photo. Replace with a photo when available.
     gallery: [
-      { kind: "far" },
-      { kind: "close" },
-      { kind: "interior" },
-      { kind: "detail" },
       {
         kind: "drawing",
         cover: true,
         photo: {
-          src: "/images/projects/project-18.webp",
+          src: "/images/projects/tanjung-aru-public-facilities/project-18.webp",
           width: 977,
           height: 547,
           alt:
@@ -781,13 +1516,17 @@ const projects: readonly Project[] = [
       {
         kind: "drawing",
         photo: {
-          src: "/images/projects/project-18-drawing.webp",
+          src: "/images/projects/tanjung-aru-public-facilities/project-18-drawing.webp",
           width: 689,
           height: 374,
           alt:
             "Front elevation drawing of the domed building, with a scalloped parapet and arched windows",
         },
       },
+      { kind: "far" },
+      { kind: "close" },
+      { kind: "interior" },
+      { kind: "detail" },
     ],
     featured: false,
   },
@@ -795,7 +1534,7 @@ const projects: readonly Project[] = [
     id: "project-19",
     slug: "majlis-agama-islam-johor",
     title: "Majlis Agama Islam",
-    category: "Aluminium Dome",
+    category: "Supply and Install Aluminium Dome",
     location: "Johor Bahru, Johor",
     year: "2026",
     scope: "Supply and install aluminium dome",
@@ -804,15 +1543,11 @@ const projects: readonly Project[] = [
     // TODO_CONFIRM: the portfolio shows an architectural drawing for this
     // project, not a site photo. Replace with a photo when available.
     gallery: [
-      { kind: "far" },
-      { kind: "close" },
-      { kind: "interior" },
-      { kind: "detail" },
       {
         kind: "drawing",
         cover: true,
         photo: {
-          src: "/images/projects/project-19.webp",
+          src: "/images/projects/majlis-agama-islam-johor/project-19.webp",
           width: 1097,
           height: 573,
           alt:
@@ -822,13 +1557,115 @@ const projects: readonly Project[] = [
       {
         kind: "drawing",
         photo: {
-          src: "/images/projects/project-19-drawing.webp",
+          src: "/images/projects/majlis-agama-islam-johor/project-19-drawing.webp",
           width: 813,
           height: 573,
           alt:
             "Side elevation drawing of the building's arched ground floor and gabled upper storeys, with construction notes",
         },
       },
+      { kind: "far" },
+      { kind: "close" },
+      { kind: "interior" },
+      { kind: "detail" },
+    ],
+    featured: false,
+  },
+  {
+    id: "project-20",
+    slug: "masjid-jumhuriyyah-taman-datuk-haron",
+    title: "Masjid Jumhuriyyah",
+    category: "Dome Refurbishment",
+    // TODO_CONFIRM: location, year (taken from the photo dates) and client
+    // are not in the portfolio; this project only arrived with the photos.
+    location: "Taman Datuk Haron, Petaling Jaya, Selangor",
+    year: "2022",
+    scope: "Dome refurbishment",
+    gallery: [
+      {
+        kind: "close",
+        cover: true,
+        photo: {
+          src: "/images/projects/masjid-jumhuriyyah-taman-datuk-haron/project-20-06.webp",
+          width: 1440,
+          height: 810,
+          alt: "The gold dome from the side, with the minaret and city behind",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/masjid-jumhuriyyah-taman-datuk-haron/project-20-03.webp",
+          width: 1440,
+          height: 810,
+          alt: "Aerial view of the mosque's dome and minaret above the surrounding rooftops, workers at the dome base",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-jumhuriyyah-taman-datuk-haron/project-20-02.webp",
+          width: 1440,
+          height: 810,
+          alt: "Partly re-clad dome with its blue zigzag band, the city skyline behind",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/masjid-jumhuriyyah-taman-datuk-haron/project-20-05.webp",
+          width: 1440,
+          height: 810,
+          alt: "Re-clad gold dome with its blue zigzag band and crescent finial",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-jumhuriyyah-taman-datuk-haron/project-20-01.webp",
+          width: 1440,
+          height: 810,
+          alt: "Masjid Jumhuriyyah's dome mid-refurbishment, half re-clad in gold beside the old panels",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/masjid-jumhuriyyah-taman-datuk-haron/project-20-04.webp",
+          width: 1440,
+          height: 810,
+          alt: "Weathered silver and gold dome before re-cladding, beside a gold minaret top",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-jumhuriyyah-taman-datuk-haron/project-20-07.webp",
+          width: 1440,
+          height: 810,
+          alt: "Crane lifting the gold minaret cap into place",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-jumhuriyyah-taman-datuk-haron/project-20-08.webp",
+          width: 1440,
+          height: 810,
+          alt: "Crane at the minaret as its gold cap is fitted, the re-clad dome beside it",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-jumhuriyyah-taman-datuk-haron/project-20-09.webp",
+          width: 1440,
+          height: 810,
+          alt: "Worker on a ladder fixing new gold panels over the old dome cladding",
+        },
+      },
+      { kind: "interior" },
+      { kind: "detail" },
     ],
     featured: false,
   },
@@ -862,7 +1699,7 @@ export const siteConfig = {
     memberSince: "11 July 2023",
     validUntil: "20 August 2026",
     // TODO_CONFIRM: projects span Peninsular Malaysia and Sabah.
-    serviceArea: "Nationwide — Peninsular Malaysia & Sabah",
+    serviceArea: "Nationwide: Peninsular Malaysia and Sabah",
     certifications: ["PPK", "SPKK", "STB"],
     natureOfBusiness: [
       "Construction of roads and railways",
@@ -885,10 +1722,10 @@ export const siteConfig = {
     { label: "Contact", href: "/contact" },
   ],
   stats: [
-    // TODO_CONFIRM_STATS: "since 2014" and the counts come from the portfolio
-    // (19 projects across 8 states) — confirm with the client.
+    // TODO_CONFIRM_STATS: "since 2014" and "8 states" come from the portfolio;
+    // confirm with the client. The project count follows the project list.
     { value: "2014", label: "Track Record Since" },
-    { value: "19", label: "Portfolio Projects" },
+    { value: String(projects.length), label: "Projects" },
     { value: "8", label: "States Served" },
     { value: "G3", label: "CIDB Grade" },
   ],
