@@ -18,7 +18,7 @@ Built as a **fully static site** — no server, no database, no secrets — so i
 | `/` | Hero, stats, five capabilities, CIDB credentials, process, featured projects |
 | `/about` | Company overview, history timeline, values, SSM/CIDB registration details, why choose us |
 | `/services` | Five detailed capability sections with scope bullets, process |
-| `/projects` | All 19 portfolio projects, filterable by type, each with a gallery page at `/projects/<slug>`; plus the client list |
+| `/projects` | All 20 projects, filterable by type, each with a gallery page at `/projects/<slug>`; plus the client list |
 | `/contact` | Address, phone, email, WhatsApp, business hours, Google Maps embed |
 
 There is no contact form by design — enquiries go through click-to-WhatsApp (floating button on every page), phone, or email.
@@ -86,7 +86,7 @@ Search `src/` for `TODO_CONFIRM`:
 |---|---|
 | `globals.css` | Brand navy `#022662` / maroon `#8b0304` with the designer |
 | `site-config.ts` `company.trackRecordSince` | 2014 as the start of the track record |
-| `site-config.ts` `stats` | Track record year, 19 projects, 8 states |
+| `site-config.ts` `stats` | Track record year and states served (the project count is automatic) |
 | `site-config.ts` `registration.serviceArea` | "Nationwide — Peninsular Malaysia & Sabah" |
 | `site-config.ts` `projects` | main contractor is omitted for projects 05, 06 and 07; projects 18 and 19 use architectural drawings, not photos |
 | `site-config.ts` `about.history` | Year Teguh Aluminium and Construction Sdn. Bhd. was formed |
@@ -97,7 +97,7 @@ against the Google Business Profile listing.
 
 ### Images and logos
 
-All images are **WebP, pre-sized for their slot** (this keeps the mobile PageSpeed score high). They were extracted from `docs/TP - Portfolio_Digital.pdf` and are never upscaled.
+All images are **WebP, pre-sized for their slot** (this keeps the mobile PageSpeed score high) and are never upscaled. Project photos come from the client's `docs/Website/<Category>/<Project name>/` folders; the hero, about and service images were extracted from `docs/TP - Portfolio_Digital.pdf`.
 
 | File | Source | Width |
 |---|---|---|
@@ -108,35 +108,35 @@ All images are **WebP, pre-sized for their slot** (this keeps the mobile PageSpe
 | `services/service-decorative-panels.webp` | `img-013-093` | 800 |
 | `services/service-metalworks.webp` | `img-020-128` | 800 |
 | `services/service-refurbishment.webp` | `img-011-081` | 800 |
-| `projects/project-01.webp` … `project-19.webp` | PDF pages 4–22, one landscape photo per project (the gallery cover) | ≤ 1200 |
-| `projects/project-NN-<kind>.webp` | gallery extras (far, close, detail, progress), native size, never upscaled | ≤ 1417 |
-| `projects/og/project-NN.jpg` | per-project Open Graph image, centred 1200:630 crop of the cover source, scaled down only | ≤ 1200 |
+| `projects/<slug>/` | one folder per project, named after its page address (`/projects/<slug>`): its gallery photos, a `thumb/` folder of small copies, and `og.jpg` | — |
+| `projects/<slug>/project-NN-01.webp` … | gallery photos from `docs/Website/`, numbered in folder order; the shot kind is set in `site-config.ts` | ≤ 1440 |
+| `projects/<slug>/project-NN.webp`, `project-NN-<kind>.webp` | the earlier photos extracted from the portfolio PDF. Where the client's folder had the same shot at higher resolution, the gallery uses that file instead and the PDF copy was removed | ≤ 1500 |
+| `projects/<slug>/thumb/<same name>.webp` | small copy of every gallery photo, used by project cards and ordinary gallery tiles; the full file is used by the lightbox and by tiles that span the grid | ≤ 800 |
+| `projects/<slug>/og.jpg` | the project's share image (Open Graph), a centred 1200:630 crop of the cover source, scaled down only | ≤ 1200 |
 | `logo-mark.webp` | navy mark, 96px high | 152 |
 | `logo-mark-white.png` | white mark (footer, OG card), 160px high | 254 |
 | `logo.png` | primary lockup, 512 × 512, transparent (JSON-LD logo) | 512 |
 | `favicon.ico`, `apple-touch-icon.png` | mark; ico 16/32/48 transparent, touch icon 180 on white | — |
 
-Regenerate the photos with:
+Project photos were converted with Pillow: rotated by their EXIF orientation, scaled down to at most 1440px wide, and saved as WebP at quality 74 with the metadata stripped. Project folder names give the project titles, and the top-level folder gives the category (the type filter on `/projects`).
 
-```bash
-pdfimages -all -p "docs/TP - Portfolio_Digital.pdf" /tmp/pdf/img   # extracts img-<page>-<n>.jpg
-cwebp -q 70 -m 6 input.png -o public/images/projects/project-01.webp   # resize to max 1200px wide first
-```
+The other photos were extracted from the PDF with `pdfimages -all -p "docs/TP - Portfolio_Digital.pdf" /tmp/pdf/img` and converted with `cwebp -q 70`.
 
 Logos come from `docs/TP - Design Files/Logo/` (transparent, heavily padded PNGs): crop each to its alpha bounding box with Pillow (`im.crop(im.getchannel("A").getbbox())`), then resize.
 
-**Higher-resolution originals needed** (the PDF photos are narrower than the 1200px slot, so they render slightly soft on large screens): projects 06, 08, 10, 11, 12, 14, 15, 16, 18 and 19. Projects 18 and 19 are drawings, so real photos should replace them.
+**Low-resolution photos** (the PDF extracts, about 307–554px wide, look soft in larger tiles): project 05 detail, 06 progress, 07 far, 08 close, 11 far, 12 close, 14 progress, 15 far and 16 progress. Ask the client for the originals; several are already in `docs/Website/` as sharper shots.
 
-**Low-resolution gallery photos** (about 307–398px wide): project 05 detail, 06 progress, 07 far, 08 close, 11 far, 12 close, 14 progress, 15 far and 16 progress. No project has an interior (dome POV) photo yet.
+**Still needed from the client:** photos for projects 18 (Tanjung Aru) and 19 (Majlis Agama Islam), which still show drawings; interior (dome POV) photos for every project except Masjid An-Nur; and the location, year and client for Masjid Jumhuriyyah (project 20).
 
 ### Adding a gallery photo
 
-Each project has a `gallery` of 4–6 slots in `site-config.ts`. A slot without a `photo` shows a "Photo coming soon" placeholder.
+Each project has a `gallery` in `site-config.ts`: its photos, plus a placeholder slot (`{ kind: "interior" }`, no `photo`) for any core kind it doesn't have a photo of yet. Placeholders are currently **hidden** (`SHOW_PLACEHOLDERS = false` in `src/lib/gallery.ts`); set it to `true` to show a "Photo coming soon" tile for each one. The slots stay in the data so that switch works.
 
-1. Export at the photo's native size: `cwebp -q 78 -m 6 -metadata none in.jpg -o public/images/projects/project-NN-<kind>.webp`.
-2. Add `photo: { src, width, height, alt }` to the matching slot (`width` and `height` are the file's real size).
+1. Export the photo at no more than 1440px wide: `cwebp -q 74 -m 6 -metadata none -resize 1440 0 in.jpg -o public/images/projects/<slug>/project-NN-<n>.webp` (drop `-resize` if it's already narrower).
+2. Make its small copy: `cwebp -q 74 -m 6 -metadata none -resize 800 0 public/images/projects/<slug>/project-NN-<n>.webp -o public/images/projects/<slug>/thumb/project-NN-<n>.webp` (or copy the file if it's 800px or narrower).
+3. Add `{ kind, photo: { src, width, height, alt } }` to the gallery (`width` and `height` are the file's real size; `alt` describes this photo specifically). If it fills a core kind, delete that kind's placeholder.
 
-Rules (checked at build time by `assertGallery` in `src/lib/gallery.ts`): 4–6 slots, each of the 4 core kinds (far, close, interior, detail) exactly once, and exactly one `cover: true` slot that has a photo.
+Rules (checked at build time by `assertGallery` in `src/lib/gallery.ts`): each of the 4 core kinds (far, close, interior, detail) has a slot, either a photo or a placeholder; at most 16 slots; and exactly one `cover: true` slot that has a photo.
 
 If a replacement uses a different extension, update the matching path in `site-config.ts` (the hero paths live in `src/app/page.tsx`). The Poppins OFL licence file was not in the supplied font zip; add it to `assets/fonts/` if the client has it.
 
