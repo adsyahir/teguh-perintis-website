@@ -15,9 +15,9 @@ Built as a **fully static site** — no server, no database, no secrets — so i
 
 | Route | Content |
 |---|---|
-| `/` | Hero, stats, five capabilities, CIDB credentials, process, featured projects |
+| `/` | Hero, stats, six services, featured projects, clients & agencies, CIDB credential |
 | `/about` | Company overview, history timeline, values, SSM/CIDB registration details, why choose us |
-| `/services` | Five detailed capability sections with scope bullets, process |
+| `/services` | Six detailed service sections with scope bullets, process |
 | `/projects` | All 20 projects, filterable by type, each with a gallery page at `/projects/<slug>`; plus the client list |
 | `/contact` | Address, phone, email, WhatsApp, business hours, Google Maps embed |
 
@@ -71,6 +71,7 @@ public/
 - Font: **Poppins** via `next/font/google` (weights 400, 500, 700 — it is not a variable font, so weights are listed explicitly in `layout.tsx`). The same TTFs live in `assets/fonts/` for the Open Graph image.
 - **Maroon rule:** gold fails contrast on white, so text on light backgrounds uses `text-secondary-700`, never `text-accent-600`.
 - The navy and maroon are the logo's sRGB values; the CMYK print values convert to different on-screen colours. Needs designer confirmation (see TODO table).
+- **CIDB logo** (`public/images/cidb-malaysia.webp`, homepage "Certified Credentials"): the official light-background logo from cidb.gov.my. CIDB's [corporate logo guideline](https://www.cidb.gov.my/eng/corporate-logo-guideline/) says registered contractors must apply for written permission (Logo Validation, "Registered Contractor") at least 30 days before using it. Confirm the client has this before going live.
 
 ## Editing content
 
@@ -90,7 +91,7 @@ Search `src/` for `TODO_CONFIRM`:
 | `site-config.ts` `registration.serviceArea` | "Nationwide — Peninsular Malaysia & Sabah" |
 | `site-config.ts` `projects` | main contractor is omitted for projects 05, 06 and 07; projects 18 and 19 use architectural drawings, not photos |
 | `site-config.ts` `about.history` | Year Teguh Aluminium and Construction Sdn. Bhd. was formed |
-| `site-config.ts` `services` | `decorative-panels` and `minarets-metalworks` photos are stand-ins (a lit dome and a fence) |
+| `site-config.ts` `services` | `decorative-panels` has no photo yet (shows "Coming soon"); `minarets-metalworks` photo is a stand-in (a fence); `roofing` scope and copy, and whether the Sabah roof photo is their work |
 
 `siteUrl`, `hours`, `geo` and `googleBusinessUrl` are filled in and confirmed
 against the Google Business Profile listing.
@@ -105,9 +106,10 @@ All images are **WebP, pre-sized for their slot** (this keeps the mobile PageSpe
 | `about-company.webp` | PDF page 1, `img-001-002` (cropped 4:3) | 800 |
 | `services/service-domes.webp` | `img-012-086` | 800 |
 | `services/service-windows-cladding.webp` | `img-016-108` | 800 |
-| `services/service-decorative-panels.webp` | `img-013-093` | 800 |
+| `services/service-decorative-panels.webp` | removed: the card shows "Coming soon" until the client sends a Celuka/CNC panel photo | |
 | `services/service-metalworks.webp` | `img-020-128` | 800 |
 | `services/service-refurbishment.webp` | `img-011-081` | 800 |
+| `services/service-roofing.webp` | `docs/Website/Dome Refurbishment/Kompleks Pentadbiran Kerajaan Persekutuan Sabah/DJI_0575.JPG`, cropped 4:3 | 800 |
 | `projects/<slug>/` | one folder per project, named after its page address (`/projects/<slug>`): its gallery photos, a `thumb/` folder of small copies, and `og.jpg` | — |
 | `projects/<slug>/project-NN-01.webp` … | gallery photos from `docs/Website/`, numbered in folder order; the shot kind is set in `site-config.ts` | ≤ 1440 |
 | `projects/<slug>/project-NN.webp`, `project-NN-<kind>.webp` | the earlier photos extracted from the portfolio PDF. Where the client's folder had the same shot at higher resolution, the gallery uses that file instead and the PDF copy was removed | ≤ 1500 |

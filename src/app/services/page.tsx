@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { pageUrls } from "@/lib/page-metadata";
 import Image from "next/image";
+import PhotoComingSoon from "@/components/ui/PhotoComingSoon";
 import PageHero from "@/components/sections/PageHero";
 import Section from "@/components/ui/Section";
 import Container from "@/components/ui/Container";
@@ -11,7 +12,7 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Aluminium domes and pinnacles, aluminium windows and ACP cladding, Celuka lattice and CNC-cut panels, minarets and metal works, and dome refurbishment by Teguh Perintis Sdn. Bhd.",
+    "Aluminium domes and pinnacles, aluminium windows, Celuka lattice and CNC-cut panels, architectural metal works, dome refurbishment and roofing by Teguh Perintis Sdn. Bhd.",
   ...pageUrls("/services"),
 };
 
@@ -20,7 +21,7 @@ export default function ServicesPage() {
     <>
       <PageHero
         title="Our Services"
-        subtitle="Five specialist capabilities in aluminium domes and architectural metal works, from design coordination to installation."
+        subtitle="Aluminium domes, windows, roofing and architectural metal works, from design coordination to installation."
       />
 
       <div className="py-16 sm:py-24">
@@ -39,13 +40,19 @@ export default function ServicesPage() {
                 id={service.id}
                 className="grid items-center gap-10 lg:grid-cols-2"
               >
-                <Image
-                  src={service.image}
-                  alt={service.altText}
-                  width={800}
-                  height={600}
-                  className={`rounded-lg ${index % 2 === 1 ? "lg:order-last" : ""}`}
-                />
+                {service.image ? (
+                  <Image
+                    src={service.image}
+                    alt={service.altText}
+                    width={800}
+                    height={600}
+                    className={`rounded-lg ${index % 2 === 1 ? "lg:order-last" : ""}`}
+                  />
+                ) : (
+                  <PhotoComingSoon
+                    className={`aspect-[4/3] rounded-lg ${index % 2 === 1 ? "lg:order-last" : ""}`}
+                  />
+                )}
                 <div>
                   <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
                     {service.title}

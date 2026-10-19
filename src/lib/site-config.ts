@@ -1749,24 +1749,24 @@ export const siteConfig = {
     },
     {
       id: "windows-glazing-cladding",
-      title: "Aluminium Windows, Glazing & ACP Cladding",
+      title: "Aluminium Windows",
       shortDescription:
-        "Aluminium windows, glazing, ACP cladding and aluminium capping for institutional and commercial buildings.",
+        "Aluminium windows for institutional and commercial buildings.",
       fullDescription:
-        "Alongside domes, we supply and install aluminium windows and glazing, aluminium composite panel (ACP) cladding and aluminium capping, fabricated to suit the architect's details and installed to a clean, weather-tight finish.",
+        "Alongside domes, we supply and install aluminium windows, fabricated to suit the architect's details and installed to a clean, weather-tight finish.",
       bullets: [
-        "Aluminium windows and glazing",
-        "ACP facade cladding",
-        "Aluminium capping and trim",
+        "Aluminium windows",
+        "Fabricated to the architect's details",
         "Supply and installation to drawings",
+        "Clean, weather-tight finish",
       ],
       image: "/images/services/service-windows-cladding.webp",
       altText:
-        "Building facade with dark aluminium window frames and orange cladding trim",
+        "Building facade with dark aluminium window frames",
     },
     {
       id: "decorative-panels",
-      title: "Celuka Lattice & CNC-Cut Panels",
+      title: "Celuka Lattice Composite & CNC-Cut Panels",
       shortDescription:
         "Decorative Celuka lattice composite and CNC-cut aluminium panels for facades and Islamic architectural detailing.",
       fullDescription:
@@ -1777,15 +1777,14 @@ export const siteConfig = {
         "Calligraphy and pattern detailing",
         "Facade and screen applications",
       ],
-      // TODO_CONFIRM: photo shows a dome with calligraphy detailing; swap for
-      // a clear shot of Celuka/CNC panels when the client has one.
-      image: "/images/services/service-decorative-panels.webp",
-      altText:
-        "Mosque dome with calligraphy detailing, lit in green at dusk beside a minaret",
+      // No photo yet: the card and the services page show "Coming soon".
+      // TODO_CONFIRM: add a clear shot of Celuka/CNC panels from the client.
+      image: null,
+      altText: "",
     },
     {
       id: "minarets-metalworks",
-      title: "Minarets & Architectural Metal Works",
+      title: "Architectural Metal Works",
       shortDescription:
         "Minaret steel structures, stainless-steel pinnacles, perimeter fencing and other architectural metal works.",
       fullDescription:
@@ -1818,6 +1817,18 @@ export const siteConfig = {
       image: "/images/services/service-refurbishment.webp",
       altText:
         "Workers on scaffolding refurbishing a large teal-green aluminium dome",
+    },
+    {
+      // TODO_CONFIRM: roofing scope and copy with the client. The photo is the
+      // Kompleks Pentadbiran Kerajaan Persekutuan Sabah roof from docs/Website.
+      id: "roofing",
+      title: "Roofing",
+      shortDescription: "Metal roofing supply and installation.",
+      fullDescription: "We supply and install metal roofing.",
+      bullets: ["Metal roofing supply and installation"],
+      image: "/images/services/service-roofing.webp",
+      altText:
+        "Aerial view of a government complex with green metal roofs and domes",
     },
   ],
   process: [
