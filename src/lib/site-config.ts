@@ -1710,7 +1710,6 @@ export const siteConfig = {
       { code: "B04", label: "Building Works" },
       { code: "CE21", label: "Civil Engineering" },
       { code: "M15", label: "Mechanical & Electrical" },
-      { code: "FM", label: "Facility Management" },
     ],
   },
   contact,
@@ -1745,7 +1744,7 @@ export const siteConfig = {
       ],
       image: "/images/services/service-domes.webp",
       altText:
-        "Three dark grey aluminium domes with ribbed panels on the roof of a white building",
+        "Large gold aluminium dome on a mosque roof, with two installers working on it",
     },
     {
       id: "windows-glazing-cladding",
@@ -1784,9 +1783,8 @@ export const siteConfig = {
     },
     {
       id: "minarets-metalworks",
-      title: "Architectural Metal Works",
-      shortDescription:
-        "Minaret steel structures, stainless-steel pinnacles, perimeter fencing and other architectural metal works.",
+      title: "Metal Works",
+      shortDescription: "Custom steel and architectural metal fabrication.",
       fullDescription:
         "We fabricate and install minaret steel structures, stainless-steel pinnacles and other architectural metal works, including perimeter fencing for commercial and industrial sites.",
       bullets: [

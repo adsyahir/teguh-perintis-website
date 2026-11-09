@@ -28,7 +28,8 @@ export default function ServiceCard({ service }: { service: Service }) {
           href={`/services#${service.id}`}
           className="mt-4 inline-block text-sm font-semibold text-primary-600 transition-colors hover:text-primary-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500"
         >
-          See what&apos;s included
+          View service
+          <span className="sr-only">: {service.title}</span>
         </Link>
       </div>
     </article>

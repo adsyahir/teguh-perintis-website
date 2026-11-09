@@ -104,7 +104,7 @@ All images are **WebP, pre-sized for their slot** (this keeps the mobile PageSpe
 |---|---|---|
 | `hero-home-{768,1280,1920}.webp` | PDF page 10, `img-010-078` | 768 / 1280 / 1920 |
 | `about-company.webp` | PDF page 1, `img-001-002` (cropped 4:3) | 800 |
-| `services/service-domes.webp` | `img-012-086` | 800 |
+| `services/service-domes.webp` | `projects/masjid-kg-tok-machang-raub/project-04-04.webp`, cropped 4:3 | 800 |
 | `services/service-windows-cladding.webp` | `img-016-108` | 800 |
 | `services/service-decorative-panels.webp` | removed: the card shows "Coming soon" until the client sends a Celuka/CNC panel photo | |
 | `services/service-metalworks.webp` | `img-020-128` | 800 |
