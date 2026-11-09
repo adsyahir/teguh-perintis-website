@@ -50,6 +50,20 @@ html {
   scroll-padding-top: 5rem;
 }
 
+/* Tailwind v4 gives buttons the default arrow cursor; show the hand on every
+   control that does something. In the base layer, so utilities such as
+   cursor-zoom-in on gallery tiles still win. */
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  select:not(:disabled),
+  summary,
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
 /* Smooth in-page scrolling only for visitors who haven't asked for less
    motion. */
 @media (prefers-reduced-motion: no-preference) {
