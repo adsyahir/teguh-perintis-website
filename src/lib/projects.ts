@@ -9,17 +9,19 @@ for (const p of siteConfig.projects) {
   slugs.add(p.slug);
 }
 
-/** Newest first; the sort is stable, so ties keep portfolio order. */
+/** Newest first, projects with no year last; the sort is stable, so ties
+ * keep portfolio order. */
 export function projectsInDisplayOrder() {
   return [...siteConfig.projects].sort(
-    (a, b) => Number(b.year) - Number(a.year),
+    (a, b) => Number(b.year ?? 0) - Number(a.year ?? 0),
   );
 }
 
 /** Meta description, also used as the WebPage description in JSON-LD. */
 export function projectDescription(p: Project) {
   const client = p.client ? ` Client: ${p.client}.` : "";
-  return `${p.scope}: ${p.title}, ${p.location}, completed ${p.year}.${client}`;
+  const year = p.year ? `, completed ${p.year}` : "";
+  return `${p.scope}: ${p.title}, ${p.location}${year}.${client}`;
 }
 
 export function getProjectBySlug(slug: string) {

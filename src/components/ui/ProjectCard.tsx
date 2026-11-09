@@ -46,7 +46,8 @@ export default function ProjectCard({
           </Link>
         </h3>
         <p className="mt-0.5 text-sm text-slate-500 sm:mt-1">
-          {project.location} &middot; {project.year}
+          {project.location}
+          {project.year && <> &middot; {project.year}</>}
         </p>
         {/* On phones each label sits beside its value (a two-column grid), which
             roughly halves the card's text height; from sm up it stacks. */}

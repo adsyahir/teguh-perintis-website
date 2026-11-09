@@ -88,7 +88,8 @@ export interface Project {
   title: string;
   category: string;
   location: string;
-  year: string;
+  /** Omitted when the year is not confirmed. */
+  year?: string;
   scope: string;
   /** Omitted when the client is not confirmed. */
   client?: string;
@@ -101,9 +102,11 @@ export interface Project {
 }
 
 // Projects 01-19 come from the client's portfolio PDF, in portfolio order;
-// 20 arrived later with the photo folders. Names, categories and photos follow
-// the client's docs/Website folders (see README "Images and logos"). 18 and 19
-// have no folder yet, so they still show the portfolio's drawings.
+// 20 arrived later with the docs/Website photo folders, and 21-26 with
+// docs/update. Names, categories and photos follow those folders (see README
+// "Images and logos"). 18 and 19 have no folder yet, so they still show the
+// portfolio's drawings. Every location must end with its state: the
+// "States Served" stat counts the last part of each one.
 const projects: readonly Project[] = [
   {
     id: "project-01",
@@ -1669,6 +1672,263 @@ const projects: readonly Project[] = [
     ],
     featured: false,
   },
+  {
+    id: "project-21",
+    slug: "kompleks-ibu-pejabat-mahkamah-syariah-pahang",
+    title: "Kompleks Ibu Pejabat Mahkamah Syariah Pahang",
+    // TODO_CONFIRM: category, scope, year and client. Only photos arrived
+    // (docs/update), so the year and client are left out.
+    category: "Supply and Install Aluminium Dome",
+    location: "Pahang",
+    scope: "Supply and install aluminium dome",
+    gallery: [
+      {
+        kind: "far",
+        cover: true,
+        photo: {
+          src: "/images/projects/kompleks-ibu-pejabat-mahkamah-syariah-pahang/project-21-01.webp",
+          width: 1080,
+          height: 810,
+          alt: "Aerial view of the completed court complex with its large gold main dome and two smaller gold domes",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/kompleks-ibu-pejabat-mahkamah-syariah-pahang/project-21-02.webp",
+          width: 960,
+          height: 720,
+          alt: "Aluminium dome frames standing on the roof while the building is still wrapped in scaffolding",
+        },
+      },
+      { kind: "close" },
+      { kind: "interior" },
+      { kind: "detail" },
+    ],
+    featured: false,
+  },
+  {
+    id: "project-22",
+    slug: "kompleks-islam-daerah-kuala-selangor",
+    title: "Kompleks Islam Daerah Kuala Selangor",
+    // TODO_CONFIRM: category, scope, year and client. Only photos arrived
+    // (docs/update), so the year and client are left out.
+    category: "Supply and Install Aluminium Dome",
+    location: "Kuala Selangor, Selangor",
+    scope: "Supply and install aluminium dome",
+    gallery: [
+      {
+        kind: "far",
+        cover: true,
+        photo: {
+          src: "/images/projects/kompleks-islam-daerah-kuala-selangor/project-22-01.webp",
+          width: 1440,
+          height: 820,
+          alt: "Front of the complex with its gold dome rising above the central entrance block",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/kompleks-islam-daerah-kuala-selangor/project-22-02.webp",
+          width: 1440,
+          height: 1435,
+          alt: "Aerial view of the gold dome over the central block, between green roofs",
+        },
+      },
+      { kind: "interior" },
+      { kind: "detail" },
+    ],
+    featured: false,
+  },
+  {
+    id: "project-23",
+    slug: "masjid-al-falah-shah-alam",
+    title: "Masjid Al Falah",
+    // TODO_CONFIRM: category, scope, year and client. Only photos arrived
+    // (docs/update), so the year and client are left out.
+    category: "Supply and Install Aluminium Dome",
+    location: "Shah Alam, Selangor",
+    scope: "Supply and install aluminium dome",
+    gallery: [
+      {
+        kind: "far",
+        cover: true,
+        photo: {
+          src: "/images/projects/masjid-al-falah-shah-alam/project-23-01.webp",
+          width: 960,
+          height: 640,
+          alt: "Masjid Al Falah with its gold dome and tall minaret",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-al-falah-shah-alam/project-23-02.webp",
+          width: 1440,
+          height: 1920,
+          alt: "Inside the dome during construction, scaffolding below the patterned ceiling",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-al-falah-shah-alam/project-23-03.webp",
+          width: 1440,
+          height: 1920,
+          alt: "Finished gold dome while the minaret is still under scaffolding",
+        },
+      },
+      { kind: "close" },
+      { kind: "interior" },
+      { kind: "detail" },
+    ],
+    featured: false,
+  },
+  {
+    id: "project-24",
+    slug: "masjid-al-badr-pulau-pangkor",
+    title: "Masjid Al-Badr (1000 Selawat)",
+    // TODO_CONFIRM: category, scope, year and client. Only photos arrived
+    // (docs/update), so the year and client are left out.
+    category: "Supply and Install Aluminium Dome",
+    location: "Pulau Pangkor, Perak",
+    scope: "Supply and install aluminium dome",
+    gallery: [
+      {
+        kind: "close",
+        cover: true,
+        photo: {
+          src: "/images/projects/masjid-al-badr-pulau-pangkor/project-24-01.webp",
+          width: 1280,
+          height: 720,
+          alt: "Masjid Al-Badr on stilts over the sea, its blue patterned dome beside the minaret",
+        },
+      },
+      {
+        kind: "interior",
+        photo: {
+          src: "/images/projects/masjid-al-badr-pulau-pangkor/project-24-03.webp",
+          width: 960,
+          height: 1280,
+          alt: "Underside of the dome, patterned in blue and gold with calligraphy around the rim",
+        },
+      },
+      {
+        kind: "detail",
+        photo: {
+          src: "/images/projects/masjid-al-badr-pulau-pangkor/project-24-04.webp",
+          width: 461,
+          height: 665,
+          alt: "Blue dome with white pattern and a gold band, the minaret behind it",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/masjid-al-badr-pulau-pangkor/project-24-02.webp",
+          width: 1280,
+          height: 720,
+          alt: "Aerial view of the mosque standing over the water off Pulau Pangkor",
+        },
+      },
+    ],
+    featured: false,
+  },
+  {
+    id: "project-25",
+    slug: "masjid-darul-halim-sibu",
+    title: "Masjid Darul Halim",
+    // TODO_CONFIRM: category, scope, year and client. Only photos arrived
+    // (docs/update), so the year and client are left out.
+    category: "Supply and Install Aluminium Dome",
+    location: "Sibu, Sarawak",
+    scope: "Supply and install aluminium dome",
+    gallery: [
+      {
+        kind: "far",
+        cover: true,
+        photo: {
+          src: "/images/projects/masjid-darul-halim-sibu/project-25-01.webp",
+          width: 960,
+          height: 720,
+          alt: "Front of Masjid Darul Halim with its gold dome above the entrance",
+        },
+      },
+      {
+        kind: "far",
+        photo: {
+          src: "/images/projects/masjid-darul-halim-sibu/project-25-02.webp",
+          width: 960,
+          height: 720,
+          alt: "The mosque from the car park, the gold dome above the yellow facade",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/masjid-darul-halim-sibu/project-25-03.webp",
+          width: 960,
+          height: 720,
+          alt: "Side entrance of the mosque with the gold dome above",
+        },
+      },
+      { kind: "interior" },
+      { kind: "detail" },
+    ],
+    featured: false,
+  },
+  {
+    id: "project-26",
+    slug: "masjid-lama-kg-sura-dungun",
+    title: "Masjid Lama Kg Sura",
+    // TODO_CONFIRM: category, scope, year and client. Only photos arrived
+    // (docs/update), so the year and client are left out.
+    category: "Supply and Install Aluminium Dome",
+    location: "Dungun, Terengganu",
+    scope: "Supply and install aluminium dome",
+    gallery: [
+      {
+        kind: "far",
+        cover: true,
+        photo: {
+          src: "/images/projects/masjid-lama-kg-sura-dungun/project-26-01.webp",
+          width: 959,
+          height: 543,
+          alt: "Masjid Lama Kg Sura with its green and white dome and minaret",
+        },
+      },
+      {
+        kind: "interior",
+        photo: {
+          src: "/images/projects/masjid-lama-kg-sura-dungun/project-26-04.webp",
+          width: 752,
+          height: 1368,
+          alt: "Inside the dome: a green lattice pattern ringed by small windows above the prayer hall",
+        },
+      },
+      {
+        kind: "progress",
+        photo: {
+          src: "/images/projects/masjid-lama-kg-sura-dungun/project-26-03.webp",
+          width: 1024,
+          height: 768,
+          alt: "Construction work at the front of the mosque, the green dome already in place",
+        },
+      },
+      {
+        kind: "close",
+        photo: {
+          src: "/images/projects/masjid-lama-kg-sura-dungun/project-26-02.webp",
+          width: 1024,
+          height: 768,
+          alt: "Front of the mosque with its green dome, cars parked outside",
+        },
+      },
+      { kind: "detail" },
+    ],
+    featured: false,
+  },
 ];
 
 export const siteConfig = {
@@ -1699,7 +1959,7 @@ export const siteConfig = {
     memberSince: "11 July 2023",
     validUntil: "20 August 2026",
     // TODO_CONFIRM: projects span Peninsular Malaysia and Sabah.
-    serviceArea: "Nationwide: Peninsular Malaysia and Sabah",
+    serviceArea: "Nationwide: Peninsular Malaysia, Sabah and Sarawak",
     certifications: ["PPK", "SPKK", "STB"],
     natureOfBusiness: [
       "Construction of roads and railways",
@@ -1721,11 +1981,17 @@ export const siteConfig = {
     { label: "Contact", href: "/contact" },
   ],
   stats: [
-    // TODO_CONFIRM_STATS: "since 2014" and "8 states" come from the portfolio;
-    // confirm with the client. The project count follows the project list.
+    // TODO_CONFIRM_STATS: "since 2014" comes from the portfolio; confirm with
+    // the client. The project and state counts follow the project list (the
+    // state is the last part of each location).
     { value: "2014", label: "Track Record Since" },
     { value: String(projects.length), label: "Projects" },
-    { value: "8", label: "States Served" },
+    {
+      value: String(
+        new Set(projects.map((p) => p.location.split(", ").at(-1))).size,
+      ),
+      label: "States Served",
+    },
     { value: "G3", label: "CIDB Grade" },
   ],
   services: [

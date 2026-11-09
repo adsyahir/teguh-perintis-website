@@ -73,7 +73,8 @@ export default async function ProjectPage({ params }: Props) {
             {project.title}
           </h1>
           <p className="mt-2 text-base text-slate-300 sm:text-lg">
-            {project.location} &middot; {project.year}
+            {project.location}
+            {project.year && <> &middot; {project.year}</>}
           </p>
         </Container>
       </div>

@@ -18,7 +18,7 @@ Built as a **fully static site** — no server, no database, no secrets — so i
 | `/` | Hero, stats, six services, featured projects, clients & agencies, CIDB credential |
 | `/about` | Company overview, history timeline, values, SSM/CIDB registration details, why choose us |
 | `/services` | Six detailed service sections with scope bullets, process |
-| `/projects` | All 20 projects, filterable by type, each with a gallery page at `/projects/<slug>`; plus the client list |
+| `/projects` | All projects, filterable by type, each with a gallery page at `/projects/<slug>`; plus the client list |
 | `/contact` | Address, phone, email, WhatsApp, business hours, Google Maps embed |
 
 There is no contact form by design — enquiries go through click-to-WhatsApp (floating button on every page), phone, or email.
@@ -87,8 +87,9 @@ Search `src/` for `TODO_CONFIRM`:
 |---|---|
 | `globals.css` | Brand navy `#022662` / maroon `#8b0304` with the designer |
 | `site-config.ts` `company.trackRecordSince` | 2014 as the start of the track record |
-| `site-config.ts` `stats` | Track record year and states served (the project count is automatic) |
-| `site-config.ts` `registration.serviceArea` | "Nationwide — Peninsular Malaysia & Sabah" |
+| `site-config.ts` `stats` | Track record year (the project and state counts are worked out from the project list) |
+| `site-config.ts` `projects` 21–26 | from `docs/update/`, photos only: category, scope, year and client to confirm; the year is hidden until set |
+| `site-config.ts` `registration.serviceArea` | "Nationwide: Peninsular Malaysia, Sabah and Sarawak" |
 | `site-config.ts` `projects` | main contractor is omitted for projects 05, 06 and 07; projects 18 and 19 use architectural drawings, not photos |
 | `site-config.ts` `about.history` | Year Teguh Aluminium and Construction Sdn. Bhd. was formed |
 | `site-config.ts` `services` | `decorative-panels` has no photo yet (shows "Coming soon"); `minarets-metalworks` photo is a stand-in (a fence); `roofing` scope and copy, and whether the Sabah roof photo is their work |
@@ -98,7 +99,7 @@ against the Google Business Profile listing.
 
 ### Images and logos
 
-All images are **WebP, pre-sized for their slot** (this keeps the mobile PageSpeed score high) and are never upscaled. Project photos come from the client's `docs/Website/<Category>/<Project name>/` folders; the hero, about and service images were extracted from `docs/TP - Portfolio_Digital.pdf`.
+All images are **WebP, pre-sized for their slot** (this keeps the mobile PageSpeed score high) and are never upscaled. Project photos come from the client's `docs/Website/<Category>/<Project name>/` folders and, for projects 21–26, `docs/update/<Project name>/`; the hero, about and service images were extracted from `docs/TP - Portfolio_Digital.pdf`.
 
 | File | Source | Width |
 |---|---|---|
@@ -126,9 +127,9 @@ The other photos were extracted from the PDF with `pdfimages -all -p "docs/TP - 
 
 Logos come from `docs/TP - Design Files/Logo/` (transparent, heavily padded PNGs): crop each to its alpha bounding box with Pillow (`im.crop(im.getchannel("A").getbbox())`), then resize.
 
-**Low-resolution photos** (the PDF extracts, about 307–554px wide, look soft in larger tiles): project 05 detail, 06 progress, 07 far, 08 close, 11 far, 12 close, 14 progress, 15 far and 16 progress. Ask the client for the originals; several are already in `docs/Website/` as sharper shots.
+**Low-resolution photos** (the PDF extracts, about 307–554px wide, look soft in larger tiles): project 05 detail, 06 progress, 07 far, 08 close, 11 far, 12 close, 14 progress, 15 far and 16 progress; also project 24's blue dome detail (461px, from `docs/update`). Ask the client for the originals; several are already in `docs/Website/` as sharper shots.
 
-**Still needed from the client:** photos for projects 18 (Tanjung Aru) and 19 (Majlis Agama Islam), which still show drawings; interior (dome POV) photos for every project except Masjid An-Nur; and the location, year and client for Masjid Jumhuriyyah (project 20).
+**Still needed from the client:** photos for projects 18 (Tanjung Aru) and 19 (Majlis Agama Islam), which still show drawings; interior (dome POV) photos for every project except Masjid An-Nur, Masjid Al-Badr and Masjid Lama Kg Sura; the location, year and client for Masjid Jumhuriyyah (project 20); and the category, scope, year and client for projects 21–26.
 
 ### Adding a gallery photo
 
