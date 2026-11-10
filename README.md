@@ -16,7 +16,7 @@ Built as a **fully static site** — no server, no database, no secrets — so i
 | Route | Content |
 |---|---|
 | `/` | Hero, stats, six services, featured projects, clients & agencies, CIDB credential |
-| `/about` | Company overview, history timeline, values, SSM/CIDB registration details, why choose us |
+| `/about` | Company overview, history timeline, values, why choose us |
 | `/services` | Six detailed service sections with scope bullets, process |
 | `/projects` | All projects, filterable by type, each with a gallery page at `/projects/<slug>`; plus the client list |
 | `/contact` | Address, phone, email, WhatsApp, business hours, Google Maps embed |

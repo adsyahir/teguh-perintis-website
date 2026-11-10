@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  const { company, registration, values, about } = siteConfig;
+  const { company, values, about } = siteConfig;
 
   return (
     <>
@@ -84,99 +84,9 @@ export default function AboutPage() {
       </Section>
 
       <Section
-        title="Registration & Certifications"
-        subtitle="Fully registered with the Construction Industry Development Board (CIDB) Malaysia."
-        className="bg-slate-50"
-      >
-        <div className="grid gap-6 lg:grid-cols-2">
-          <dl className="space-y-4 rounded-lg border border-slate-200 p-8">
-            <div>
-              <dt className="text-sm font-semibold text-slate-500">
-                SSM Registration No.
-              </dt>
-              <dd className="text-lg font-bold text-slate-900">
-                {registration.ssmRegNo}
-              </dd>
-            </div>
-            <div>
-              <dt className="text-sm font-semibold text-slate-500">
-                CIDB Registration No.
-              </dt>
-              <dd className="text-lg font-bold text-slate-900">
-                {registration.cidbRegNo}
-              </dd>
-            </div>
-            <div>
-              <dt className="text-sm font-semibold text-slate-500">Grade</dt>
-              <dd className="text-lg font-bold text-slate-900">
-                {registration.cidbGrade}
-              </dd>
-            </div>
-            <div>
-              <dt className="text-sm font-semibold text-slate-500">
-                CIDB Member Since
-              </dt>
-              <dd className="text-lg font-bold text-slate-900">
-                {registration.memberSince}
-              </dd>
-            </div>
-            <div>
-              <dt className="text-sm font-semibold text-slate-500">
-                Valid Until
-              </dt>
-              <dd className="text-lg font-bold text-slate-900">
-                {registration.validUntil}
-              </dd>
-            </div>
-            <div>
-              <dt className="text-sm font-semibold text-slate-500">
-                Certifications
-              </dt>
-              <dd className="text-lg font-bold text-slate-900">
-                {registration.certifications.join(" · ")}
-              </dd>
-            </div>
-          </dl>
-          <div className="space-y-8">
-            <div className="rounded-lg border border-slate-200 p-8">
-              <h3 className="text-sm font-semibold text-slate-500">
-                Registered Categories
-              </h3>
-              <ul className="mt-4 space-y-3">
-                {registration.categories.map((cat) => (
-                  <li key={cat.code} className="flex items-center gap-3">
-                    <span className="rounded bg-primary-700 px-2 py-1 text-xs font-bold text-white">
-                      {cat.code}
-                    </span>
-                    <span className="font-medium text-slate-900">
-                      {cat.label}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="rounded-lg border border-slate-200 p-8">
-              <h3 className="text-sm font-semibold text-slate-500">
-                Registered Nature of Business (SSM)
-              </h3>
-              <ul className="mt-4 list-inside list-disc space-y-2 text-slate-900">
-                {registration.natureOfBusiness.map((item) => (
-                  <li key={item} className="font-medium">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-4 text-sm text-slate-500">
-                Service area: {registration.serviceArea}
-              </p>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      <Section
         eyebrow="Why Choose Us"
         title="Specialists You Can Rely On"
+        className="bg-slate-50"
       >
         <ul className="grid gap-6 sm:grid-cols-2">
           {about.whyChooseUs.map((reason) => (
