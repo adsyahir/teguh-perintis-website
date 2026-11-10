@@ -1994,9 +1994,19 @@ export const siteConfig = {
     },
     { value: "G3", label: "CIDB Grade" },
   ],
+  // Each service has its own page at /services/<slug>. `seoTitle` is the
+  // page <title>; `malayName` goes only into the meta description and
+  // JSON-LD for Malay searches, never on the page (TODO_CONFIRM: have the
+  // client check the wording);
+  // `projectCategory` picks the related projects listed on the page (null
+  // hides the section).
   services: [
     {
       id: "aluminium-domes",
+      slug: "aluminium-dome",
+      seoTitle: "Aluminium Dome Contractor in Malaysia (Kubah Aluminium)",
+      malayName: "Kubah Aluminium Masjid",
+      projectCategory: "Supply and Install Aluminium Dome",
       title: "Aluminium Domes & Pinnacles",
       shortDescription:
         "Design coordination, fabrication and installation of aluminium domes, structural framing, cladding and pinnacles.",
@@ -2014,6 +2024,10 @@ export const siteConfig = {
     },
     {
       id: "windows-glazing-cladding",
+      slug: "aluminium-windows",
+      seoTitle: "Aluminium Windows Supply and Installation (Tingkap Aluminium)",
+      malayName: "Tingkap Aluminium",
+      projectCategory: "Supply and Install Aluminium Window",
       title: "Aluminium Windows",
       shortDescription:
         "Aluminium windows for institutional and commercial buildings.",
@@ -2031,6 +2045,10 @@ export const siteConfig = {
     },
     {
       id: "decorative-panels",
+      slug: "celuka-cnc-panels",
+      seoTitle: "Celuka Lattice Composite and CNC-Cut Aluminium Panels",
+      malayName: "Panel Celuka dan Panel Potongan CNC",
+      projectCategory: null,
       title: "Celuka Lattice Composite & CNC-Cut Panels",
       shortDescription:
         "Decorative Celuka lattice composite and CNC-cut aluminium panels for facades and Islamic architectural detailing.",
@@ -2049,6 +2067,10 @@ export const siteConfig = {
     },
     {
       id: "minarets-metalworks",
+      slug: "metal-works",
+      seoTitle: "Metal Works and Steel Fabrication (Kerja Logam)",
+      malayName: "Kerja Logam",
+      projectCategory: "Metal Work",
       title: "Metal Works",
       shortDescription: "Custom steel and architectural metal fabrication.",
       fullDescription:
@@ -2067,6 +2089,10 @@ export const siteConfig = {
     },
     {
       id: "dome-refurbishment",
+      slug: "dome-refurbishment",
+      seoTitle: "Dome Refurbishment and Waterproofing (Baik Pulih Kubah)",
+      malayName: "Baik Pulih dan Kalis Air Kubah",
+      projectCategory: "Dome Refurbishment",
       title: "Dome Refurbishment & Waterproofing",
       shortDescription:
         "Refurbishment, repair and waterproofing of existing domes, including re-cladding in aluminium or composite panels.",
@@ -2086,6 +2112,10 @@ export const siteConfig = {
       // TODO_CONFIRM: roofing scope and copy with the client. The photo is the
       // Kompleks Pentadbiran Kerajaan Persekutuan Sabah roof from docs/Website.
       id: "roofing",
+      slug: "roofing",
+      seoTitle: "Metal Roofing Supply and Installation (Bumbung Logam)",
+      malayName: "Bumbung Logam",
+      projectCategory: null,
       title: "Roofing",
       shortDescription: "Metal roofing supply and installation.",
       fullDescription: "We supply and install metal roofing.",
@@ -2123,6 +2153,13 @@ export const siteConfig = {
   ],
   projects,
   // Copy for the per-project detail pages (/projects/<slug>).
+  servicePage: {
+    backLabel: "All services",
+    includedHeading: "What's included",
+    locationNote: "Based in Johor, working across Malaysia.",
+    relatedHeading: "Related projects",
+    otherHeading: "Other services",
+  },
   projectPage: {
     galleryHeading: "Project photos",
     beforeAfterHeading: "Before & after",

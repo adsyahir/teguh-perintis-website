@@ -17,7 +17,7 @@ Built as a **fully static site** — no server, no database, no secrets — so i
 |---|---|
 | `/` | Hero, stats, six services, featured projects, clients & agencies, CIDB credential |
 | `/about` | Company overview, history timeline, values, why choose us |
-| `/services` | Six detailed service sections with scope bullets, process |
+| `/services` | Six service sections with scope bullets, process; each links to its own page at `/services/<slug>` with related projects |
 | `/projects` | All projects, filterable by type, each with a gallery page at `/projects/<slug>`; plus the client list |
 | `/contact` | Address, phone, email, WhatsApp, business hours, Google Maps embed |
 
@@ -43,12 +43,13 @@ src/
 ├── app/                     # routes (page.tsx per route), layout, SEO files
 │   ├── layout.tsx           # header/footer shell, metadata template, JSON-LD
 │   ├── sitemap.ts robots.ts # generated at build
-│   └── */page.tsx           # about, services, projects, contact, not-found
+│   ├── */page.tsx           # about, services, projects, contact, not-found
+│   └── */[slug]/page.tsx    # one page per service and per project
 └── components/
     ├── layout/              # Header, MobileNav (only client component), Footer
     ├── sections/            # Hero, StatsBar, ServicesGrid, ProcessSteps, …
     ├── ui/                  # Container, Section, Button, cards, WhatsApp buttons
-    └── seo/JsonLd.tsx       # GeneralContractor structured data
+    └── seo/                 # JSON-LD: site-wide (JsonLd), per service, per project
 assets/fonts/                # Poppins TTFs read by the Open Graph image (not served)
 public/
 ├── _headers                 # security headers for static hosts
@@ -92,7 +93,7 @@ Search `src/` for `TODO_CONFIRM`:
 | `site-config.ts` `registration.serviceArea` | "Nationwide: Peninsular Malaysia, Sabah and Sarawak" |
 | `site-config.ts` `projects` | main contractor is omitted for projects 05, 06 and 07; projects 18 and 19 use architectural drawings, not photos |
 | `site-config.ts` `about.history` | Year Teguh Aluminium and Construction Sdn. Bhd. was formed |
-| `site-config.ts` `services` | `decorative-panels` has no photo yet (shows "Coming soon"); `minarets-metalworks` photo is a stand-in (a fence); `roofing` scope and copy, and whether the Sabah roof photo is their work |
+| `site-config.ts` `services` | `decorative-panels` has no photo yet (shows "Coming soon"); `minarets-metalworks` photo is a stand-in (a fence); `roofing` scope and copy, and whether the Sabah roof photo is their work; the Malay terms in `seoTitle` and `malayName` (search titles and descriptions only) need a native speaker's check |
 
 `siteUrl`, `hours`, `geo` and `googleBusinessUrl` are filled in and confirmed
 against the Google Business Profile listing.
@@ -200,5 +201,5 @@ Note: `npm run build` prints a warning that `headers()` is ignored with `output:
 - Static export: no server-side code, no environment variables, no secrets anywhere in the repo.
 - Google Maps uses a keyless embed URL — no API key required.
 - All external links use `rel="noopener noreferrer"`.
-- The only `dangerouslySetInnerHTML` is the JSON-LD script, escaped against `</script>` injection.
+- The only `dangerouslySetInnerHTML` use is the JSON-LD scripts (site-wide, service and project), each escaped against `</script>` injection.
 - Content-Security-Policy locks scripts/styles/fonts to same-origin; only the Google Maps iframe is allowed to frame in.

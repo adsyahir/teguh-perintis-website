@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import PhotoComingSoon from "@/components/ui/PhotoComingSoon";
+import { serviceUrl } from "@/lib/services";
 import type { Service } from "@/lib/site-config";
 
 export default function ServiceCard({ service }: { service: Service }) {
@@ -25,7 +26,7 @@ export default function ServiceCard({ service }: { service: Service }) {
           {service.shortDescription}
         </p>
         <Link
-          href={`/services#${service.id}`}
+          href={serviceUrl(service)}
           className="mt-4 inline-block text-sm font-semibold text-primary-600 transition-colors hover:text-primary-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500"
         >
           View service

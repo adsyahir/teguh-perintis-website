@@ -1,3 +1,4 @@
+import { serviceSchema } from "@/lib/services";
 import { siteConfig } from "@/lib/site-config";
 
 /**
@@ -64,15 +65,7 @@ export default function JsonLd() {
     })),
     makesOffer: services.map((service) => ({
       "@type": "Offer",
-      itemOffered: {
-        "@type": "Service",
-        "@id": `${contact.siteUrl}/services#${service.id}`,
-        name: service.title,
-        description: service.shortDescription,
-        serviceType: service.title,
-        provider: { "@id": businessId },
-        areaServed: "Malaysia",
-      },
+      itemOffered: serviceSchema(service),
     })),
   };
 

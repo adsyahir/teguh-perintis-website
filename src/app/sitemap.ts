@@ -2,6 +2,7 @@ import { execFileSync } from "node:child_process";
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
 import { projectsInDisplayOrder } from "@/lib/projects";
+import { serviceUrl } from "@/lib/services";
 
 export const dynamic = "force-static";
 
@@ -46,5 +47,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Real photos only; placeholders have no file.
     images: p.gallery.flatMap((s) => (s.photo ? [`${siteUrl}${s.photo.src}`] : [])),
   }));
-  return [...pages, ...projects];
+  const services: MetadataRoute.Sitemap = siteConfig.services.map((s) => ({
+    url: `${siteUrl}${serviceUrl(s)}`,
+    lastModified,
+    changeFrequency: "monthly",
+    // No image entries: some service photos are still stand-ins.
+    priority: 0.7,
+  }));
+  return [...pages, ...services, ...projects];
 }

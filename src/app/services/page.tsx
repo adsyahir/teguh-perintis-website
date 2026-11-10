@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { pageUrls } from "@/lib/page-metadata";
 import Image from "next/image";
+import Link from "next/link";
 import PhotoComingSoon from "@/components/ui/PhotoComingSoon";
 import PageHero from "@/components/sections/PageHero";
 import Section from "@/components/ui/Section";
 import Container from "@/components/ui/Container";
 import ProcessSteps from "@/components/sections/ProcessSteps";
 import CtaBanner from "@/components/sections/CtaBanner";
+import { serviceUrl } from "@/lib/services";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -73,6 +75,13 @@ export default function ServicesPage() {
                       </li>
                     ))}
                   </ul>
+                  <Link
+                    href={serviceUrl(service)}
+                    className="mt-6 inline-block text-sm font-semibold text-primary-600 transition-colors hover:text-primary-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500"
+                  >
+                    View service
+                    <span className="sr-only">: {service.title}</span>
+                  </Link>
                 </div>
               </section>
             ))}
