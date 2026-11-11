@@ -3,6 +3,7 @@ import { pageUrls } from "@/lib/page-metadata";
 import PageHero from "@/components/sections/PageHero";
 import Section from "@/components/ui/Section";
 import CtaBanner from "@/components/sections/CtaBanner";
+import EmailButton from "@/components/ui/EmailButton";
 import { WhatsAppLink } from "@/components/ui/WhatsAppButton";
 import { siteConfig } from "@/lib/site-config";
 
@@ -78,10 +79,11 @@ export default function ContactPage() {
 
             <div>
               <h2 className="text-sm font-semibold tracking-wider text-secondary-700 uppercase">
-                Prefer instant messaging?
+                Send us a message
               </h2>
-              <div className="mt-3">
+              <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <WhatsAppLink>Chat on WhatsApp</WhatsAppLink>
+                <EmailButton />
               </div>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
+import EmailButton from "@/components/ui/EmailButton";
 import { WhatsAppLink } from "@/components/ui/WhatsAppButton";
 import { siteConfig } from "@/lib/site-config";
 
@@ -27,6 +28,7 @@ export default function CtaBanner({
           >
             Call {siteConfig.contact.phoneDisplay}
           </Button>
+          <EmailButton />
         </div>
       </Container>
     </div>

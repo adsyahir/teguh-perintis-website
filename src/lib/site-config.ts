@@ -50,6 +50,8 @@ const contact = {
   // The Google Business Profile listing, as its stable CID link. Emitted as
   // schema.org sameAs so Google ties this site to the existing map listing.
   googleBusinessUrl: "https://maps.google.com/?cid=800152553011140462",
+  // Pre-filled subject for the "Email Us" button on the contact page.
+  emailSubject: "Project enquiry",
   whatsappMessage:
     "Hello Teguh Perintis, I would like to enquire about aluminium dome / metal works.",
 } as const;
