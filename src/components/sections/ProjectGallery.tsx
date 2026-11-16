@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import BandedImage from "@/components/ui/BandedImage";
 import { useRef, useState } from "react";
 import GalleryPlaceholder from "@/components/ui/GalleryPlaceholder";
 import { lightboxItems, thumbSrc, tileClass } from "@/lib/gallery";
@@ -117,11 +117,14 @@ export default function ProjectGallery({
         onClick={() => open(at)}
         className={`group relative block h-full w-full cursor-zoom-in overflow-hidden rounded-lg bg-slate-100 ${focusRing}`}
       >
-        <Image
+        <BandedImage
           src={large ? photo.src : thumbSrc(photo.src)}
-          fill
           alt={photo.alt}
-          className="object-cover transition-transform duration-300 motion-safe:group-hover:scale-105"
+          width={photo.width}
+          height={photo.height}
+          fit="cover"
+          className="absolute inset-0"
+          zoomClassName="transition-transform duration-300 motion-safe:group-hover:scale-105"
           {...(first && { loading: "eager", fetchPriority: "high" })}
         />
         <span className="sr-only">, open larger view</span>
@@ -201,15 +204,20 @@ export default function ProjectGallery({
           onPointerCancel={() => (swipe.current = null)}
         >
           {item && (
-            <figure className="flex max-h-full flex-col items-center">
-              <Image
+            <figure className="flex max-h-full w-full flex-col items-center">
+              {/* As large as fits under the controls, never past the
+                  photo's own size. */}
+              <BandedImage
                 key={item.src}
                 src={item.src}
                 width={item.width}
                 height={item.height}
                 alt={item.alt}
                 draggable={false}
-                className="h-auto max-h-[calc(100dvh-9rem)] w-auto max-w-full rounded object-contain motion-safe:animate-fade-in"
+                className="rounded motion-safe:animate-fade-in"
+                style={{
+                  width: `min(100%, ${item.width}px, (100dvh - 9rem) * ${item.width / (item.height - 2)})`,
+                }}
               />
               {/* Shot kinds (wide view, close-up, ...) order the gallery but
                   aren't shown; only a written caption appears. */}

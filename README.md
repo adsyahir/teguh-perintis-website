@@ -132,13 +132,20 @@ Logos come from `docs/TP - Design Files/Logo/` (transparent, heavily padded PNGs
 
 **Still needed from the client:** photos for projects 18 (Tanjung Aru) and 19 (Majlis Agama Islam), which still show drawings; interior (dome POV) photos for every project except Masjid An-Nur, Masjid Al-Badr and Masjid Lama Kg Sura; the location, year and client for Masjid Jumhuriyyah (project 20); and the category, scope, year and client for projects 21–26.
 
+### Watermark band
+
+Every gallery, service and About photo file has a navy band under the photo with the TP mark and "Teguh Perintis Sdn. Bhd. · teguhperintis.com", plus copyright details (creator, rights) embedded in the file. The site never shows the band: `BandedImage` (`src/components/ui/BandedImage.tsx`) sizes each frame to the photo's own shape and clips the band off. Opening a photo in a new tab, saving it, or finding it on Google Images gives the whole file, band included. The band is added by `scripts/watermark.py`, which must stay in sync with `src/lib/band.ts`. The hero photos, share images (`og.jpg`) and logos have no band.
+
+`site-config.ts` keeps each photo's size **without** the band. Run the script once per photo, on the clean export: it is not idempotent.
+
 ### Adding a gallery photo
 
 Each project has a `gallery` in `site-config.ts`: its photos, plus a placeholder slot (`{ kind: "interior" }`, no `photo`) for any core kind it doesn't have a photo of yet. Placeholders are currently **hidden** (`SHOW_PLACEHOLDERS = false` in `src/lib/gallery.ts`); set it to `true` to show a "Photo coming soon" tile for each one. The slots stay in the data so that switch works.
 
 1. Export the photo at no more than 1440px wide: `cwebp -q 74 -m 6 -metadata none -resize 1440 0 in.jpg -o public/images/projects/<slug>/project-NN-<n>.webp` (drop `-resize` if it's already narrower).
 2. Make its small copy: `cwebp -q 74 -m 6 -metadata none -resize 800 0 public/images/projects/<slug>/project-NN-<n>.webp -o public/images/projects/<slug>/thumb/project-NN-<n>.webp` (or copy the file if it's 800px or narrower).
-3. Add `{ kind, photo: { src, width, height, alt } }` to the gallery (`width` and `height` are the file's real size; `alt` describes this photo specifically). If it fills a core kind, delete that kind's placeholder.
+3. Note the photo's size now, then add the watermark band (this also redoes the thumb): `python3 scripts/watermark.py public/images/projects/<slug>/project-NN-<n>.webp`
+4. Add `{ kind, photo: { src, width, height, alt } }` to the gallery (`width` and `height` are the photo's size **before** the band; `alt` describes this photo specifically). If it fills a core kind, delete that kind's placeholder.
 
 Rules (checked at build time by `assertGallery` in `src/lib/gallery.ts`): each of the 4 core kinds (far, close, interior, detail) has a slot, either a photo or a placeholder; at most 16 slots; and exactly one `cover: true` slot that has a photo.
 

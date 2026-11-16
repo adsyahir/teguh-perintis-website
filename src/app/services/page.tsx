@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { pageUrls } from "@/lib/page-metadata";
-import Image from "next/image";
+import BandedImage from "@/components/ui/BandedImage";
 import Link from "next/link";
 import PhotoComingSoon from "@/components/ui/PhotoComingSoon";
 import PageHero from "@/components/sections/PageHero";
@@ -43,7 +43,7 @@ export default function ServicesPage() {
                 className="grid items-center gap-10 lg:grid-cols-2"
               >
                 {service.image ? (
-                  <Image
+                  <BandedImage
                     src={service.image}
                     alt={service.altText}
                     width={800}

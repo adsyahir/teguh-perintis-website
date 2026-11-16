@@ -1,4 +1,4 @@
-import Image from "next/image";
+import BandedImage from "@/components/ui/BandedImage";
 import Link from "next/link";
 import PhotoComingSoon from "@/components/ui/PhotoComingSoon";
 import { serviceUrl } from "@/lib/services";
@@ -9,12 +9,14 @@ export default function ServiceCard({ service }: { service: Service }) {
     <article className="reveal group overflow-hidden rounded-lg border border-slate-200 bg-white transition-shadow hover:shadow-lg">
       <div className="overflow-hidden">
         {service.image ? (
-          <Image
+          <BandedImage
             src={service.image}
             alt={service.altText}
             width={800}
             height={600}
-            className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            fit="cover"
+            className="h-48 w-full"
+            zoomClassName="transition-transform duration-300 group-hover:scale-105"
           />
         ) : (
           <PhotoComingSoon className="h-48" />

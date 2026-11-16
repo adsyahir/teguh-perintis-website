@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import BandedImage from "@/components/ui/BandedImage";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { pageUrls } from "@/lib/page-metadata";
@@ -73,12 +73,13 @@ export default async function ServicePage({ params }: Props) {
       <Section>
         <div className="grid items-start gap-10 lg:grid-cols-2">
           {service.image ? (
-            <Image
+            <BandedImage
               src={service.image}
               alt={service.altText}
               width={800}
               height={600}
-              priority
+              loading="eager"
+              fetchPriority="high"
               className="rounded-lg"
             />
           ) : (

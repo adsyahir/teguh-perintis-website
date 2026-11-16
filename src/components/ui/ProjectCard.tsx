@@ -1,4 +1,4 @@
-import Image from "next/image";
+import BandedImage from "@/components/ui/BandedImage";
 import Link from "next/link";
 import CameraIcon from "@/components/ui/CameraIcon";
 import { coverOf, photoCount, thumbSrc } from "@/lib/gallery";
@@ -18,12 +18,14 @@ export default function ProjectCard({
   return (
     <article className="reveal group relative flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white transition-shadow hover:shadow-lg has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-accent-500">
       <div className="relative overflow-hidden">
-        <Image
+        <BandedImage
           src={thumbSrc(cover.src)}
           alt={cover.alt}
           width={cover.width}
           height={cover.height}
-          className="aspect-video w-full object-cover sm:aspect-[3/2] transition-transform duration-300 motion-safe:group-hover:scale-105"
+          fit="cover"
+          className="aspect-video w-full sm:aspect-[3/2]"
+          zoomClassName="transition-transform duration-300 motion-safe:group-hover:scale-105"
         />
         <p className="absolute top-3 left-3 flex flex-wrap gap-2">
           <span className="rounded bg-accent-500 px-2 py-0.5 text-xs font-semibold text-primary-900">

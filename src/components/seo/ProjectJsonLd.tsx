@@ -1,3 +1,4 @@
+import { fileHeight } from "@/lib/band";
 import { coverOf } from "@/lib/gallery";
 import { projectDescription } from "@/lib/projects";
 import { siteConfig, type Project } from "@/lib/site-config";
@@ -49,7 +50,8 @@ export default function ProjectJsonLd({ project }: { project: Project }) {
               url: abs(slot.photo.src),
               contentUrl: abs(slot.photo.src),
               width: slot.photo.width,
-              height: slot.photo.height,
+              // The file's real size, watermark band included.
+              height: fileHeight(slot.photo.width, slot.photo.height),
               caption: slot.photo.alt,
             },
           ]

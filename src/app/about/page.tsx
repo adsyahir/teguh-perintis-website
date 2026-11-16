@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { pageUrls } from "@/lib/page-metadata";
-import Image from "next/image";
+import BandedImage from "@/components/ui/BandedImage";
 import PageHero from "@/components/sections/PageHero";
 import Section from "@/components/ui/Section";
 import CtaBanner from "@/components/sections/CtaBanner";
@@ -31,7 +31,7 @@ export default function AboutPage() {
             ))}
             <p>{about.cidbNote}</p>
           </div>
-          <Image
+          <BandedImage
             src="/images/about-company.webp"
             alt="Scaffolding platforms around a gold aluminium dome, seen from above during dome works"
             width={800}
