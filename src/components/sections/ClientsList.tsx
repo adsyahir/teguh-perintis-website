@@ -34,7 +34,7 @@ export default function ClientsList() {
               return (
                 <li
                   key={org.logo.src}
-                  className={`flex rounded-xl border border-slate-200 bg-white px-3 py-4 transition-[border-color,box-shadow] duration-200 hover:border-primary-200 hover:shadow-md motion-reduce:transition-none sm:flex-col sm:px-4 sm:py-5 ${
+                  className={`reveal flex rounded-xl border border-slate-200 bg-white px-3 py-4 transition-[border-color,box-shadow] duration-200 hover:border-primary-200 hover:shadow-md motion-reduce:transition-none sm:flex-col sm:px-4 sm:py-5 ${
                     // Phones: a two-column tile lays out sideways (logo left,
                     // names right) so it isn't a tall box of white space.
                     wide

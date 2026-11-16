@@ -16,7 +16,7 @@ export default function ProjectCard({
   const n = photoCount(project);
 
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white transition-shadow hover:shadow-lg has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-accent-500">
+    <article className="reveal group relative flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white transition-shadow hover:shadow-lg has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-accent-500">
       <div className="relative overflow-hidden">
         <Image
           src={thumbSrc(cover.src)}

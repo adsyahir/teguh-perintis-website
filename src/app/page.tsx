@@ -22,6 +22,7 @@ export default function HomePage() {
         title="Aluminium Dome & Architectural Metal Specialist"
         subtitle="Design coordination, fabrication and installation for projects across Malaysia."
         imageBase="/images/hero-home"
+        slides={["/images/hero-home-2", "/images/hero-home-3"]}
         imageAlt="Green aluminium dome with a white lattice trim band and gold finial on a mosque roof, with a minaret beside it"
       />
 

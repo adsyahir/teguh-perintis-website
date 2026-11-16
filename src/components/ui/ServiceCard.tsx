@@ -6,7 +6,7 @@ import type { Service } from "@/lib/site-config";
 
 export default function ServiceCard({ service }: { service: Service }) {
   return (
-    <article className="group overflow-hidden rounded-lg border border-slate-200 bg-white transition-shadow hover:shadow-lg">
+    <article className="reveal group overflow-hidden rounded-lg border border-slate-200 bg-white transition-shadow hover:shadow-lg">
       <div className="overflow-hidden">
         {service.image ? (
           <Image

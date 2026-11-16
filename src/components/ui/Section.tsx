@@ -19,7 +19,7 @@ export default function Section({
     <section id={id} className={`py-12 sm:py-24 ${className}`}>
       <Container>
         {(eyebrow || title || subtitle) && (
-          <div className="mb-8 max-w-3xl sm:mb-12">
+          <div className="reveal mb-8 max-w-3xl sm:mb-12">
             {eyebrow && (
               <p className="mb-2 text-sm font-semibold tracking-wider text-secondary-700 uppercase">
                 {eyebrow}

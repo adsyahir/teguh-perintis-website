@@ -76,3 +76,83 @@ html {
 html:has(dialog[open]) {
   overflow: hidden;
 }
+
+/* ── Motion ──────────────────────────────────────────────────────────────
+   Everything below runs only for visitors who haven't asked for reduced
+   motion; without it the page is static and fully visible. */
+
+/* Hero: the extra photos stay hidden unless the slideshow runs. */
+.hero-slide {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* An 18s loop over the main photo: slide 1 fades in at 6s, slide 2 at
+     12s, and slide 2 fades out at the end to show the main photo again.
+     Slide 2 sits on top, so slide 1 can fade out unseen beneath it. */
+  @keyframes hero-slide-1 {
+    0%, 30% { opacity: 0; }
+    38%, 72% { opacity: 1; }
+    80%, 100% { opacity: 0; }
+  }
+  @keyframes hero-slide-2 {
+    0%, 63% { opacity: 0; }
+    71%, 92% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  /* A slow push-in on every hero photo; the slides run their fade (named in
+     --slide) alongside it. */
+  .hero-zoom {
+    animation-name: hero-zoom;
+    animation-duration: 18s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+  .hero-slide.hero-zoom {
+    animation-name: var(--slide), hero-zoom;
+    animation-duration: 18s, 18s;
+    animation-timing-function: ease-in-out, linear;
+    animation-iteration-count: infinite, infinite;
+    animation-direction: normal, alternate;
+  }
+  .hero-slide-1 { --slide: hero-slide-1; }
+  .hero-slide-2 { --slide: hero-slide-2; }
+  @keyframes hero-zoom {
+    from { scale: 1; }
+    to { scale: 1.08; }
+  }
+
+  /* Hero copy rises in on load, one line after another. */
+  .hero-rise > * {
+    animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .hero-rise > :nth-child(2) { animation-delay: 0.12s; }
+  .hero-rise > :nth-child(3) { animation-delay: 0.24s; }
+  .hero-rise > :nth-child(4) { animation-delay: 0.36s; }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    translate: 0 1.5rem;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* Section headings and cards rise in as they scroll into view. Uses a
+   scroll-driven animation (no JavaScript); browsers without it show the
+   content as normal. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+  }
+}
